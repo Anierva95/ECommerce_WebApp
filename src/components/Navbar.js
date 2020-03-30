@@ -35,11 +35,11 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             Welcome to my Store!
           </Typography>
-          <Link to="/">
-          <Button color="inherit">Home</Button>
+          <Link to="/" style={{"textDecoration": "inherit"}}>
+          <Button style={{"textDecoration": "inherit"}} color="secondary">Home</Button>
           </Link>
-          <Link to="/blog">
-          <Button color="inherit">Blog</Button>
+          <Link to="/blog" style={{"textDecoration": "inherit"}}>
+          <Button style={{"textDecoration": "inherit"}} color="secondary" >Blog</Button>
           </Link>
         </Toolbar>
       </AppBar>
