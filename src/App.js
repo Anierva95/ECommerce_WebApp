@@ -3,45 +3,13 @@ import './App.css';
 import Navbar from './components/Navbar';
 import MediaCard from './components/Card';
 import { Grid } from '@material-ui/core';
+import Home from './pages/Home'
 
 
 function App() {
   return (
     <div className="App">
-    <Navbar/>
-    <Grid container direction="row">
-    <Grid item xs={1}></Grid>
-      <Grid item={true} xs={3}>
-        <MediaCard/>
-        </Grid>
-        <Grid item xs={3}>
-        <MediaCard/>
-        </Grid>
-      </Grid>
-      <Grid item xs={2}></Grid>
-
-      <Grid container direction="row">
-    <Grid item xs={1}></Grid>
-      <Grid item={true} xs={3}>
-        <MediaCard/>
-        </Grid>
-        <Grid item xs={3}>
-        <MediaCard/>
-        </Grid>
-      </Grid>      
-    <Grid item xs={2}></Grid>
-
-    <Grid container direction="row">
-    <Grid item xs={1}></Grid>
-      <Grid item={true} xs={3}>
-        <MediaCard/>
-        </Grid>
-        <Grid item xs={3}>
-        <MediaCard/>
-        </Grid>
-      </Grid>      
-    <Grid item xs={2}></Grid>
-
+      <Home/>
     </div>
   );
 }
