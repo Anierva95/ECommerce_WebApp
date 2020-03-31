@@ -5,23 +5,44 @@ import { Grid } from '@material-ui/core';
 
 export default function ProductRow() {
     return(
-    <div>
-<Grid container direction="row">
-<Grid item xs={2}></Grid>
-  <Grid item={true} xs={2}>
+    <>
+  <Grid item xs={3}>
     <MediaCard/>
     </Grid>
-    <Grid item xs={2}>
+    <Grid item xs={3}>
     <MediaCard/>
     </Grid>
-    <Grid item xs={2}>
+    <Grid item xs={3}>
     <MediaCard/>
     </Grid>
-    <Grid item xs={2}>
+    <Grid item xs={3}>
+    <MediaCard/>
+    </Grid>     
+    <Grid item xs={3}>
     <MediaCard/>
     </Grid>
-  </Grid>      
-<Grid item xs={2}></Grid>
-    </div>
+    <Grid item xs={3}>
+    <MediaCard/>
+    </Grid>
+    <Grid item xs={3}>
+    <MediaCard/>
+    </Grid>
+    <Grid item xs={3}>
+    <MediaCard/>
+    </Grid>    
+    <Grid item xs={3}>
+    <MediaCard/>
+    </Grid>
+    <Grid item xs={3}>
+    <MediaCard/>
+    </Grid>
+    <Grid item xs={3}>
+    <MediaCard/>
+    </Grid>
+    <Grid item xs={3}>
+    <MediaCard/>
+    
+    </Grid>    
+    </>
     )
 }
