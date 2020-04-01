@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link, useLocation } from "react-router-dom";
-import { PromiseProvider } from 'mongoose';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,8 +49,8 @@ export default function Navbar() {
           <Button style={{"textDecoration": "inherit"}} color="secondary" >Cart</Button>
           </Link>
 
-          <Link to="/invoice" style={{"textDecoration": "inherit"}}>
-          <Button style={{"textDecoration": "inherit"}} color="secondary" >Invoice</Button>
+          <Link to="/storeManager" style={{"textDecoration": "inherit"}}>
+          <Button style={{"textDecoration": "inherit"}} color="secondary" >Store Manger</Button>
           </Link>
         </Toolbar>
       </AppBar>
