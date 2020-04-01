@@ -4,6 +4,8 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
+import { useStoreContext } from "../utils/GlobalState";
+import API from '../utils/API';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +23,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TransitionsModal(props) {
+
+  const [state, dispatch] = useStoreContext()
+
+function addToWish(id) {
+    API.getProduct(id).then(res => dispatch({type: "ADD_TO_WISH", product: res.data}))
+}
+
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -58,7 +68,7 @@ export default function TransitionsModal(props) {
             <Button variant="contained" color="primary">
                 Add to Cart
             </Button>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={() => addToWish(props.id)}>
         Wishlist!
       </Button>
           </div>

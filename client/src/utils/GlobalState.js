@@ -13,6 +13,21 @@ const reducer = (state, action) => {
                 ...state,
                 products: [...action.products]
             }
+        case "SET_CURRENT_PRODUCT":
+            return {
+                ...state,
+                currentProduct: action.product
+            }
+        case "ADD_TO_CART":
+            return {
+                ...state,
+                shoppingCart: [...state.shoppingCart, action.product]
+            }
+        case "ADD_TO_WISH":
+            return {
+                ...state,
+                wishList: [...state.wishList, action.product]
+            }
     }
 }
 
@@ -20,11 +35,13 @@ const StoreProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = useReducer(reducer, {
         products: [],
         currentProduct: {
-            
+            _id: 0,
+            Item: "",
+            Price: 0
         },
         shoppingCart: [],
         wishList: [],
-        blostPosts: [],
+        blogPosts: [],
         currentUser: {
             title: "",
             body: "",

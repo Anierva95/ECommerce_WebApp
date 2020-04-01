@@ -30,7 +30,12 @@ export default function MediaCard(props) {
   const [state, dispatch] = useStoreContext();
 
   function setCurrentProduct (id) {
-    API.getProduct(id).then(res => console.log(res.data))
+    API.getProduct(id).then(res => dispatch({type: "SET_CURRENT_PRODUCT", product: res.data}))
+  }
+
+
+  function addToCart(id) {
+    API.getProduct(id).then(res => dispatch({type: "ADD_TO_CART", product: res.data}))
   }
 
   return (
@@ -54,13 +59,14 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => setCurrentProduct(props.id)}>
+        <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => addToCart(props.id)}>
           Add to Cart
         </Button>
         <Modal
         name={props.name}
         description={props.description}
         price={props.price}
+        id={props.id}
         />
       </CardActions>
     </Card>
