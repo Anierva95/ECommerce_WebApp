@@ -56,17 +56,38 @@ const productSeed = [
   },
 ];
 
+const blogPostSeed = [
+  {
+    Title: "Blog about my store",
+    Body: "Welcome to my store, we will be selling many things to try and make certain individuals stand up.. er I mean we will be raising money for charities. Yeah, this is a nonprofit ecommerce site. All profits will be donated to charities found on DonotSpot!",
+    Date: 0101,
+    Likes: 1
+  }];
+
+db.BlogPost.remove({})
+.then(() => db.BlogPost.collection.insertMany(blogPostSeed))
+.then(data => {
+  console.log(data.result.n + " blog posts inserted!");
+  process.exit(0);
+})
+.catch(err => {
+  console.error(err);
+  process.exit(1);
+});
+
+
 
 db.Product.remove({})
   .then(() => db.Product.collection.insertMany(productSeed))
   .then(data => {
-    console.log(data.result.n + " records inserted!");
+    console.log(data.result.n + " products inserted!");
     process.exit(0);
   })
   .catch(err => {
     console.error(err);
     process.exit(1);
   });
+
 
 // db.Post.remove({})
 //   .then(() => db.Post.collection.insertMany(bookSeed))
