@@ -17,6 +17,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 app.use(routes);
+console.log("this is app", app.use(routes))
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/ecommerceShop");
 
 // router.post('/stripe/charge', postCharge)

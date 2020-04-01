@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
-import Invoice from './pages/Invoice';
+import StoreManager from './pages/StoreManager';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { StoreProvider } from "./utils/GlobalState";
 
@@ -13,7 +13,7 @@ function App() {
         <StoreProvider>
           <Route exact path="/" component={Home} />
           <Route exact path="/blog" component={Blog} />
-          <Route exact path="/invoice" component={Invoice} />
+          <Route exact path="/storeManager" component={StoreManager} />
         </StoreProvider>
       </div>
     </Router>

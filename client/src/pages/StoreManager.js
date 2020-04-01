@@ -1,9 +1,9 @@
 import React, {useRef} from 'react';
 import Navbar from '../components/Navbar';
-import InvoiceHeader from '../components/InvoiceHeader';
+import StoreManagerHeader from '../components/StoreManagerHeader';
 import API from '../utils/API';
 
-export default function Invoice() {
+export default function StoreManager() {
 
     const itemRef = useRef();
     const priceRef = useRef();
@@ -35,7 +35,7 @@ export default function Invoice() {
     return (
         <>
             <Navbar />
-            <InvoiceHeader />
+            <StoreManagerHeader />
             <form>
                 Item
                 <input name="Item" ref={itemRef}/>
