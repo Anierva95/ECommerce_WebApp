@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal() {
+export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -51,9 +51,9 @@ export default function TransitionsModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Product Name</h2>
+      <h2 id="transition-modal-title">{props.name}</h2>
             <img src="https://via.placeholder.com/150"></img>
-            <p id="transition-modal-description">Here is a description of my product!! It is really great and I hope you enjoy what it does. Thank you for your support!</p>
+      <p id="transition-modal-description">{props.description}</p>
             <Button variant="contained" color="primary">
                 Add to Cart
             </Button>

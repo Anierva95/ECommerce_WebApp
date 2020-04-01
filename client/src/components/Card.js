@@ -36,13 +36,19 @@ export default function MediaCard(props) {
           <Typography variant="body2" color="textSecondary" component="p">
           {props.description}
           </Typography>
+          <Typography gutterBottom variant="h5" component="h2">
+            ${props.price}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button variant="contained" size="small" color="primary">
           Add to Cart
         </Button>
-        <Modal/>
+        <Modal
+        name={props.name}
+        description={props.description}
+        />
       </CardActions>
     </Card>
   );

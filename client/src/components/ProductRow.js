@@ -23,6 +23,7 @@ export default function ProductRow() {
        <MediaCard 
        name = {product.Item}
        description = {product.Description}
+       price= {product.Price}
        />
      </Grid>
     ))}
