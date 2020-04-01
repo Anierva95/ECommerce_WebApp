@@ -41,7 +41,7 @@ const StoreProvider = ({ value = [], ...props }) => {
         },
         shoppingCart: [],
         wishList: [],
-        blostPosts: [],
+        blogPosts: [],
         currentUser: {
             title: "",
             body: "",
