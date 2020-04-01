@@ -18,6 +18,11 @@ const reducer = (state, action) => {
                 ...state,
                 currentProduct: action.product
             }
+        case "ADD_TO_CART":
+            return {
+                ...state,
+                shoppingCart: [...state.shoppingCart, action.product]
+            }
     }
 }
 
