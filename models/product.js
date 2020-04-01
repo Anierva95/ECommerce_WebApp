@@ -7,7 +7,7 @@ const productSchema = new Schema({
   Description: { type: String, required: true },
   Price: { type: Number, required: true },
   Quantity: { type: Number, required: true },
-  Gender: { type: String, required: true}, //dropdown? male/female/unisex
+  Gender: { type: String, required: true }, //dropdown? male/female/unisex
 });
 
 const Product = mongoose.model("Product", productSchema);
