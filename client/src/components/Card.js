@@ -30,7 +30,7 @@ export default function MediaCard(props) {
   const [state, dispatch] = useStoreContext();
 
   function setCurrentProduct (id) {
-    API.getProduct(id).then(res => console.log(res.data))
+    API.getProduct(id).then(res => dispatch({type: "SET_CURRENT_PRODUCT", product: res.data}))
   }
 
   return (
