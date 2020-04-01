@@ -12,6 +12,8 @@ import Modal from './Modal';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    marginTop: "40px",
+    marginBottom: "40px"
   },
   media: {
     height: 140,
@@ -26,7 +28,7 @@ export default function MediaCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image="https://picsum.photos/200/300"
           title="Contemplative Reptile"
         />
         <CardContent>
@@ -48,6 +50,7 @@ export default function MediaCard(props) {
         <Modal
         name={props.name}
         description={props.description}
+        price={props.price}
         />
       </CardActions>
     </Card>

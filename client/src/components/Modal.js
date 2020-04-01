@@ -52,8 +52,9 @@ export default function TransitionsModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
       <h2 id="transition-modal-title">{props.name}</h2>
-            <img src="https://via.placeholder.com/150"></img>
+            <img src="https://picsum.photos/200/300"></img>
       <p id="transition-modal-description">{props.description}</p>
+      <h2>${props.price}</h2>
             <Button variant="contained" color="primary">
                 Add to Cart
             </Button>
