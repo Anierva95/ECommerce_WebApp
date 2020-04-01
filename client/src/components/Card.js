@@ -8,6 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Modal from './Modal';
+import { useStoreContext } from "../utils/GlobalState";
+import API from '../utils/API';
 
 const useStyles = makeStyles({
   root: {
@@ -21,8 +23,15 @@ const useStyles = makeStyles({
   },
 });
 
+
 export default function MediaCard(props) {
   const classes = useStyles();
+
+  const [state, dispatch] = useStoreContext();
+
+  function setCurrentProduct (id) {
+    API.getProduct(id).then(res => console.log(res.data))
+  }
 
   return (
     <Card className={classes.root}>
@@ -45,7 +54,7 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button variant="contained" size="small" color="primary">
+        <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => setCurrentProduct(props.id)}>
           Add to Cart
         </Button>
         <Modal

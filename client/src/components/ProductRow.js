@@ -9,10 +9,6 @@ export default function ProductRow() {
 
   const [state, dispatch] = useStoreContext();
 
-  useEffect(() => {
-    loadProducts()
-  }, [])
-
   function loadProducts() {
     API.getProducts().then(res => {
       dispatch({
@@ -21,13 +17,18 @@ export default function ProductRow() {
       })
     })
     .catch(err => console.log(err));
-  }
+  };
+
+  useEffect(() => {
+    loadProducts()
+  }, []);
 
   return (
     <>
       {state.products.map(product => (
         <Grid item xs={3}>
           <MediaCard
+            id = {product._id}
             name={product.Item}
             description={product.Description}
             price={product.Price}
