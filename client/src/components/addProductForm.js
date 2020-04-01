@@ -1,6 +1,9 @@
 import React, {useRef} from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import FilledInput from '@material-ui/core/FilledInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import MenuItem from '@material-ui/core/MenuItem';
 import API from '../utils/API';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +43,26 @@ export default function AddProductForm() {
         }).then(res => console.log("passed through!!! burkeep"))
     }
 
+    const currencies = [
+        {
+          value: 'USD',
+          label: '$',
+        },
+        {
+          value: 'EUR',
+          label: '€',
+        },
+        {
+          value: 'BTC',
+          label: '฿',
+        },
+        {
+          value: 'JPY',
+          label: '¥',
+        },
+      ];
+      
+
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
@@ -48,6 +71,27 @@ export default function AddProductForm() {
           label="Item Name"
           variant="filled"
         />
+        <FilledInput
+        id="filled-adornment-amount"
+        startAdornment={<InputAdornment position="start">$</InputAdornment>}
+        /> 
+        <TextField
+          label="Type"
+          variant="filled"
+        />
+        <TextField
+          id="standard-select-currency"
+          select
+          label="Select"
+          helperText="Please select your currency"
+        >
+          {currencies.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+
         <TextField
           label="Item Name"
           variant="filled"
@@ -59,15 +103,7 @@ export default function AddProductForm() {
         <TextField
           label="Item Name"
           variant="filled"
-        />
-        <TextField
-          label="Item Name"
-          variant="filled"
-        />
-        <TextField
-          label="Item Name"
-          variant="filled"
-        />        
+        />       
       </div>
 
       <form>
