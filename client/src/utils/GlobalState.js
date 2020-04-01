@@ -23,6 +23,11 @@ const reducer = (state, action) => {
                 ...state,
                 shoppingCart: [...state.shoppingCart, action.product]
             }
+        case "ADD_TO_WISH":
+            return {
+                ...state,
+                wishList: [...state.wishList, action.product]
+            }
     }
 }
 

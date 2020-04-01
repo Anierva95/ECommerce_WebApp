@@ -33,6 +33,7 @@ export default function MediaCard(props) {
     API.getProduct(id).then(res => dispatch({type: "SET_CURRENT_PRODUCT", product: res.data}))
   }
 
+
   function addToCart(id) {
     API.getProduct(id).then(res => dispatch({type: "ADD_TO_CART", product: res.data}))
   }
@@ -65,6 +66,7 @@ export default function MediaCard(props) {
         name={props.name}
         description={props.description}
         price={props.price}
+        id={props.id}
         />
       </CardActions>
     </Card>
