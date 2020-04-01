@@ -47,12 +47,9 @@ export default function Navbar() {
             Cart<span>{props.cart.length}</span>
           </Link> */}
           <Link to="/cart" style={{ "textDecoration": "inherit" }}>
-            Cart
+          <Button style={{"textDecoration": "inherit"}} color="secondary" >Cart</Button>
           </Link>
 
-          <Link to="/invoice" style={{"textDecoration": "inherit"}}>
-          <Button style={{"textDecoration": "inherit"}} color="secondary" >Invoice</Button>
-          </Link>
           <Link to="/invoice" style={{"textDecoration": "inherit"}}>
           <Button style={{"textDecoration": "inherit"}} color="secondary" >Invoice</Button>
           </Link>
