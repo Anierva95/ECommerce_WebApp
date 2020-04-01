@@ -61,10 +61,26 @@ export default function AddProductForm() {
           label: '¥',
         },
       ];
+
+const genders = [
+    {
+        value: 'Female',
+        label: 'Female'
+    },
+    {
+        value: 'Male',
+        label: 'Male'
+    },
+    {
+        value: 'Unisex',
+        label: 'Unisex'
+    }
+]
       
 
 
   return (
+      <div>
     <form className={classes.root} noValidate autoComplete="off">
       <div>
         <TextField
@@ -76,14 +92,10 @@ export default function AddProductForm() {
         startAdornment={<InputAdornment position="start">$</InputAdornment>}
         /> 
         <TextField
-          label="Type"
-          variant="filled"
-        />
-        <TextField
           id="standard-select-currency"
           select
-          label="Select"
-          helperText="Please select your currency"
+          label="Type"
+          variant="filled"
         >
           {currencies.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -93,19 +105,27 @@ export default function AddProductForm() {
         </TextField>
 
         <TextField
-          label="Item Name"
+          label="Item Description"
           variant="filled"
         />
         <TextField
-          label="Item Name"
+          label="Quantity"
           variant="filled"
         />
-        <TextField
-          label="Item Name"
+                <TextField
+          id="standard-select-currency"
+          select
+          label="Gender"
           variant="filled"
-        />       
+        >
+          {genders.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
       </div>
-
+      </form>
       <form>
                 Item
                 <input name="Item" ref={itemRef}/>
@@ -124,6 +144,6 @@ export default function AddProductForm() {
             <button onClick={() => AddItem()}>
                 Submit
             </button>
-    </form>
+            </div>
   );
 }
