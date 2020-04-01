@@ -43,22 +43,22 @@ export default function AddProductForm() {
         }).then(res => console.log("passed through!!! burkeep"))
     }
 
-    const currencies = [
+    const Type = [
         {
-          value: 'USD',
-          label: '$',
+          value: 'Clothing',
+          label: 'Clothing',
         },
         {
-          value: 'EUR',
-          label: '€',
+          value: 'Stand Up',
+          label: 'Stand Up',
         },
         {
-          value: 'BTC',
-          label: '฿',
+          value: 'Relic',
+          label: 'Relic',
         },
         {
-          value: 'JPY',
-          label: '¥',
+          value: 'Used Kitchenware',
+          label: 'Used Kitchenware',
         },
       ];
 
@@ -86,18 +86,21 @@ const genders = [
         <TextField
           label="Item Name"
           variant="filled"
+          inputRef={itemRef}
         />
         <FilledInput
         id="filled-adornment-amount"
         startAdornment={<InputAdornment position="start">$</InputAdornment>}
+        inputRef={priceRef}
         /> 
         <TextField
           id="standard-select-currency"
           select
           label="Type"
           variant="filled"
+          inputRef={typeRef}
         >
-          {currencies.map((option) => (
+          {Type.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
@@ -107,16 +110,18 @@ const genders = [
         <TextField
           label="Item Description"
           variant="filled"
+          inputRef={descriptionRef}
         />
         <TextField
           label="Quantity"
           variant="filled"
+          inputRef={quantityRef}
         />
-                <TextField
-          id="standard-select-currency"
+        <TextField
           select
           label="Gender"
           variant="filled"
+          inputRef={genderRef}
         >
           {genders.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -126,21 +131,6 @@ const genders = [
         </TextField>
       </div>
       </form>
-      <form>
-                Item
-                <input name="Item" ref={itemRef}/>
-                Price
-                <input name="Price"ref={priceRef}/>
-                Type
-                <input name="Type" ref={typeRef}/>
-                Description
-                <input name="Description" ref={descriptionRef}/>
-                Quanitity
-                <input name="Quantity" ref={quantityRef}/>
-                Gender
-                <input name="Gender" ref={genderRef}/>
-            </form>
-
             <button onClick={() => AddItem()}>
                 Submit
             </button>
