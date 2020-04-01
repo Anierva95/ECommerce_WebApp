@@ -50,6 +50,9 @@ export default function Navbar() {
             Cart
           </Link>
 
+          <Link to="/invoice" style={{"textDecoration": "inherit"}}>
+          <Button style={{"textDecoration": "inherit"}} color="secondary" >Invoice</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
