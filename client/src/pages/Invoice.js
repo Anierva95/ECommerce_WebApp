@@ -15,12 +15,18 @@ export default function Invoice() {
 
 
     function AddItem() {
+        console.log(itemRef.current.value);
+        console.log(priceRef.current.value);
+        console.log(typeRef.current.value);
+        console.log(descriptionRef.current.value);
+        console.log(quantityRef.current.value);
+        console.log(genderRef.current.value);
         API.saveProduct({
             Item: itemRef.current.value,
             Type: typeRef.current.value,
             Description: descriptionRef.current.value,
-            Price: priceRef.current.value,
-            Quanitity: quantityRef.current.value,
+            Price: parseInt(priceRef.current.value),
+            Quantity: parseInt(quantityRef.current.value),
             Gender: genderRef.current.value
         }).then(res => console.log("passed through!!! burkeep"))
     }
