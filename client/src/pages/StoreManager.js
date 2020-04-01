@@ -37,25 +37,6 @@ export default function StoreManager() {
         <>
             <Navbar />
             <StoreManagerHeader />
-            <form>
-                Item
-                <input name="Item" ref={itemRef}/>
-                Price
-                <input name="Price"ref={priceRef}/>
-                Type
-                <input name="Type" ref={typeRef}/>
-                Description
-                <input name="Description" ref={descriptionRef}/>
-                Quanitity
-                <input name="Quantity" ref={quantityRef}/>
-                Gender
-                <input name="Gender" ref={genderRef}/>
-            </form>
-
-            <button onClick={() => AddItem()}>
-                Submit
-            </button>
-
             <AddProductForm />
 
         </>
