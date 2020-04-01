@@ -1,13 +1,21 @@
 import React from 'react'
 import Navbar from '../components/Navbar';
-import Modal from '../components/Modal'
+import BlogHeader from '../components/BlogHeader'
+import { Grid } from '@material-ui/core';
 
 export default function Blog() {
     return(
         <div>
             <Navbar/>
-            <h1 style={{"textAlign" : "center"}}>Hello! You Reached the blog!</h1>
-        
+            <BlogHeader/>
+        <Grid container direction="row">
+          <Grid item xs={2} />
+          <Grid item container direction="row" xs={8}>
+          
+          <Grid item xs={2} />
+          </Grid>
+          </Grid>
+
         </div>
     )
 }
