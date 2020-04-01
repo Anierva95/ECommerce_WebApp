@@ -6,8 +6,8 @@ export default function Blog() {
     return(
         <div>
             <Navbar/>
-            <h1>Hello! You Reached the blog!</h1>
-            <Modal/>
+            <h1 style={{"textAlign" : "center"}}>Hello! You Reached the blog!</h1>
+        
         </div>
     )
 }
