@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link, useLocation } from "react-router-dom";
+import { PromiseProvider } from 'mongoose';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,12 +37,19 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             Welcome to my Store!
           </Typography>
-          <Link to="/" style={{"textDecoration": "inherit"}}>
-          <Button style={{"textDecoration": "inherit"}} color="secondary">Home</Button>
+          <Link to="/" style={{ "textDecoration": "inherit" }}>
+            <Button style={{ "textDecoration": "inherit" }} color="secondary">Home</Button>
           </Link>
-          <Link to="/blog" style={{"textDecoration": "inherit"}}>
-          <Button style={{"textDecoration": "inherit"}} color="secondary" >Blog</Button>
+          <Link to="/blog" style={{ "textDecoration": "inherit" }}>
+            <Button style={{ "textDecoration": "inherit" }} color="secondary" >Blog</Button>
           </Link>
+          {/* <Link to="/cart" style={{ "textDecoration": "inherit" }}>
+            Cart<span>{props.cart.length}</span>
+          </Link> */}
+          <Link to="/cart" style={{ "textDecoration": "inherit" }}>
+            Cart
+          </Link>
+
         </Toolbar>
       </AppBar>
     </div>
