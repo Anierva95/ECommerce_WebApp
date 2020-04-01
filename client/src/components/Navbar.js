@@ -42,6 +42,9 @@ export default function Navbar() {
           <Link to="/blog" style={{"textDecoration": "inherit"}}>
           <Button style={{"textDecoration": "inherit"}} color="secondary" >Blog</Button>
           </Link>
+          <Link to="/login" style={{"textDecoration": "inherit"}}>
+          <Button style={{"textDecoration": "inherit"}} color="secondary" >Login</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
