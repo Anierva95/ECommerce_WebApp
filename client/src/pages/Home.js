@@ -25,8 +25,6 @@ export default function Home(){
           <Grid item xs={2} />
           <Grid item container direction="row" xs={8}>
           <ProductRow/>
-
-
           <Grid item xs={2} />
           </Grid>
           </Grid>
