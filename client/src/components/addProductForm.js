@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: '35ch',
     },
     textAlign: "center",
     boxShadow: "0 0 5px"
@@ -48,19 +48,6 @@ export default function AddProductForm() {
       Gender: genderRef.current.value
     }).then(res => console.log("Product created!! burkeep!"))
   }
-
-  const titleRef = useRef();
-  const bodyRef = useRef();
-
-  function AddBlog() {
-    console.log(titleRef.current.value);
-    console.log(bodyRef.current.value);
-    API.saveProduct({
-      Title: titleRef.current.value,
-      Body: bodyRef.current.value,
-    }).then(res => console.log("Blog created!! burkeep!"))
-  }
-
 
   const Type = [
     {
@@ -101,8 +88,6 @@ export default function AddProductForm() {
   return (
     <div>
       <div>
-        <Grid container diretion="row" xs={12}>
-          <Grid item xs={2}></Grid>
           <Grid item container direction="column" xs={3}>
             <form className={classes.root} noValidate autoComplete="off" bgcolor="primary.main">
               <h2>Sell an item</h2>
@@ -160,7 +145,6 @@ export default function AddProductForm() {
             </Button>
             </form>
           </Grid>
-        </Grid>
       </div>
     </div>
   );
