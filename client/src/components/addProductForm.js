@@ -5,6 +5,10 @@ import FilledInput from '@material-ui/core/FilledInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
 import API from '../utils/API';
+import { Grid } from '@material-ui/core';
+import { Button } from '@material-ui/core'
+import { FormControl } from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: '25ch',
     },
+    textAlign: "center",
+    boxShadow: "0 0 5px"
   },
 }));
 
@@ -81,12 +87,17 @@ const genders = [
 
   return (
       <div>
-    <form className={classes.root} noValidate autoComplete="off">
+
       <div>
+      <Grid container direction="column" xs={3}>
+      <form className={classes.root} noValidate autoComplete="off">
+        <h2>Sell an item</h2> 
+        <FormControl fullWidth>
         <TextField
           label="Item Name"
           variant="filled"
           inputRef={itemRef}
+          fullWidth={true}
         />
         <FilledInput
         id="filled-adornment-amount"
@@ -129,11 +140,18 @@ const genders = [
             </MenuItem>
           ))}
         </TextField>
-      </div>
-      </form>
-            <button onClick={() => AddItem()}>
+        </FormControl>
+        <Button variant="contained" color="primary" onClick={() => AddItem()}>
                 Submit
-            </button>
+            </Button>
+        </form>
+
+        </Grid> 
+           
+
+      </div>
+
+
             </div>
   );
 }
