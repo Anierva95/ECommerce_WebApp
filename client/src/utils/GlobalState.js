@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useContext } from "react";
 
+
 const StoreContext = createContext();
 const { Provider } = StoreContext;
 
@@ -56,4 +57,4 @@ const useStoreContext = () => {
     return useContext(StoreContext);
 };
 
-export { StoreProvider, useStoreContext };
+export { StoreProvider, useStoreContext};

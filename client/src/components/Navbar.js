@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link, useLocation } from "react-router-dom";
+import { useAuth0 } from '../utils/auth0context';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar() {
+
+  const { isLoading, user, loginWithRedirect, logout } = useAuth0();
   const classes = useStyles();
   const location = useLocation();
 
@@ -52,6 +56,25 @@ export default function Navbar() {
           <Link to="/storeManager" style={{"textDecoration": "inherit"}}>
           <Button style={{"textDecoration": "inherit"}} color="secondary" >Store Manger</Button>
           </Link>
+          {!isLoading && !user && (
+            <>
+            <Button variant="contained" color="primary" onClick={loginWithRedirect}>
+                  Login
+          </Button>
+          </>
+
+          )}
+            {!isLoading && user && (
+            <>
+            <Typography color="textprimary">
+            <p>Hello, {user.name}!     </p>
+            </Typography>
+              <Button variant="contained" color="primary" onClick={logout}>
+                  Logout
+          </Button>
+              
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </div>
