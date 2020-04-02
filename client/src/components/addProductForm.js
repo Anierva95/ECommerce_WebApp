@@ -8,6 +8,7 @@ import API from '../utils/API';
 import { Grid } from '@material-ui/core';
 import { Button } from '@material-ui/core'
 import { FormControl } from '@material-ui/core';
+import { palette, spacing, typography } from '@material-ui/system'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -89,8 +90,10 @@ const genders = [
       <div>
 
       <div>
-      <Grid container direction="column" xs={3}>
-      <form className={classes.root} noValidate autoComplete="off">
+      <Grid container diretion="row" xs={12}>
+      <Grid item xs={1}></Grid>
+      <Grid item container direction="column" xs={3}>
+      <form className={classes.root} noValidate autoComplete="off" bgcolor="primary.main">
         <h2>Sell an item</h2> 
         <FormControl fullWidth>
         <TextField
@@ -145,13 +148,69 @@ const genders = [
                 Submit
             </Button>
         </form>
+        </Grid>
 
-        </Grid> 
-           
+        <Grid item xs={1}></Grid>
 
+        <Grid container direction="column" xs={3}>
+      <form className={classes.root} noValidate autoComplete="off" bgcolor="primary.main">
+        <h2>Write a blog</h2> 
+        <FormControl fullWidth>
+        <TextField
+          label="Item Name"
+          variant="filled"
+          inputRef={itemRef}
+          fullWidth={true}
+        />
+        <FilledInput
+        id="filled-adornment-amount"
+        startAdornment={<InputAdornment position="start">$</InputAdornment>}
+        inputRef={priceRef}
+        /> 
+        <TextField
+          id="standard-select-currency"
+          select
+          label="Type"
+          variant="filled"
+          inputRef={typeRef}
+        >
+          {Type.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <TextField
+          label="Item Description"
+          variant="filled"
+          inputRef={descriptionRef}
+        />
+        <TextField
+          label="Quantity"
+          variant="filled"
+          inputRef={quantityRef}
+        />
+        <TextField
+          select
+          label="Gender"
+          variant="filled"
+          inputRef={genderRef}
+        >
+          {genders.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        </FormControl>
+        <Button variant="contained" color="primary" onClick={() => AddItem()}>
+                Submit
+            </Button>
+        </form>
+        </Grid>
+        </Grid>
       </div>
-
-
-            </div>
+           </div>
   );
 }
