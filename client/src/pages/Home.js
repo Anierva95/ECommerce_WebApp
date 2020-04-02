@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 
 export default function Home(){
   const auth0 = useContext(Auth0Context)
+  const { isLoading, user, loginWithRedirect } = useContext(Auth0Context);
   // const [products] = useState(data);
 	// const [cart, setCart] = useState([]);
 
@@ -23,9 +24,23 @@ export default function Home(){
           <Navbar/>
 
           <SalesHeader/>
-          <Button variant="contained" color="primary" onClick={auth0.loginWithRedirect} className="button is-danger">
-            Login
+
+          {!isLoading && !user && (
+            <>
+            <Button variant="contained" color="primary" onClick={auth0.loginWithRedirect} className="button is-danger">
+                  Login
           </Button>
+          </>
+
+          )}
+            {!isLoading && user && (
+            <>
+              <h1>Welcome!</h1>
+              <p>Hello {user.name}</p>
+
+              {user.picture && <img src={user.picture} alt="My Avatar" />}
+            </>
+          )}
           <Grid container direction="row">
           <Grid item xs={2} />
           <Grid item container direction="row" xs={8}>
