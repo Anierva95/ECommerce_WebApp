@@ -5,7 +5,7 @@ function CheckoutHeader(props) {
     return (
         <tr>
             <td>{props.item}</td>
-            <td>${props.price}</td>
+            <td>${props.price.toFixed(2)}</td>
             <td>{props.quantity}</td>
             <td>${props.total}</td>
         </tr>

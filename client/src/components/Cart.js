@@ -35,14 +35,14 @@ const Cart = () => {
                 </thead>
                 <tbody>
                     {shoppingCart.map(element => (
-                        subTotal = subTotal + element.Quantity * element.Price.toFixed(2),
+                        subTotal = subTotal + (element.Quantity * element.Price.toFixed(2)),
                         <CheckoutHeader
                             id={element._id}
                             item={element.Item}
                             type={element.Type}
                             quantity={element.Quantity}
                             price={element.Price}
-                            total={element.Quantity * element.Price}
+                            total={(element.Quantity * element.Price).toFixed(2)}
                         />
                     ))}
                     {taxAmount()}

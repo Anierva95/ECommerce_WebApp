@@ -54,7 +54,7 @@ export default function Navbar() {
           </Link>
 
           <Link to="/storeManager" style={{"textDecoration": "inherit"}}>
-          <Button style={{"textDecoration": "inherit"}} color="secondary" >Store Manger</Button>
+          <Button style={{"textDecoration": "inherit"}} color="secondary" >Store Manager</Button>
           </Link>
           {!isLoading && !user && (
             <>
