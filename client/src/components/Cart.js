@@ -8,15 +8,26 @@ const Cart = props => {
     const [state, dispatch] = useStoreContext();
     // console.log(state);
 
-    const totalAmount = () => {
-        return props.cart.reduce((tot, val) => {
-            return tot + val.price;
-        }, 0)
-    }
+    // const totalAmount = () => {
+    //     return props.cart.reduce((tot, val) => {
+    //         return tot + val.price;
+    //     }, 0)
+    // }
 
     console.log(state.shoppingCart);
     const shoppingCart = state.shoppingCart;
-    const subTotal = 0;
+    let subTotal = 0;
+    let taxRate = 0.07;
+    let taxTotal;
+    let total;
+
+    function taxAmount() {
+        taxTotal = subTotal * taxRate
+    }
+
+    function totalAmount() {
+        total = subTotal + taxTotal
+    }
 
     return (
         <div className="shoppingCart">
@@ -31,6 +42,7 @@ const Cart = props => {
                 </thead>
                 <tbody>
                     {shoppingCart.map(element => (
+                        subTotal = subTotal + element.Quantity * element.Price.toFixed(2),
                         <CheckoutHeader
                             id={element._id}
                             item={element.Item}
@@ -40,22 +52,34 @@ const Cart = props => {
                             total={element.Quantity * element.Price}
                         />
                     ))}
+                    {taxAmount()}
+                    {totalAmount()}
+                    <hr></hr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Subtotal: </th>
+                        <th>${subTotal.toFixed(2)}</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Subtotal with Tax: </th>
+                        <th>${taxTotal.toFixed(2)}</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Total with Tax: </th>
+                        <th>${total.toFixed(2)}</th>
+                    </tr>
                 </tbody>
-                <hr></hr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    {/* {shoppingCart.forEach(element => {
-                        {subTotal = subTotal + (element.Price * element.Quantity)}
-                    })} */}
-                    <th>Subtotal: </th>
-                </tr>
+
             </table>
             {/* {props.cart.map(item => (
                 <Item key={item.id} {...item}/>
             ))} */}
             <div className="checkout">
-                <p>Total:$</p>
                 <button>checkout</button>
             </div>
         </div>

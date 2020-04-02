@@ -9,8 +9,7 @@ function CheckoutHeader(props) {
             <td>{props.item}</td>
             <td>${props.price}</td>
             <td>{props.quantity}</td>
-            <td>{props.total}</td>
-            <td>{}</td> 
+            <td>${props.total}</td>
         </tr>
     )
 }
