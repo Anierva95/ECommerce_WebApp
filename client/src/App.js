@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Blog from './pages/Blog';
 import CheckoutPage from './pages/Checkoutpage'
 import StoreManager from './pages/StoreManager';
+import Cart from './pages/Cart'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { StoreProvider } from "./utils/GlobalState";
 
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/storeManager" component={StoreManager} />
           <Route exact path="/CheckoutPage" component={CheckoutPage} />
+          <Route exact path="/cart" component={Cart} />
         </StoreProvider>
       </div>
     </Router>

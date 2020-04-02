@@ -20,5 +20,8 @@ export default {
 
   getBlogPosts: function() {
     return axios.get("/api/blogposts");
-  }
+  },
+  saveBlogPost: function(postData) {
+    return axios.post("/api/blogposts", postData);
+  },
 };
