@@ -34,9 +34,9 @@ export default function MediaCard(props) {
   }
 
 
-  function addToCart(id) {
-    API.getProduct(id).then(res => dispatch({type: "ADD_TO_CART", product: res.data}))
-  }
+  // function addToCart(id) {
+  //   API.getProduct(id).then(res => dispatch({type: "ADD_TO_CART", product: {...res.data, Quantity: 2}}))
+  // }
 
   return (
     <Card className={classes.root}>
@@ -59,7 +59,8 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => addToCart(props.id)}>
+        <Button variant="contained" size="small" color="primary" key={props.id}> 
+        {/* onClick={() => addToCart(props.id)} */} {/* Henry removed this. We are going to change so you can only add to cart inside Modal */}
           Add to Cart
         </Button>
         <Modal
