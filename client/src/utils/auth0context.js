@@ -9,7 +9,10 @@ export const Auth0Context = createContext();
 // create a provider
 export class Auth0Provider extends Component {
   state = { 
-      auth0Client: null
+      auth0Client: null,
+      isLoading: true,
+      isAuthenticated: false,
+      user: null
      };
 
     config = {
@@ -24,13 +27,22 @@ export class Auth0Provider extends Component {
 
     initializeAuth0 = async () => {
         const auth0Client = await createAuth0Client(this.config);
-        this.setState({ auth0Client });
+        const isAuthenticated = await auth0Client.isAuthenticated();
+        const user = isAuthenticated ? await auth0Client.getUser() : null;
+
+        this.setState({ auth0Client, isLoading: false, isAuthenticated, user });
     };
+    
 
   render() {
+    const { isLoading, isAuthenticated, user} = this.state; 
     const { children } = this.props;
 
-    const configObject = {  };
+    const configObject = { 
+        isLoading,
+        isAuthenticated,
+        user
+     };
 
     return (
       <Auth0Context.Provider value={configObject}>
