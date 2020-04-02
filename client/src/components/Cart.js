@@ -3,16 +3,9 @@ import Item from './CartItem';
 import CheckoutHeader from './CheckoutHeader'
 import { useStoreContext } from "../utils/GlobalState";
 
-const Cart = props => {
+const Cart = () => {
 
     const [state, dispatch] = useStoreContext();
-    // console.log(state);
-
-    // const totalAmount = () => {
-    //     return props.cart.reduce((tot, val) => {
-    //         return tot + val.price;
-    //     }, 0)
-    // }
 
     console.log(state.shoppingCart);
     const shoppingCart = state.shoppingCart;
@@ -76,21 +69,11 @@ const Cart = props => {
                 </tbody>
 
             </table>
-            {/* {props.cart.map(item => (
-                <Item key={item.id} {...item}/>
-            ))} */}
             <div className="checkout">
                 <button>checkout</button>
             </div>
         </div>
-
-
-
     )
-
-
-
-
 }
 
 export default Cart

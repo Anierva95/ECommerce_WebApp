@@ -2,8 +2,6 @@ import React from "react";
 
 function CheckoutHeader(props) {
     console.log(props);
-    // const shoppingCart = props.headers.shoppingCart;
-    // const total = props.quantity * props.price
     return (
         <tr>
             <td>{props.item}</td>
