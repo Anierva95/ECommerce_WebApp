@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     function AddBlog() {
       console.log(titleRef.current.value);
       console.log(bodyRef.current.value);
-      API.saveProduct({
+      API.saveBlogPost({
         Title: titleRef.current.value,
         Body: bodyRef.current.value,
       }).then(res => console.log("Blog created!! burkeep!"))
@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
                     InputProps={{
                         className: classes.input2
                       }}
+                    multiline
                   />
                 </FormControl>
                 <Button variant="contained" color="primary" onClick={() => AddBlog()}>
