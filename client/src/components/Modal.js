@@ -34,6 +34,10 @@ export default function TransitionsModal(props) {
   const [state, dispatch] = useStoreContext()
 
   function addToCart(id) {
+    console.log(quantityRef.current.value)
+    if (quantityRef.current.value === undefined) {
+      alert("Error! Please select a quantity!")
+    }
     API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
   }
 
@@ -100,9 +104,10 @@ export default function TransitionsModal(props) {
             <TextField
               id="standard-select-currency"
               select
-              label="Type"
+              label="Quantity"
               variant="filled"
               inputRef={quantityRef}
+              style={{"width": "200px"}}
             >
               {quantity.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -110,7 +115,7 @@ export default function TransitionsModal(props) {
                 </MenuItem>
               ))}
             </TextField>
-            <Button variant="contained" color="primary" onClick={() => addToCart(props.id)}>
+            <Button variant="contained" color="primary" onClick={() => addToCart(props.id)} style={{"marginLeft": "50px"}}>
               Add to Cart
             </Button>
           </div>
