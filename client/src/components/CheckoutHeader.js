@@ -9,9 +9,10 @@ function CheckoutHeader(props) {
     const [state, dispatch] = useStoreContext();
     // console.log(state.shoppingCart)
 
-    function editQuantity (id, itemQuantity) {
+    function editQuantity (id) { //, itemQuantity
+        console.log(parseInt(quantityRef.current.value));
         const itemObj = state.shoppingCart.find(({_id}) => _id === id)  
-        itemObj.quantity = 1000
+        itemObj.Quantity = parseInt(quantityRef.current.value)
         const indexNum = state.shoppingCart.indexOf(itemObj);
         console.log("indexNum is: " ,indexNum);
         state.shoppingCart.splice(indexNum, 1);
@@ -59,7 +60,7 @@ function CheckoutHeader(props) {
                     variant="filled"
                     inputRef={quantityRef}
                     placeholder={props.quantity}
-                    onChange={() => editQuantity(props.id, quantityRef)}
+                    onChange={() => editQuantity(props.id)} //, quantityRef.current.value)
                     style={{ "width": "200px" }}
                 >
                     {quantity.map((option) => (
