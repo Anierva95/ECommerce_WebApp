@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-// import Item from './CartItem';
-// import CheckoutHeader from './CheckoutHeader'
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStoreContext } from "../utils/GlobalState";
@@ -9,7 +7,9 @@ const Cart = () => {
 
     const [state, dispatch] = useStoreContext();
 
-    console.log(state.shoppingCart);
+    // console.log(state.shoppingCart);
+
+    const [total, setTotal] = useState()
     let subTotal = 0;
     let taxRate = 0.07;
     let taxTotal;
@@ -23,24 +23,16 @@ const Cart = () => {
         total = subTotal + taxTotal
     }
 
-    // useEffect(() => {
-
-    // }, [])
-
-    function editQuantity(event, id) { //, itemQuantity
+    function editQuantity(event, id) { 
         const shoppingCart = state.shoppingCart;
-        console.log(parseInt(event.target.value));
-        const itemObj = shoppingCart.find(({ _id }) => _id === id)
-        itemObj.Quantity = parseInt(event.target.value)
-        const indexNum = shoppingCart.indexOf(itemObj);
-        // console.log("indexNum is: ", indexNum);
-        shoppingCart.splice(indexNum, 1);
-        console.log("before dispatch state: ", shoppingCart);
-        dispatch({ type: "ADD_TO_CART", product: { ...itemObj } });
-        console.log("after dispatch state: ", shoppingCart)
+        const updatedCart = shoppingCart.map(element => {
+            if(element._id === id) {
+                element.Quantity = event.target.value;
+            }
+            return element;
+        })
+        dispatch({ type: "UPDATE_CART", updatedCart: updatedCart });
     }
-
-    const quantityRef = useRef();
 
     const quantity = [
         {
@@ -64,7 +56,6 @@ const Cart = () => {
             label: 5
         }
     ]
-
 
     return (
         <div className="shoppingCart">
@@ -90,9 +81,8 @@ const Cart = () => {
                                     label={"Quantity"}
                                     value={element.Quantity}
                                     variant="filled"
-                                    // inputRef={quantityRef}
                                     placeholder={element.Quantity}
-                                    onChange={event => editQuantity(event, element._id)} //, quantityRef.current.value)
+                                    onChange={event => editQuantity(event, element._id)} 
                                     style={{ "width": "200px" }}
                                 >
                                     {quantity.map((option) => (
@@ -104,14 +94,6 @@ const Cart = () => {
                             </td>
                             <td>${(element.Quantity * element.Price).toFixed(2)}</td>
                         </tr>
-                        // <CheckoutHeader
-                        //     id={element._id}
-                        //     item={element.Item}
-                        //     type={element.Type}
-                        //     quantity={element.Quantity}
-                        //     price={element.Price}
-                        //     total={(element.Quantity * element.Price).toFixed(2)}
-                        // />
                     ))}
                     {taxAmount()}
                     {totalAmount()}
