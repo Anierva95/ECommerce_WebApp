@@ -1,14 +1,11 @@
 import React, { useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import FilledInput from '@material-ui/core/FilledInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import MenuItem from '@material-ui/core/MenuItem';
 import API from '../utils/API';
 import { Grid } from '@material-ui/core';
 import { Button } from '@material-ui/core'
 import { FormControl } from '@material-ui/core';
-import { sizing } from '@material-ui/system';
+const moment = require('moment');
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
       API.saveBlogPost({
         Title: titleRef.current.value,
         Body: bodyRef.current.value,
+        Date: moment().format('MMMM Do YYYY, h:mm:ss a')
       }).then(res => console.log("Blog created!! burkeep!"))
     }
   
