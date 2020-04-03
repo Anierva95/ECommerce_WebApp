@@ -104,11 +104,12 @@ export default function TransitionsModal(props) {
             <p id="transition-modal-description">{props.description}</p>
             <h2>${props.price}</h2>
             <TextField
-              id="standard-select-currency"
+              id={props.id}
               select
               label="Quantity"
               variant="filled"
               inputRef={quantityRef}
+              // onChange=
               style={{"width": "200px"}}
             >
               {quantity.map((option) => (
