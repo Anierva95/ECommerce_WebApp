@@ -75,7 +75,8 @@ const productSeed = [
 const blogPostSeed = [
   {
     Title: "Blog about my store",
-    Body: "Welcome to my store, we will be selling many things to try and make certain individuals stand up.. er I mean we will be raising money for charities. Yeah, this is a nonprofit ecommerce site. All profits will be donated to charities found on DonotSpot!"
+    Body: "Welcome to my store, we will be selling many things to try and make certain individuals stand up.. er I mean we will be raising money for charities. Yeah, this is a nonprofit ecommerce site. All profits will be donated to charities found on DonotSpot!",
+    Date: "304923"
   }];
 
 const userSeed = [
