@@ -1,14 +1,15 @@
-import React from 'react';
-import Item from './CartItem';
-import CheckoutHeader from './CheckoutHeader'
+import React, { useEffect, useRef } from 'react';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
 import { useStoreContext } from "../utils/GlobalState";
 
 const Cart = () => {
 
     const [state, dispatch] = useStoreContext();
 
-    console.log(state.shoppingCart);
-    const shoppingCart = state.shoppingCart;
+    // console.log(state.shoppingCart);
+
+    const [total, setTotal] = useState()
     let subTotal = 0;
     let taxRate = 0.07;
     let taxTotal;
@@ -22,6 +23,40 @@ const Cart = () => {
         total = subTotal + taxTotal
     }
 
+    function editQuantity(event, id) { 
+        const shoppingCart = state.shoppingCart;
+        const updatedCart = shoppingCart.map(element => {
+            if(element._id === id) {
+                element.Quantity = event.target.value;
+            }
+            return element;
+        })
+        dispatch({ type: "UPDATE_CART", updatedCart: updatedCart });
+    }
+
+    const quantity = [
+        {
+            value: 1,
+            label: 1
+        },
+        {
+            value: 2,
+            label: 2
+        },
+        {
+            value: 3,
+            label: 3
+        },
+        {
+            value: 4,
+            label: 4
+        },
+        {
+            value: 5,
+            label: 5
+        }
+    ]
+
     return (
         <div className="shoppingCart">
             <table>
@@ -34,16 +69,31 @@ const Cart = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {shoppingCart.map(element => (
+                    {state.shoppingCart.map(element => (
                         subTotal = subTotal + (element.Quantity * element.Price.toFixed(2)),
-                        <CheckoutHeader
-                            id={element._id}
-                            item={element.Item}
-                            type={element.Type}
-                            quantity={element.Quantity}
-                            price={element.Price}
-                            total={(element.Quantity * element.Price).toFixed(2)}
-                        />
+                        <tr key={element._id}>
+                            <td>{element.Item}</td>
+                            <td>${element.Price}</td>
+                            <td>
+                                <TextField
+                                    id={element._id}
+                                    select
+                                    label={"Quantity"}
+                                    value={element.Quantity}
+                                    variant="filled"
+                                    placeholder={element.Quantity}
+                                    onChange={event => editQuantity(event, element._id)} 
+                                    style={{ "width": "200px" }}
+                                >
+                                    {quantity.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </td>
+                            <td>${(element.Quantity * element.Price).toFixed(2)}</td>
+                        </tr>
                     ))}
                     {taxAmount()}
                     {totalAmount()}

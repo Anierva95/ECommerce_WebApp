@@ -29,6 +29,11 @@ const reducer = (state, action) => {
                 ...state,
                 wishList: [...state.wishList, action.product]
             }
+        case "UPDATE_CART":
+            return {
+                ...state,
+                shoppingCart: action.updatedCart
+            }
     }
 }
 
@@ -57,4 +62,4 @@ const useStoreContext = () => {
     return useContext(StoreContext);
 };
 
-export { StoreProvider, useStoreContext};
+export { StoreProvider, useStoreContext };
