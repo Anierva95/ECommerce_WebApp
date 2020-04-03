@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStoreContext } from "../utils/GlobalState";
@@ -9,11 +9,9 @@ const Cart = () => {
 
     // console.log(state.shoppingCart);
 
-    const [total, setTotal] = useState({
-        subtotal: 0,
-        taxTotal: "",
-        total: "",
-    })
+    let total;
+    let subTotal = 0;
+    let taxTotal;
     
     let taxRate = 0.07;
 
