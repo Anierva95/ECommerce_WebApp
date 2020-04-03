@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -21,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: "center",
     padding: theme.spacing(2, 4, 3),
+    width: "500px"
   },
 }));
 
@@ -29,13 +34,14 @@ export default function TransitionsModal(props) {
 
   const [state, dispatch] = useStoreContext()
 
-  function addToWish(id) {
-    API.getProduct(id).then(res => dispatch({ type: "ADD_TO_WISH", product: res.data }))
-  }
-
   function addToCart(id) {
+    console.log(quantityRef.current.value)
+    if (quantityRef.current.value === undefined) {
+      alert("Error! Please select a quantity!")
+    } else {
     API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
   }
+}
 
 
   const classes = useStyles();
@@ -100,9 +106,10 @@ export default function TransitionsModal(props) {
             <TextField
               id="standard-select-currency"
               select
-              label="Type"
+              label="Quantity"
               variant="filled"
               inputRef={quantityRef}
+              style={{"width": "200px"}}
             >
               {quantity.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -110,12 +117,9 @@ export default function TransitionsModal(props) {
                 </MenuItem>
               ))}
             </TextField>
-            <Button variant="contained" color="primary" onClick={() => addToCart(props.id)}>
+            <Button variant="contained" color="primary" onClick={() => addToCart(props.id)} style={{"marginLeft": "50px"}}>
               Add to Cart
             </Button>
-            <Button variant="contained" color="secondary" onClick={() => addToWish(props.id)}>
-              Wishlist!
-      </Button>
           </div>
         </Fade>
       </Modal>

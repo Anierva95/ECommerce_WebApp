@@ -9,6 +9,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from '../utils/auth0context';
 import API from '../utils/API';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Badge from '@material-ui/core/Badge';
+import { useStoreContext } from "../utils/GlobalState";
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
 
@@ -30,6 +34,7 @@ export default function Navbar() {
   const { isLoading, user, loginWithRedirect, logout } = useAuth0();
   const classes = useStyles();
   const location = useLocation();
+  const [state, dispatch] = useStoreContext()
 
   useEffect(() => {
     function checkUser(email) {
@@ -61,20 +66,26 @@ export default function Navbar() {
             Welcome to my Store!
           </Typography>
           <Link to="/" style={{ "textDecoration": "inherit" }}>
-            <Button style={{ "textDecoration": "inherit" }} color="secondary">Home</Button>
+            <Button style={{ "textDecoration": "inherit" }} >Home</Button>
           </Link>
           <Link to="/blog" style={{ "textDecoration": "inherit" }}>
-            <Button style={{ "textDecoration": "inherit" }} color="secondary" >Blog</Button>
+            <Button style={{ "textDecoration": "inherit" }} >Blog</Button>
           </Link>
           {/* <Link to="/cart" style={{ "textDecoration": "inherit" }}>
             Cart<span>{props.cart.length}</span>
           </Link> */}
+          <Badge badgeContent={state.shoppingCart.length} color="secondary">
           <Link to="/cart" style={{ "textDecoration": "inherit" }}>
-            <Button style={{ "textDecoration": "inherit" }} color="secondary" >Cart</Button>
+          <ShoppingCartIcon style={{"textDecoration": "inherit"}} />
           </Link>
+          </Badge>
 
-          <Link to="/storeManager" style={{ "textDecoration": "inherit" }}>
-            <Button style={{ "textDecoration": "inherit" }} color="secondary" >Store Manager</Button>
+          <Badge badgeContent={state.wishList.length} color="secondary">
+          <FavoriteIcon style={{"marginLeft": "20px"}}/>
+          </Badge>
+
+          <Link to="/storeManager" style={{"textDecoration": "inherit"}}>
+          <Button style={{"textDecoration": "inherit"}}  >Store Manager</Button>
           </Link>
           {!isLoading && !user && (
             <>
