@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -37,9 +38,10 @@ export default function TransitionsModal(props) {
     console.log(quantityRef.current.value)
     if (quantityRef.current.value === undefined) {
       alert("Error! Please select a quantity!")
-    }
+    } else {
     API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
   }
+}
 
 
   const classes = useStyles();
