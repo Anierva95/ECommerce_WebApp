@@ -28,7 +28,7 @@ export default {
   getUsers: function() {
     return axios.get("/api/users");
   },
-  saveUsers: function() {
-    return axios.post("/api/users")
+  saveUsers: function(postData) {
+    return axios.post("/api/users", postData);
   }
 };

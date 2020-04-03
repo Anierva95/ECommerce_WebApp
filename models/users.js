@@ -17,6 +17,6 @@ const userSchema = new Schema({
     Transactions: []
 });
 
-const UserList = mongoose.model("User", userSchema);
+const UserList = mongoose.model("UserList", userSchema);
 
 module.exports = UserList;

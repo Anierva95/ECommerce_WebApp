@@ -31,8 +31,26 @@ export default function Navbar() {
   const classes = useStyles();
   const location = useLocation();
 
-  // function checkUser (email) {
-  //   API.getUsers
+  function checkUser(email) {
+    console.log("email is: " + email);
+    API.getUsers().then(res => res.data.forEach(element => {
+      if (element.Email !== email) {
+        API.saveUsers({ Email: email }).then(res => console.log("User created!! burkeep!"))
+      // } else {
+      //   API.saveUsers({ Email: email }).then(res => console.log("User created!! burkeep!"))
+      // }
+      } else {
+        console.log("User exists");
+      }
+
+    }))
+  }
+
+  // function checkUser(userEmail) {
+  //   console.log(userEmail);
+  //   API.saveUsers({ 
+  //     Email: userEmail,
+  //   }).then(res => console.log("User created!! burkeep!"))
   // }
 
   return (
@@ -55,31 +73,39 @@ export default function Navbar() {
             Cart<span>{props.cart.length}</span>
           </Link> */}
           <Link to="/cart" style={{ "textDecoration": "inherit" }}>
-          <Button style={{"textDecoration": "inherit"}} color="secondary" >Cart</Button>
+            <Button style={{ "textDecoration": "inherit" }} color="secondary" >Cart</Button>
           </Link>
 
-          <Link to="/storeManager" style={{"textDecoration": "inherit"}}>
-          <Button style={{"textDecoration": "inherit"}} color="secondary" >Store Manager</Button>
+          <Link to="/storeManager" style={{ "textDecoration": "inherit" }}>
+            <Button style={{ "textDecoration": "inherit" }} color="secondary" >Store Manager</Button>
           </Link>
           {!isLoading && !user && (
             <>
-            <Button variant="contained" color="primary" onClick={loginWithRedirect}>
-                  Login
+              <Button variant="contained" color="primary" onClick={loginWithRedirect}>
+                Login
           </Button>
-          </>
+            </>
 
           )}
-            {!isLoading && user && (
+          {!isLoading && user && (
+
             <>
-            <Typography color="textprimary">
-            <p>Hello, {user.name}!     </p>
-            </Typography>
+              {checkUser(user.email)}
+              <Typography color="textprimary">
+                <p>Hello, {user.name}!</p>
+              </Typography>
               <Button variant="contained" color="primary" onClick={logout}>
-                  Logout
+                Logout
           </Button>
-              
+          {/* {checkUser(user.email)} */}
             </>
           )}
+
+          {/* {user &&(
+            <>
+            {checkUser(user.email)}
+            </>
+          )} */}
         </Toolbar>
       </AppBar>
     </div>
