@@ -24,4 +24,11 @@ export default {
   saveBlogPost: function(postData) {
     return axios.post("/api/blogposts", postData);
   },
+
+  getUsers: function() {
+    return axios.get("/api/users");
+  },
+  saveUsers: function() {
+    return axios.post("/api/users")
+  }
 };

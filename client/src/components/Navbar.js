@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from '../utils/auth0context';
+import API from '../utils/API';
 
 
 
@@ -29,6 +30,10 @@ export default function Navbar() {
   const { isLoading, user, loginWithRedirect, logout } = useAuth0();
   const classes = useStyles();
   const location = useLocation();
+
+  // function checkUser (email) {
+  //   API.getUsers
+  // }
 
   return (
     <div className={classes.root}>
