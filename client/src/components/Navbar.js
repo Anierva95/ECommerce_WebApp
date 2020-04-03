@@ -62,7 +62,7 @@ export default function Navbar() {
           </Badge>
 
           <Badge badgeContent={state.wishList.length} color="secondary">
-          <FavoriteIcon style={{"textDecoration": "inherit"}}/>
+          <FavoriteIcon style={{"marginLeft": "20px"}}/>
           </Badge>
 
           <Link to="/storeManager" style={{"textDecoration": "inherit"}}>
