@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -31,27 +31,24 @@ export default function Navbar() {
   const classes = useStyles();
   const location = useLocation();
 
-  function checkUser(email) {
-    console.log("email is: " + email);
-    API.getUsers().then(res => res.data.forEach(element => {
-      if (element.Email !== email) {
-        API.saveUsers({ Email: email }).then(res => console.log("User created!! burkeep!"))
-      // } else {
-      //   API.saveUsers({ Email: email }).then(res => console.log("User created!! burkeep!"))
-      // }
-      } else {
-        console.log("User exists");
-      }
+  useEffect(() => {
+    function checkUser(email) {
+      API.getUsers().then(res => {
+        const isUser = res.data.find(({ Email }) => Email === email)
+        console.log("resdata: ", res.data);
+        console.log("isUser: ", isUser);
+        if (!isUser) {
+          API.saveUsers({ Email: email }).then(res => console.log("User created!! burkeep!"))
+        }
+      });
+    };
 
-    }))
-  }
-
-  // function checkUser(userEmail) {
-  //   console.log(userEmail);
-  //   API.saveUsers({ 
-  //     Email: userEmail,
-  //   }).then(res => console.log("User created!! burkeep!"))
-  // }
+    if (!user) {
+      return;
+    } else {
+      checkUser(user.email)
+    }
+  }, [user])
 
   return (
     <div className={classes.root}>
@@ -90,22 +87,16 @@ export default function Navbar() {
           {!isLoading && user && (
 
             <>
-              {checkUser(user.email)}
+              {/* {checkUser(user.email)} */}
               <Typography color="textprimary">
                 <p>Hello, {user.name}!</p>
               </Typography>
               <Button variant="contained" color="primary" onClick={logout}>
                 Logout
           </Button>
-          {/* {checkUser(user.email)} */}
+              {/* {checkUser(user.email)} */}
             </>
           )}
-
-          {/* {user &&(
-            <>
-            {checkUser(user.email)}
-            </>
-          )} */}
         </Toolbar>
       </AppBar>
     </div>
