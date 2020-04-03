@@ -9,11 +9,13 @@ const Cart = () => {
 
     // console.log(state.shoppingCart);
 
-    const [total, setTotal] = useState()
-    let subTotal = 0;
+    const [total, setTotal] = useState({
+        subtotal: 0,
+        taxTotal: "",
+        total: "",
+    })
+    
     let taxRate = 0.07;
-    let taxTotal;
-    let total;
 
     function taxAmount() {
         taxTotal = subTotal * taxRate
