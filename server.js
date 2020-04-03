@@ -9,9 +9,6 @@ const routes = require("./routes");
 const env = require("dotenv").config({ path: "./.env" });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-// const express = require("express");
-// const bodyParser = require("body-parser");
-// const app = express();
 const { resolve } = require("path");
 
 const app = express()

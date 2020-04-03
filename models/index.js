@@ -1,4 +1,5 @@
 module.exports = {
     Product: require("./product"),
-    BlogPost: require("./blogpost")
+    BlogPost: require("./blogpost"),
+    UserList: require("./users")
   };
