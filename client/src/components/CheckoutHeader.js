@@ -10,8 +10,14 @@ function CheckoutHeader(props) {
     // console.log(state.shoppingCart)
 
     function editQuantity (id, itemQuantity) {
-        const itemObj = state.shoppingCart.find(({_id}) => _id === id)
-        console.log("item found: " , itemObj)
+        const itemObj = state.shoppingCart.find(({_id}) => _id === id)  
+        itemObj.quantity = 1000
+        const indexNum = state.shoppingCart.indexOf(itemObj);
+        console.log("indexNum is: " ,indexNum);
+        state.shoppingCart.splice(indexNum, 1);
+        console.log("before dispatch state: ", state.shoppingCart);
+        dispatch({ type: "ADD_TO_CART", product: {...itemObj}});
+        console.log("after dispatch state: ", state.shoppingCart)
     }
 
     const quantityRef = useRef();
