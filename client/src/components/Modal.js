@@ -21,17 +21,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: "center",
     padding: theme.spacing(2, 4, 3),
+    width: "500px"
   },
 }));
 
 export default function TransitionsModal(props) {
 
   const [state, dispatch] = useStoreContext()
-
-  function addToWish(id) {
-    API.getProduct(id).then(res => dispatch({ type: "ADD_TO_WISH", product: res.data }))
-  }
 
   function addToCart(id) {
     API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
@@ -113,9 +113,6 @@ export default function TransitionsModal(props) {
             <Button variant="contained" color="primary" onClick={() => addToCart(props.id)}>
               Add to Cart
             </Button>
-            <Button variant="contained" color="secondary" onClick={() => addToWish(props.id)}>
-              Wishlist!
-      </Button>
           </div>
         </Fade>
       </Modal>

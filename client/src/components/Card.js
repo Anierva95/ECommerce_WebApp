@@ -32,6 +32,11 @@ export default function MediaCard(props) {
   function setCurrentProduct (id) {
     API.getProduct(id).then(res => dispatch({type: "SET_CURRENT_PRODUCT", product: res.data}))
   }
+  function addToWish(id) {
+    console.log(id)
+    API.getProduct(id).then(res => dispatch({ type: "ADD_TO_WISH", product: res.data }))
+  }
+
 
 
   // function addToCart(id) {
@@ -59,9 +64,8 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button variant="contained" size="small" color="primary" key={props.id}> 
-        {/* onClick={() => addToCart(props.id)} */} {/* Henry removed this. We are going to change so you can only add to cart inside Modal */}
-          Add to Cart
+        <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => addToWish(props.id)}> 
+          Wishlist!
         </Button>
         <Modal
         name={props.name}
