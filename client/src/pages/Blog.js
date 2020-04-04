@@ -4,19 +4,25 @@ import BlogHeader from '../components/BlogHeader'
 import { Grid } from '@material-ui/core';
 import BlogPost from '../components/BlogPost';
 import API from '../utils/API'
+import { useStoreContext } from "../utils/GlobalState";
 
 export default function Blog() {
 
-    const [blogs, setBlogs] = useState([])
-
-    useEffect(() => {
-        loadBlogs()
-    }, [])
+    const [state, dispatch] = useStoreContext();
 
     function loadBlogs() {
-        API.getBlogPosts().then(res => setBlogs(res.data))
-    }
-
+      API.getBlogPosts().then(res => {
+        dispatch({
+          type: "GET_BLOGS",
+          blogs: res.data
+        })
+      })
+      .catch(err => console.log(err));
+    };
+  
+    useEffect(() => {
+      loadBlogs()
+    }, []);
     return(
         <div>
             <Navbar/>
@@ -24,11 +30,12 @@ export default function Blog() {
             <Grid container direction="row">
           <Grid item xs={2} />
           <Grid item container direction="row" xs={8}>
-          {blogs.map(blog => (
+          {state.blogPosts.map(blog => (
               <BlogPost
               Title = {blog.Title}
               Body = {blog.Body}
               Date = {blog.Date}
+              key = {blog._id}
               /> 
           ))}
                  

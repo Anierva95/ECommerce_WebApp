@@ -34,6 +34,11 @@ const reducer = (state, action) => {
                 ...state,
                 shoppingCart: action.updatedCart
             }
+        case "GET_BLOGS":
+            return {
+                ...state,
+                blogPosts: action.blogs
+            }
     }
 }
 

@@ -1,29 +1,68 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStoreContext } from "../utils/GlobalState";
+import StripeCheckout from "react-stripe-checkout"
 
 const Cart = () => {
 
     const [state, dispatch] = useStoreContext();
 
+    const [totalCharge, setTotalCharge] = useState({
+        name: "Ecommerce App items",
+        price: 0,
+    })
+
+    const makePayment = token => {
+        const body = {
+            token,
+            totalCharge
+        }
+        const headers = {
+            "Content-Type" : "application/json"
+        }
+        
+        console.log(token);
+        console.log(totalCharge)
+        
+        return fetch('http://localhost:7000/payment', {
+            method: "POST",
+            headers,
+            body: JSON.stringify(body)
+        }).then(response => {
+          console.log("Response", response)
+          const {status} = response;
+          console.log("status", status)
+        }).catch(error => console.log(error))
+    }
+
     // console.log(state.shoppingCart);
 
-    const [total, setTotal] = useState({
-        subtotal: 0,
-        taxTotal: "",
-        total: "",
-    })
+    let total;
+    let subTotal = 0;
+    let taxTotal;
     
     let taxRate = 0.07;
 
-    function taxAmount() {
-        taxTotal = subTotal * taxRate
-    }
 
-    function totalAmount() {
-        total = subTotal + taxTotal
-    }
+
+    useEffect(() => {
+        function taxAmount() {
+            taxTotal = subTotal * taxRate
+        }
+      
+        function totalAmount() {
+            console.log(subTotal)
+            console.log(taxTotal)
+            total = subTotal + taxTotal
+            console.log(total)
+            setTotalCharge({...totalCharge, price: total.toFixed(0)})
+            console.log(totalCharge)
+        }
+        taxAmount()
+        totalAmount();
+    },[state.shoppingCart])
+
 
     function editQuantity(event, id) { 
         const shoppingCart = state.shoppingCart;
@@ -97,32 +136,38 @@ const Cart = () => {
                             <td>${(element.Quantity * element.Price).toFixed(2)}</td>
                         </tr>
                     ))}
-                    {taxAmount()}
-                    {totalAmount()}
+                    {/* {taxAmount()} */}
+                 
                     <hr></hr>
                     <tr>
                         <th></th>
                         <th></th>
                         <th>Subtotal: </th>
-                        <th>${subTotal.toFixed(2)}</th>
+                        {/* <th>${subTotal.toFixed(2)}</th> */}
                     </tr>
                     <tr>
                         <th></th>
                         <th></th>
                         <th>Subtotal with Tax: </th>
-                        <th>${taxTotal.toFixed(2)}</th>
+                        {/* <th>${taxTotal.toFixed(2)}</th> */}
                     </tr>
                     <tr>
                         <th></th>
                         <th></th>
                         <th>Total with Tax: </th>
-                        <th>${total.toFixed(2)}</th>
+                        {totalCharge.price}
+                        {/* <th>${total.toFixed(2)}</th> */}
                     </tr>
                 </tbody>
 
             </table>
             <div className="checkout">
-                <button>checkout</button>
+            <StripeCheckout
+            stripeKey="pk_test_EyOvaQsKqUFV933zd4l0nmOK00ViQzudXV"
+            token={makePayment}
+            name="Buy product"
+            amount={totalCharge.price * 100}
+            />
             </div>
         </div>
     )

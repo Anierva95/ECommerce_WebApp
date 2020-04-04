@@ -2,6 +2,7 @@
 
 import React, { Component, createContext, useContext } from 'react';
 import createAuth0Client from '@auth0/auth0-spa-js';
+require("dotenv").config();
 
 // create the context
 export const Auth0Context = createContext();
