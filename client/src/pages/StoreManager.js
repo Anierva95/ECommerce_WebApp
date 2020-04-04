@@ -1,7 +1,6 @@
 import React, {useRef} from 'react';
 import Navbar from '../components/Navbar';
 import StoreManagerHeader from '../components/StoreManagerHeader';
-import API from '../utils/API';
 import AddProductForm from '../components/addProductForm';
 import AddBlogForm from '../components/addBlogForm'
 import { Grid } from '@material-ui/core';

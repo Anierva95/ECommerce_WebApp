@@ -1,7 +1,4 @@
-const path = require('path')
 const express = require('express')
-const bodyParser = require('body-parser')
-// const postCharge = require('./stripe')
 require('dotenv').config()
 const mongoose = require("mongoose");
 const routes = require("./routes");
@@ -13,11 +10,8 @@ const uuid = require("uuid/v4");
 
 const port = process.env.PORT || 7000
 
-// const { resolve } = require("path");
-
 const app = express()
 app.use(cors())
-// const router = express.Router()
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
