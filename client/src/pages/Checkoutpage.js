@@ -1,8 +1,5 @@
 import React, {useState} from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import CheckoutForm from "../components/CheckoutForm";
 import Navbar from '../components/Navbar';
-import CardSection from '../components/CardSection';
 import StripeCheckout from "react-stripe-checkout"
 
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
