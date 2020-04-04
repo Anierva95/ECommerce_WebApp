@@ -7,24 +7,56 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 
 const env = require("dotenv").config({ path: "./.env" });
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")("sk_test_ZJ27OYNBBKyx1APxHOc7HCYy00z7lu2Sdn");
+const cors = require("cors");
+const uuid = require("uuid/v4")
 
-const { resolve } = require("path");
-
-const app = express()
-// const router = express.Router()
 const port = process.env.PORT || 7000
 
+// const { resolve } = require("path");
+
+const app = express()
+app.use(cors())
+// const router = express.Router()
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-app.use(routes);
-// console.log("this is app", app.use(routes))
+
+
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/ecommerceShop");
 
+app.post("/payment", (req, res) => {
+  console.log(req.body)
+
+  const { product , token } = req.body;
+  console.log("PRODUCT", product);
+  console.log("PRICE", product.price);
+  const idempotencyKey = uuid();
+
+  return stripe.customers.create({
+    email: token.email,
+    source: token.id
+  }).then(customer => {
+    stripe.charges.create({
+      amount: product.price,
+      currency: 'usd',
+      customer: customer.id,
+      receipt_email: token.email,
+      description: product.name
+    }, {idempotencyKey})
+  }).then(charge => {
+    stripe.paymentIntents.create({
+      amount: product.price,
+      currency: 'usd'
+    })
+  }).then(result => res.status(200).json(result)).catch(err => console.log(err))
+})
+
+
+app.use(routes);
 
 
 
