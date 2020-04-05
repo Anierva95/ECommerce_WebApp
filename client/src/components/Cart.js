@@ -13,63 +13,58 @@ const Cart = () => {
         price: 0,
     })
 
+    // const [total, setTotal] = useState()
+
+    // const [subTotal, setSubTotal] = useState(0)
+
+    // const [taxTotal, setTax] = useState()
+
     const makePayment = token => {
         const body = {
             token,
             totalCharge
         }
         const headers = {
-            "Content-Type" : "application/json"
+            "Content-Type": "application/json"
         }
-        
+
         console.log(token);
         console.log(totalCharge)
-        
+
         return fetch('http://localhost:7000/payment', {
             method: "POST",
             headers,
             body: JSON.stringify(body)
         }).then(response => {
-          console.log("Response", response)
-          const {status} = response;
-          console.log("status", status)
+            console.log("Response", response)
+            const { status } = response;
+            console.log("status", status)
         }).catch(error => console.log(error))
     }
 
-    // console.log(state.shoppingCart);
-
-    let total;
     let subTotal = 0;
-    let taxTotal;
-    
+    let taxTotal = 0;
+    let total = 0;
+
     let taxRate = 0.07;
 
+    function taxAmount() {
+        taxTotal = taxTotal + (subTotal * taxRate)
+    }
 
+    function totalAmount() {
+        total = total + subTotal + taxTotal
+    }
 
     useEffect(() => {
-        function taxAmount() {
-            console.log ("taxTotal: " , taxTotal)
-            console.log ("taxRte: " , taxRate)
-            // taxTotal = subTotal * taxRate
-        }
-      
-        function totalAmount() {
-            console.log(subTotal)
-            console.log(taxTotal)
-            total = subTotal + taxTotal
-            console.log(total)
-            setTotalCharge({...totalCharge, price: total.toFixed(0)})
-            console.log(totalCharge)
-        }
-        taxAmount()
-        totalAmount();
-    },[state.shoppingCart])
+        setTotalCharge({ ...totalCharge, price: total })
+    }, [state.shoppingCart])
 
 
-    function editQuantity(event, id) { 
+    function editQuantity(event, id) {
         const shoppingCart = state.shoppingCart;
         const updatedCart = shoppingCart.map(element => {
-            if(element._id === id) {
+            if (element._id === id) {
                 element.Quantity = event.target.value;
             }
             return element;
@@ -113,7 +108,9 @@ const Cart = () => {
                 </thead>
                 <tbody>
                     {state.shoppingCart.map(element => (
+                        // console.log(subTotal, "before"),
                         subTotal = subTotal + (element.Quantity * element.Price),
+                        // console.log(subTotal, "after"),
                         <tr key={element._id}>
                             <td>{element.Item}</td>
                             <td>${element.Price}</td>
@@ -125,7 +122,7 @@ const Cart = () => {
                                     value={element.Quantity}
                                     variant="filled"
                                     placeholder={element.Quantity}
-                                    onChange={event => editQuantity(event, element._id)} 
+                                    onChange={event => editQuantity(event, element._id)}
                                     style={{ "width": "200px" }}
                                 >
                                     {quantity.map((option) => (
@@ -135,41 +132,41 @@ const Cart = () => {
                                     ))}
                                 </TextField>
                             </td>
-                            <td>${(element.Quantity * element.Price).toFixed(2)}</td>
+                            <td>$ {(element.Quantity * element.Price).toFixed(2)}</td>
                         </tr>
                     ))}
-                    {/* {taxAmount()} */}
-                 
+                    {taxAmount()}
+                    {totalAmount()}
+
                     <hr></hr>
                     <tr>
                         <th></th>
                         <th></th>
                         <th>Subtotal: </th>
-                        <th>${(subTotal.toFixed(2))}</th>
+                        <th>$ {subTotal.toFixed(2)}</th>
                     </tr>
                     <tr>
                         <th></th>
                         <th></th>
-                        <th>Subtotal with Tax: </th>
-                        <th>${taxTotal}</th>
+                        <th>Tax: </th>
+                        <th>$ {taxTotal.toFixed(2)}</th>
                     </tr>
                     <tr>
                         <th></th>
                         <th></th>
                         <th>Total with Tax: </th>
-                        {totalCharge.price}
-                        {/* <th>${total.toFixed(2)}</th> */}
+                        <th>$ {total.toFixed(2)}</th>
                     </tr>
                 </tbody>
 
             </table>
             <div className="checkout">
-            <StripeCheckout
-            stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"  // anthony's key = pk_test_EyOvaQsKqUFV933zd4l0nmOK00ViQzudXV
-            token={makePayment}
-            name="Buy product"
-            amount={totalCharge.price * 100}
-            />
+                <StripeCheckout
+                    stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"
+                    token={makePayment}
+                    name="Buy product"
+                    amount={totalCharge.price * 100}
+                />
             </div>
         </div>
     )

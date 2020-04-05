@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import API from '../utils/API';
+import { useStoreContext } from "../utils/GlobalState";
 
 
 const useStyles = makeStyles({
@@ -25,14 +26,19 @@ const useStyles = makeStyles({
   },
 });
 
+
 function deleteBlog (id) {
   console.log(id);
-  API.deleteBlogPost(id).then(res => console.log("blog post deleted"))
+  API.deleteBlogPost(id).then(res => window.location.reload()) // prob need to call a dispatch to re-render page here, but too lazy atm LOL
 }
 
 export default function OutlinedCard(props) {
+
+  // const [state, dispatch] = useStoreContext();
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
+
+  // console.log("state", state.blogPosts)
 
   return (
     <Card className={classes.root} variant="outlined">
