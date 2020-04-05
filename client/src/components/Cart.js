@@ -20,8 +20,25 @@ const Cart = () => {
 
     // const [taxTotal, setTax] = useState()
 
-    function setTransaction (id, cart) {
-        API.addTransaction(id, cart).then(res => console.log("successfully added to cart: ",res))
+    function setTransaction(id, cart) {
+        API.addTransaction(id, cart).then(res => console.log("successfully added to cart: ", res))
+    };
+
+    function updateInventory() {
+        const updateCart = state.shoppingCart
+        const currentProducts = state.products
+        for (let item of updateCart) {
+            for (let product of currentProducts) {
+                if (item._id === product._id) {
+                    let newQuantity = parseInt(product.Quantity) - parseInt(item.Quantity)
+                    if(newQuantity < 0) {
+                        return alert("We are all sold out!")
+                    } else {
+                        API.updateProduct(item._id, {Quantity: newQuantity}).then(res => console.log("product quantity updated!"), window.location.replace("/"))
+                    } 
+                }
+            }
+        }
     }
 
     const makePayment = token => {
@@ -38,14 +55,16 @@ const Cart = () => {
             headers,
             body: JSON.stringify(body)
         }).then(response => {
-            console.log("Response", response)
+            // console.log("Response", response)
             const { status } = response;
-            console.log("status", status)
-            console.log(token, token.id)
-            const {id} = token
+            console.log("state: ", state)
+            // console.log("status", status)
+            // console.log(token, token.id)
+            const { id } = token
             //token.id is stripe transaction id (splice the first 4 char, when rendering to show user)
-            console.log("statecurrentuserid: ",state.currentUser.id)
-            setTransaction(state.currentUser.id, {[id]: state.shoppingCart})
+            // console.log("statecurrentuserid: ",state.currentUser.id)
+            updateInventory()
+            setTransaction(state.currentUser.id, { [id]: state.shoppingCart })
         }).catch(error => console.log(error))
     }
 
