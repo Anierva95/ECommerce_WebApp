@@ -48,7 +48,9 @@ const Cart = () => {
 
     useEffect(() => {
         function taxAmount() {
-            taxTotal = subTotal * taxRate
+            console.log ("taxTotal: " , taxTotal)
+            console.log ("taxRte: " , taxRate)
+            // taxTotal = subTotal * taxRate
         }
       
         function totalAmount() {
@@ -111,7 +113,7 @@ const Cart = () => {
                 </thead>
                 <tbody>
                     {state.shoppingCart.map(element => (
-                        subTotal = subTotal + (element.Quantity * element.Price.toFixed(2)),
+                        subTotal = subTotal + (element.Quantity * element.Price),
                         <tr key={element._id}>
                             <td>{element.Item}</td>
                             <td>${element.Price}</td>
@@ -143,13 +145,13 @@ const Cart = () => {
                         <th></th>
                         <th></th>
                         <th>Subtotal: </th>
-                        {/* <th>${subTotal.toFixed(2)}</th> */}
+                        <th>${(subTotal.toFixed(2))}</th>
                     </tr>
                     <tr>
                         <th></th>
                         <th></th>
                         <th>Subtotal with Tax: </th>
-                        {/* <th>${taxTotal.toFixed(2)}</th> */}
+                        <th>${taxTotal}</th>
                     </tr>
                     <tr>
                         <th></th>
@@ -163,7 +165,7 @@ const Cart = () => {
             </table>
             <div className="checkout">
             <StripeCheckout
-            stripeKey="pk_test_EyOvaQsKqUFV933zd4l0nmOK00ViQzudXV"
+            stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"  // anthony's key = pk_test_EyOvaQsKqUFV933zd4l0nmOK00ViQzudXV
             token={makePayment}
             name="Buy product"
             amount={totalCharge.price * 100}

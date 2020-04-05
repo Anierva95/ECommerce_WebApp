@@ -24,6 +24,9 @@ export default {
   saveBlogPost: function(postData) {
     return axios.post("/api/blogposts", postData);
   },
+  deleteBlogPost: function(id) {
+    return axios.delete("/api/blogposts/" + id);
+  },
 
   getUsers: function() {
     return axios.get("/api/users");

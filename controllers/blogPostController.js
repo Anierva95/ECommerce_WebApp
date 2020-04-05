@@ -10,5 +10,10 @@ module.exports = {
         db.BlogPost.create(req.body)
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
-      },
+    },
+    remove: function(req, res) {
+        db.BlogPost.remove({ _id: req.params.id })
+          .then(dbModel => res.json(dbModel))
+          .catch(err => res.status(422).json(err));
+      }
 };
