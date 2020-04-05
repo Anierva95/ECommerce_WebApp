@@ -17,6 +17,10 @@ export default {
   saveProduct: function(postData) {
     return axios.post("/api/products", postData);
   },
+  // Update product quantity
+  updateProduct: function (id, postData) {
+    return axios.put("/api/products/" + id, postData);
+  },
 
   getBlogPosts: function() {
     return axios.get("/api/blogposts");
