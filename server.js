@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 
 const env = require("dotenv").config({ path: "./.env" });
-const stripe = require("stripe")("sk_test_ZJ27OYNBBKyx1APxHOc7HCYy00z7lu2Sdn");
+const stripe = require("stripe")("sk_test_5E3bOXork8qZUBtLQ5KjBgu000BSHwwbfO"); // anthony's key : sk_test_ZJ27OYNBBKyx1APxHOc7HCYy00z7lu2Sdn
 const cors = require("cors");
 const uuid = require("uuid/v4");
 

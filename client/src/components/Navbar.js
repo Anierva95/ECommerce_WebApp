@@ -44,6 +44,16 @@ export default function Navbar() {
         console.log("isUser: ", isUser);
         if (!isUser) {
           API.saveUsers({ Email: email }).then(res => console.log("User created!! burkeep!"))
+        } else {
+          console.log(res.data)
+          dispatch({
+            type: "SET_USER",
+            user: {
+              id: isUser._id,
+              email: isUser.Email
+            }
+          })
+          console.log("state: ", state);
         }
       });
     };

@@ -39,6 +39,12 @@ const reducer = (state, action) => {
                 ...state,
                 blogPosts: action.blogs
             }
+
+        case "SET_USER":
+            return {
+                ...state,
+                currentUser: action.user
+            }
     }
 }
 
@@ -54,9 +60,8 @@ const StoreProvider = ({ value = [], ...props }) => {
         wishList: [],
         blogPosts: [],
         currentUser: {
-            title: "",
-            body: "",
-            author: ""
+            id: "",
+            email: ""
         },
     });
 

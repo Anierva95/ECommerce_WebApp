@@ -35,7 +35,7 @@ export default function Blog() {
               Title = {blog.Title}
               Body = {blog.Body}
               Date = {blog.Date}
-              key = {blog._id}
+              Key = {blog._id}
               /> 
           ))}
                  

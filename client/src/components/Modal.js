@@ -109,7 +109,6 @@ export default function TransitionsModal(props) {
               label="Quantity"
               variant="filled"
               inputRef={quantityRef}
-              // onChange=
               style={{"width": "200px"}}
             >
               {quantity.map((option) => (

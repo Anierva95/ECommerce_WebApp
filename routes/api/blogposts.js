@@ -7,4 +7,7 @@ router
   .get(blogPostController.findAll)
   .post(blogPostController.create);
 
+router
+  .route("/:id")
+  .delete(blogPostController.remove)
 module.exports = router;

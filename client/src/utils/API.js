@@ -24,11 +24,17 @@ export default {
   saveBlogPost: function(postData) {
     return axios.post("/api/blogposts", postData);
   },
+  deleteBlogPost: function(id) {
+    return axios.delete("/api/blogposts/" + id);
+  },
 
   getUsers: function() {
     return axios.get("/api/users");
   },
   saveUsers: function(postData) {
     return axios.post("/api/users", postData);
+  },
+  addTransaction: function(id, postData) {
+    return axios.put("/api/users/" + id, postData)
   }
 };
