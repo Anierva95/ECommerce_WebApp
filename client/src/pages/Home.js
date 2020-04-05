@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import SalesHeader from '../components/SalesHeader'
 import ProductRow from '../components/ProductRow'
 import { Grid } from '@material-ui/core';
+import LiveChat from 'react-livechat'
 
 
 export default function Home(){
@@ -19,6 +20,7 @@ export default function Home(){
           <ProductRow/>
           <Grid item xs={2} />
           </Grid>
+          <LiveChat license={11844840}/>
           </Grid>
 
         </div>
