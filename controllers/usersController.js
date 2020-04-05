@@ -6,10 +6,15 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
-    create: function(req, res) {
+    create: function (req, res) {
         console.log("req.body: " + JSON.stringify(req.body))
         db.UserList.create(req.body)
-          .then(dbModel => res.json(dbModel))
-          .catch(err => res.status(422).json(err));
-      },
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    update: function (req, res) {
+        db.UserList.update({ _id: req.params.id }, { $push: { Transactions: req.body }})
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
 };

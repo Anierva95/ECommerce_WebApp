@@ -33,5 +33,8 @@ export default {
   },
   saveUsers: function(postData) {
     return axios.post("/api/users", postData);
+  },
+  addTransaction: function(id, postData) {
+    return axios.put("/api/users/" + id, postData)
   }
 };

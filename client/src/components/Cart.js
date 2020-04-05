@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStoreContext } from "../utils/GlobalState";
-import StripeCheckout from "react-stripe-checkout"
+import StripeCheckout from "react-stripe-checkout";
+import API from '../utils/API';
 
 const Cart = () => {
 
@@ -19,6 +20,10 @@ const Cart = () => {
 
     // const [taxTotal, setTax] = useState()
 
+    function setTransaction (id, cart) {
+        API.addTransaction(id, cart).then(res => console.log("successfully added to cart: ",res))
+    }
+
     const makePayment = token => {
         const body = {
             token,
@@ -28,9 +33,6 @@ const Cart = () => {
             "Content-Type": "application/json"
         }
 
-        console.log(token);
-        console.log(totalCharge)
-
         return fetch('http://localhost:7000/payment', {
             method: "POST",
             headers,
@@ -39,6 +41,11 @@ const Cart = () => {
             console.log("Response", response)
             const { status } = response;
             console.log("status", status)
+            console.log(token, token.id)
+            const {id} = token
+            //token.id is stripe transaction id (splice the first 4 char, when rendering to show user)
+            console.log("statecurrentuserid: ",state.currentUser.id)
+            setTransaction(state.currentUser.id, {[id]: state.shoppingCart})
         }).catch(error => console.log(error))
     }
 
