@@ -36,12 +36,18 @@ export default function Navbar() {
   const location = useLocation();
   const [state, dispatch] = useStoreContext()
 
+
   useEffect(() => {
+
+    if (!user) {
+      return;
+    } else {
+      checkUser(user.email)
+    }
+    
     function checkUser(email) {
       API.getUsers().then(res => {
         const isUser = res.data.find(({ Email }) => Email === email)
-        console.log("resdata: ", res.data);
-        console.log("isUser: ", isUser);
       //   if (isUser.Transactions) {
       //   for (let transaction of isUser.Transactions) {
       //     console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
@@ -59,7 +65,6 @@ export default function Navbar() {
             }
           }))
         } else {
-          console.log(res.data)
           dispatch({
             type: "SET_USER",
             user: {
@@ -68,16 +73,11 @@ export default function Navbar() {
               transactions: isUser.Transactions
             }
           })
-          console.log("state: ", state);
         }
       });
     };
 
-    if (!user) {
-      return;
-    } else {
-      checkUser(user.email)
-    }
+    console.log("state: ", state);
   }, [user])
 
   return (

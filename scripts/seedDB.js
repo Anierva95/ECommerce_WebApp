@@ -19,7 +19,7 @@ const productSeed = [
     Type: "Person",
     Description: "Please stand up",
     Price: .5,
-    Quantity: 10,
+    Quantity: 100,
     Gender: "Male"
   },
   {
@@ -27,7 +27,7 @@ const productSeed = [
     Type: "Sweatshirt",
     Description: "Laced with c0ke",
     Price: 1000,
-    Quantity: 1,
+    Quantity: 100,
     Gender: "Unisex"
   },
   {
@@ -35,7 +35,7 @@ const productSeed = [
     Type: "Accessory",
     Description: "Found under a table",
     Price: 500,
-    Quantity: 2,
+    Quantity: 200,
     Gender: "Unisex"
   },
   {
@@ -43,7 +43,7 @@ const productSeed = [
     Type: "Accessory",
     Description: "Grandmother used to love this jinglebell...",
     Price: 1000,
-    Quantity: 1,
+    Quantity: 100,
     Gender: "Female"
   },
   {
@@ -51,7 +51,7 @@ const productSeed = [
     Type: "Accessory",
     Description: "Used to surrender in a bad circumstance",
     Price: 100,
-    Quantity: 1,
+    Quantity: 100,
     Gender: "Unisex"
   },
   {
@@ -59,7 +59,7 @@ const productSeed = [
     Type: "Jean",
     Description: "No one will ever question if you skipped leg day",
     Price: 25,
-    Quantity: 10,
+    Quantity: 100,
     Gender: "Male"
   },
   {
@@ -67,7 +67,7 @@ const productSeed = [
     Type: "Jacket",
     Description: "You will look like a hipster, for sure.",
     Price: 85,
-    Quantity: 15,
+    Quantity: 150,
     Gender: "Female"
   },
 ];
