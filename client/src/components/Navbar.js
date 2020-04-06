@@ -36,33 +36,48 @@ export default function Navbar() {
   const location = useLocation();
   const [state, dispatch] = useStoreContext()
 
+
   useEffect(() => {
-    function checkUser(email) {
-      API.getUsers().then(res => {
-        const isUser = res.data.find(({ Email }) => Email === email)
-        console.log("resdata: ", res.data);
-        console.log("isUser: ", isUser);
-        if (!isUser) {
-          API.saveUsers({ Email: email }).then(res => console.log("User created!! burkeep!"))
-        } else {
-          console.log(res.data)
-          dispatch({
-            type: "SET_USER",
-            user: {
-              id: isUser._id,
-              email: isUser.Email
-            }
-          })
-          console.log("state: ", state);
-        }
-      });
-    };
 
     if (!user) {
       return;
     } else {
       checkUser(user.email)
     }
+    
+    function checkUser(email) {
+      API.getUsers().then(res => {
+        const isUser = res.data.find(({ Email }) => Email === email)
+      //   if (isUser.Transactions) {
+      //   for (let transaction of isUser.Transactions) {
+      //     console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
+      //   }
+      // }
+        if (!isUser) {
+          API.saveUsers({ Email: email })
+          .then(res =>           
+            dispatch({
+            type: "SET_USER",
+            user: {
+              id: res.data._id,
+              email: res.data.Email,
+              transactions: res.data.Transactions
+            }
+          }))
+        } else {
+          dispatch({
+            type: "SET_USER",
+            user: {
+              id: isUser._id,
+              email: isUser.Email,
+              transactions: isUser.Transactions
+            }
+          })
+        }
+      });
+    };
+
+    console.log("state: ", state);
   }, [user])
 
   return (
@@ -77,6 +92,9 @@ export default function Navbar() {
           </Typography>
           <Link to="/" style={{ "textDecoration": "inherit" }}>
             <Button style={{ "textDecoration": "inherit" }} >Home</Button>
+          </Link>
+          <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>
+          <Button style={{ "textDecoration": "inherit" }} >Account</Button>
           </Link>
           <Link to="/blog" style={{ "textDecoration": "inherit" }}>
             <Button style={{ "textDecoration": "inherit" }} >Blog</Button>

@@ -8,6 +8,7 @@ import { StoreProvider } from "./utils/GlobalState";
 import { Auth0Provider, Auth0Context } from './utils/auth0context';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
+import UserAccount from './pages/UserAccount'
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/storeManager" component={StoreManager} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/UserAccount" component={UserAccount}/>
         </StoreProvider>
         </Auth0Provider>
         </Elements>

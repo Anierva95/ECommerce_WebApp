@@ -64,7 +64,10 @@ const Cart = () => {
             //token.id is stripe transaction id (splice the first 4 char, when rendering to show user)
             // console.log("statecurrentuserid: ",state.currentUser.id)
             updateInventory()
-            setTransaction(state.currentUser.id, { [id]: state.shoppingCart })
+            // setTransaction(state.currentUser.id, { [id]: state.shoppingCart })
+            setTransaction(state.currentUser.id, {
+                transactionID: id, items: state.shoppingCart
+            })
         }).catch(error => console.log(error))
     }
 
