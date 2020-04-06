@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStoreContext } from "../utils/GlobalState";
@@ -56,7 +56,7 @@ const Cart = () => {
             body: JSON.stringify(body)
         }).then(response => {
             // console.log("Response", response)
-            const { status } = response;
+            // const { status } = response;
             console.log("state: ", state)
             // console.log("status", status)
             // console.log(token, token.id)

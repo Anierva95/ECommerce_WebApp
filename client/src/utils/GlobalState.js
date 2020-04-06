@@ -61,7 +61,8 @@ const StoreProvider = ({ value = [], ...props }) => {
         blogPosts: [],
         currentUser: {
             id: "",
-            email: ""
+            email: "",
+            transactions: []
         },
     });
 

@@ -6,6 +6,11 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+    find: function (req,res) {
+        db.UserList.findOne({ _id: req.params.id })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    },
     create: function (req, res) {
         console.log("req.body: " + JSON.stringify(req.body))
         db.UserList.create(req.body)

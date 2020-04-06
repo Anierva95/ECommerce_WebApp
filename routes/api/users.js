@@ -9,6 +9,7 @@ router
 
 router
   .route("/:id")
+  .get(usersController.find)
   .put(usersController.update)
 
 module.exports = router;

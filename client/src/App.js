@@ -1,11 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import StoreManager from './pages/StoreManager';
 import Cart from './pages/Cart'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { StoreProvider } from "./utils/GlobalState";
-import { Auth0Provider, Auth0Context } from './utils/auth0context';
+import { Auth0Provider} from './utils/auth0context';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import UserAccount from './pages/UserAccount'
@@ -13,7 +13,7 @@ import UserAccount from './pages/UserAccount'
 
 
 function App() {
-  const auth0 = useContext(Auth0Context); 
+  // const auth0 = useContext(Auth0Context); 
   const stripePromise = loadStripe('pk_test_EyOvaQsKqUFV933zd4l0nmOK00ViQzudXV');
   return (
     <Router>

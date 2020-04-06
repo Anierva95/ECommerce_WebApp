@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MediaCard from '../components/Card';
 import { Grid } from '@material-ui/core';
 import API from "../utils/API";
