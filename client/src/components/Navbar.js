@@ -42,6 +42,9 @@ export default function Navbar() {
         const isUser = res.data.find(({ Email }) => Email === email)
         console.log("resdata: ", res.data);
         console.log("isUser: ", isUser);
+        for (let transaction of isUser.Transactions) {
+          console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
+        }
         if (!isUser) {
           API.saveUsers({ Email: email }).then(res => console.log("User created!! burkeep!"))
         } else {
@@ -77,6 +80,9 @@ export default function Navbar() {
           </Typography>
           <Link to="/" style={{ "textDecoration": "inherit" }}>
             <Button style={{ "textDecoration": "inherit" }} >Home</Button>
+          </Link>
+          <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>
+          <Button style={{ "textDecoration": "inherit" }} >Account</Button>
           </Link>
           <Link to="/blog" style={{ "textDecoration": "inherit" }}>
             <Button style={{ "textDecoration": "inherit" }} >Blog</Button>
