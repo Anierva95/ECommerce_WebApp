@@ -42,18 +42,30 @@ export default function Navbar() {
         const isUser = res.data.find(({ Email }) => Email === email)
         console.log("resdata: ", res.data);
         console.log("isUser: ", isUser);
-        for (let transaction of isUser.Transactions) {
-          console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
-        }
+      //   if (isUser.Transactions) {
+      //   for (let transaction of isUser.Transactions) {
+      //     console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
+      //   }
+      // }
         if (!isUser) {
-          API.saveUsers({ Email: email }).then(res => console.log("User created!! burkeep!"))
+          API.saveUsers({ Email: email })
+          .then(res =>           
+            dispatch({
+            type: "SET_USER",
+            user: {
+              id: res.data._id,
+              email: res.data.Email,
+              transactions: res.data.Transactions
+            }
+          }))
         } else {
           console.log(res.data)
           dispatch({
             type: "SET_USER",
             user: {
               id: isUser._id,
-              email: isUser.Email
+              email: isUser.Email,
+              transactions: isUser.Transactions
             }
           })
           console.log("state: ", state);
