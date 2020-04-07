@@ -16,7 +16,19 @@ export default function TransactionModalTable(props) {
         },
     });
     const classes = useStyles();
-    const [subTotal, setSubTotal] = useState(0)
+    let subtotal = 0;
+    let taxrate = 0.07;
+    let tax = 0;
+    let total = 0;
+
+    function calculateTax () {
+        tax = tax + (subtotal * taxrate)
+    }
+    
+    function calculateTotal () {
+        total = (total + (subtotal + tax))
+    }
+    
 
     return (
         <TableContainer component={Paper}>
@@ -37,6 +49,8 @@ export default function TransactionModalTable(props) {
                 </TableHead>
                 <TableBody>
                     {props.items.map(el => (
+                        subtotal = subtotal + (el.Quantity * el.Price),
+                        console.log(subtotal),
                         <TableRow key={el._id}>
                             <TableCell>{el.Item} (Item#: {el._id})</TableCell>
                             <TableCell align="right">{el.Quantity}</TableCell>
@@ -44,19 +58,21 @@ export default function TransactionModalTable(props) {
                             <TableCell align="right">$ {(el.Quantity * el.Price).toFixed(2)}</TableCell>
                         </TableRow>
                     ))}
+                    {calculateTax()}
+                    {calculateTotal()}
                     <TableRow>
                         <TableCell rowSpan={3} />
                         <TableCell colSpan={2}>Subtotal</TableCell>
-                        <TableCell align="right"></TableCell>
+                        <TableCell align="right">$ {subtotal.toFixed(2)}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>Tax</TableCell>
                         <TableCell align="right"></TableCell>
-                        <TableCell align="right"></TableCell>
+                        <TableCell align="right">$ {tax.toFixed(2)}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell colSpan={2}>Total</TableCell>
-                        <TableCell align="right"></TableCell>
+                        <TableCell align="right">$ {total.toFixed(2)}</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

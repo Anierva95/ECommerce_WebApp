@@ -138,9 +138,7 @@ const Cart = () => {
                 </thead>
                 <tbody>
                     {state.shoppingCart.map(element => (
-                        // console.log(subTotal, "before"),
                         subTotal = subTotal + (element.Quantity * element.Price),
-                        // console.log(subTotal, "after"),
                         <tr key={element._id}>
                             <td>{element.Item}</td>
                             <td>${element.Price}</td>
