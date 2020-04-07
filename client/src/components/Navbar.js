@@ -112,7 +112,7 @@ export default function Navbar() {
           {/* <Link to="/cart" style={{ "textDecoration": "inherit" }}>
             Cart<span>{props.cart.length}</span>
           </Link> */}
-          <Badge badgeContent={state.shoppingCart.length} color="secondary">
+          <Badge badgeContent={state.shoppingCart? state.shoppingCart.length : 0} color="secondary">
           <Link to="/cart" style={{ "textDecoration": "inherit" }}>
           <ShoppingCartIcon style={{"textDecoration": "inherit"}} />
           </Link>
