@@ -39,7 +39,7 @@ export default function UserAccount() {
     if (page === "Account") {
       return <AccountDetails />
     } else if (page === "Transactions") {
-      return <TransactionPage />
+      return <TransactionPage transactions={state.currentUser.transactions}/>
     }
   }
 
@@ -51,14 +51,16 @@ export default function UserAccount() {
       <Grid container direction="row" spacing={3}>
         <Grid item xs={3}>
           <NestedList
+            page={page}
             handlePageChange={handlePageChange}
           />
         </Grid>
         <Grid item xs={8}>
           <Paper>
-            {page === "Account"
+            {renderPage(page)}
+            {/* {page === "Account"
               ? <AccountDetails />
-              : <TransactionPage transactions={state.currentUser.transactions}/>}
+              : <TransactionPage transactions={state.currentUser.transactions}/>} */}
           </Paper>
         </Grid>
         <Grid item xs={1}></Grid>
