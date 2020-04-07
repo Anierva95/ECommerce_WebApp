@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import AccountDetails from '../components/AccountDetails';
 import TransactionPage from '../components/TransactionPage';
+import WishlistPage from '../components/WishlistPage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,11 +36,25 @@ export default function UserAccount() {
     setPage(page)
   };
 
+  // const renderPage = page => {
+  //   if (page === "Account") {
+  //     return <AccountDetails />
+  //   } else if (page === "Transactions") {
+  //     return <TransactionPage transactions={state.currentUser.transactions}/>
+  //   }
+  // }
+
   const renderPage = page => {
-    if (page === "Account") {
+    switch(page) {
+      case "Account": {
       return <AccountDetails user={state.currentUser}/>
-    } else if (page === "Transactions") {
-      return <TransactionPage user={state.currentUser}/>
+      }
+      case "Transactions": {
+        return <TransactionPage transactions={state.currentUser.transactions}/>
+      }
+      case "Wishlist": {
+        return <WishlistPage/>
+      }
     }
   }
 
@@ -58,10 +73,7 @@ export default function UserAccount() {
         <Grid item xs={8}>
           <>
             {renderPage(page)}
-            {/* {page === "Account"
-              ? <AccountDetails />
-              : <TransactionPage transactions={state.currentUser.transactions}/>} */}
-          </>
+          </Paper>
         </Grid>
         <Grid item xs={1}></Grid>
       </Grid>

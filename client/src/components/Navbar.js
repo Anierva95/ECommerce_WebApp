@@ -61,17 +61,27 @@ export default function Navbar() {
             user: {
               id: res.data._id,
               email: res.data.Email,
-              transactions: res.data.Transactions
+              transactions: res.data.Transactions,
+              shoppingCart: res.data.ShoppingCart
             }
           }))
+          dispatch({
+            type: "GET_CART",
+            dbCart: res.data.ShoppingCart 
+          })
         } else {
           dispatch({
             type: "SET_USER",
             user: {
               id: isUser._id,
               email: isUser.Email,
-              transactions: isUser.Transactions
+              transactions: isUser.Transactions,
+              shoppingCart: isUser.ShoppingCart
             }
+          })
+          dispatch({
+            type: "GET_CART",
+            dbCart: isUser.ShoppingCart
           })
         }
       });
@@ -102,15 +112,16 @@ export default function Navbar() {
           {/* <Link to="/cart" style={{ "textDecoration": "inherit" }}>
             Cart<span>{props.cart.length}</span>
           </Link> */}
-          <Badge badgeContent={state.shoppingCart.length} color="secondary">
+          <Badge badgeContent={state.shoppingCart? state.shoppingCart.length : 0} color="secondary">
           <Link to="/cart" style={{ "textDecoration": "inherit" }}>
           <ShoppingCartIcon style={{"textDecoration": "inherit"}} />
           </Link>
           </Badge>
-
+          <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>
           <Badge badgeContent={state.wishList.length} color="secondary">
           <FavoriteIcon style={{"marginLeft": "20px"}}/>
           </Badge>
+          </Link>
 
           <Link to="/storeManager" style={{"textDecoration": "inherit"}}>
           <Button style={{"textDecoration": "inherit"}}  >Store Manager</Button>

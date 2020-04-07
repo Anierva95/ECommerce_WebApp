@@ -11,5 +11,6 @@ router
   .route("/:id")
   .get(usersController.find)
   .put(usersController.update)
+  .post(usersController.updateCart)
 
 module.exports = router;

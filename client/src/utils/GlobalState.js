@@ -45,6 +45,11 @@ const reducer = (state, action) => {
                 ...state,
                 currentUser: action.user
             }
+        case "GET_CART":
+            return {
+                ...state,
+                shoppingCart: action.dbCart
+            }
     }
 }
 
@@ -62,7 +67,8 @@ const StoreProvider = ({ value = [], ...props }) => {
         currentUser: {
             id: "",
             email: "",
-            transactions: []
+            transactions: [],
+            shoppingCart: []
         },
     });
 
