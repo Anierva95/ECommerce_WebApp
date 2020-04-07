@@ -32,6 +32,15 @@ export default function AddProductForm() {
   const quantityRef = useRef();
   const genderRef = useRef();
 
+  var myWidget = window.cloudinary.createUploadWidget({
+    cloudName: 'diadpow6d', 
+    uploadPreset: 'h6i1uchv'}, (error, result) => { 
+      if (!error && result && result.event === "success") { 
+        console.log('Done! Here is the image info: ', result.info); 
+      }
+    }
+  )
+
   function AddItem() {
     console.log(itemRef.current.value);
     console.log(priceRef.current.value);
@@ -137,6 +146,7 @@ export default function AddProductForm() {
                     </MenuItem>
                   ))}
                 </TextField>
+                <Button id="upload_widget" class="cloudinary-button" onClick={()=> {myWidget.open()}}>Upload Picture</Button>
               </FormControl>
               <Button variant="contained" color="primary" onClick={() => AddItem()}>
                 Submit
