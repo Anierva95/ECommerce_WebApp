@@ -35,11 +35,22 @@ export default function UserAccount() {
     setPage(page)
   };
 
+  // const renderPage = page => {
+  //   if (page === "Account") {
+  //     return <AccountDetails />
+  //   } else if (page === "Transactions") {
+  //     return <TransactionPage transactions={state.currentUser.transactions}/>
+  //   }
+  // }
+
   const renderPage = page => {
-    if (page === "Account") {
-      return <AccountDetails />
-    } else if (page === "Transactions") {
-      return <TransactionPage transactions={state.currentUser.transactions}/>
+    switch(page) {
+      case "Account": {
+        return <AccountDetails/>
+      }
+      case "Transactions": {
+        return <TransactionPage transactions={state.currentUser.transactions}/>
+      }
     }
   }
 
