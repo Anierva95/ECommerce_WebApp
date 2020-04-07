@@ -32,10 +32,16 @@ export default function AddProductForm() {
   const quantityRef = useRef();
   const genderRef = useRef();
 
+  let image = null;
+
   var myWidget = window.cloudinary.createUploadWidget({
+
+
     cloudName: 'diadpow6d', 
     uploadPreset: 'h6i1uchv'}, (error, result) => { 
-      if (!error && result && result.event === "success") { 
+      if (!error && result && result.event === "success") {
+        image = JSON.stringify(result.info.url);
+        console.log(image)
         console.log('Done! Here is the image info: ', result.info); 
       }
     }
@@ -54,7 +60,8 @@ export default function AddProductForm() {
       Description: descriptionRef.current.value,
       Price: parseInt(priceRef.current.value),
       Quantity: parseInt(quantityRef.current.value),
-      Gender: genderRef.current.value
+      Gender: genderRef.current.value,
+      Image: image
     }).then(res => console.log("Product created!! burkeep!"))
   }
 
@@ -146,7 +153,7 @@ export default function AddProductForm() {
                     </MenuItem>
                   ))}
                 </TextField>
-                <Button id="upload_widget" class="cloudinary-button" onClick={()=> {myWidget.open()}}>Upload Picture</Button>
+                <Button id="upload_widget" class="cloudinary-button" onClick={()=> {myWidget.open()}}>Upload Image</Button>
               </FormControl>
               <Button variant="contained" color="primary" onClick={() => AddItem()}>
                 Submit
@@ -154,6 +161,8 @@ export default function AddProductForm() {
             </form>
           </Grid>
       </div>
+      <img src={image}></img>
+
     </div>
   );
 }
