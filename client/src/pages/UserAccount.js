@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import AccountDetails from '../components/AccountDetails';
 import TransactionPage from '../components/TransactionPage';
-import WishlistPage from '../components/WishlistPage'
+import WishlistPage from '../components/WishlistPage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
