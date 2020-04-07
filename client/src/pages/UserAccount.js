@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import { Grid, Link } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import UserAccountHeader from '../components/UserAccountHeader';
 import { useStoreContext } from "../utils/GlobalState";
-import API from '../utils/API';
-import { useAuth0 } from '../utils/auth0context';
 import NestedList from '../components/List';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';

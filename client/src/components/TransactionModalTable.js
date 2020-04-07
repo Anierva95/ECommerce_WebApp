@@ -36,7 +36,7 @@ export default function TransactionModalTable(props) {
                 <TableHead>
                     <TableRow>
                         <TableCell align="center" colSpan={3}>
-                            Details
+                            Details of order#: {props.id.slice(4, props.id.length)}
             </TableCell>
                         <TableCell align="right">Price</TableCell>
                     </TableRow>
