@@ -5,10 +5,12 @@ import StoreManager from './pages/StoreManager';
 import Cart from './pages/Cart'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { StoreProvider } from "./utils/GlobalState";
-import { Auth0Provider} from './utils/auth0context';
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
+import { Auth0Provider } from './utils/auth0context';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import UserAccount from './pages/UserAccount'
+import LandingPage from './pages/LandingPage';
+
 
 
 
@@ -19,15 +21,16 @@ function App() {
     <Router>
       <div className="App">
         <Elements stripe={stripePromise}>
-        <Auth0Provider>
-        <StoreProvider>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/blog" component={Blog} />
-          <Route exact path="/storeManager" component={StoreManager} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/UserAccount" component={UserAccount}/>
-        </StoreProvider>
-        </Auth0Provider>
+          <Auth0Provider>
+            <StoreProvider>
+              <Route exact path="/" component={LandingPage} />
+              <Route exact path="/shop" component={Home} />
+              <Route exact path="/blog" component={Blog} />
+              <Route exact path="/storeManager" component={StoreManager} />
+              <Route exact path="/cart" component={Cart} />
+              <Route exact path="/UserAccount" component={UserAccount} />
+            </StoreProvider>
+          </Auth0Provider>
         </Elements>
       </div>
     </Router>

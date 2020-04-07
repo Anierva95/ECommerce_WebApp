@@ -90,7 +90,7 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             Welcome to my Store!
           </Typography>
-          <Link to="/" style={{ "textDecoration": "inherit" }}>
+          <Link to="/shop" style={{ "textDecoration": "inherit" }}>
             <Button style={{ "textDecoration": "inherit" }} >Home</Button>
           </Link>
           <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>
