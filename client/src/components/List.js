@@ -27,14 +27,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function NestedList() {
-    // console.log(props);
+export default function NestedList(props) {
+    console.log(props);
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
+    // const handleClick = () => {
+    //     setOpen(!open);
+    // };
 
     return (
 
@@ -48,13 +48,13 @@ export default function NestedList() {
             }
             className={classes.root}
         >
-            <ListItem button>
+            <ListItem button onClick={() => props.handlePageChange("Account")}> 
                 <ListItemIcon>
                     <BuildIcon />
                 </ListItemIcon>
                 <ListItemText primary="Account Details" />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={() => props.handlePageChange("Transactions")}>
                 <ListItemIcon>
                     <ReceiptIcon />
                 </ListItemIcon>
