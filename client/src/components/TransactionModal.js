@@ -54,7 +54,7 @@ export default function TransactionModal(props) {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <TransactionModalTable />
+                        <TransactionModalTable items={props.elements.items}/>
                     </div>
                 </Fade>
             </Modal>

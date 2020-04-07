@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,14 +8,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-export default function TransactionModalTable() {
-
+export default function TransactionModalTable(props) {
+    console.log(props)
     const useStyles = makeStyles({
         table: {
             minWidth: 700,
         },
     });
     const classes = useStyles();
+    const [subTotal, setSubTotal] = useState(0)
 
     return (
         <TableContainer component={Paper}>
@@ -35,15 +36,14 @@ export default function TransactionModalTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {/* {rows.map((row) => (
-                        <TableRow key={row.desc}>
-                            <TableCell>{row.desc}</TableCell>
-                            <TableCell align="right">{row.qty}</TableCell>
-                            <TableCell align="right">{row.unit}</TableCell>
-                            <TableCell align="right">{ccyFormat(row.price)}</TableCell>
+                    {props.items.map(el => (
+                        <TableRow key={el._id}>
+                            <TableCell>{el.Item} (Item#: {el._id})</TableCell>
+                            <TableCell align="right">{el.Quantity}</TableCell>
+                            <TableCell align="right">$ {(el.Price).toFixed(2)}</TableCell>
+                            <TableCell align="right">$ {(el.Quantity * el.Price).toFixed(2)}</TableCell>
                         </TableRow>
-                    ))} */}
-
+                    ))}
                     <TableRow>
                         <TableCell rowSpan={3} />
                         <TableCell colSpan={2}>Subtotal</TableCell>
