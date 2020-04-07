@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -34,15 +34,33 @@ export default function TransitionsModal(props) {
 
   const [state, dispatch] = useStoreContext()
 
+  function saveCart() {
+    // console.log(state.currentUser.id);
+    // console.log(state.shoppingCart)
+    API.saveCart(state.currentUser.id, state.shoppingCart).then(res => console.log("saved to cart", res.data)).then(dispatch({
+      type: "SET_USER",
+      user: {
+        ...state.currentUser,
+        shoppingCart: state.shoppingCart
+      }
+    }))
+  }
+
+
+
   function addToCart(id) {
     console.log(quantityRef.current.value)
     if (quantityRef.current.value === undefined) {
       alert("Error! Please select a quantity!")
     } else {
     API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
+    // .then(saveCart());
   }
 }
 
+useEffect(() => {
+  saveCart();
+}, [state.shoppingCart])
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
