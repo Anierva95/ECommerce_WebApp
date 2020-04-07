@@ -4,6 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useStoreContext } from "../utils/GlobalState";
 import StripeCheckout from "react-stripe-checkout";
 import API from '../utils/API';
+const moment = require('moment');
 
 const Cart = () => {
 
@@ -66,7 +67,7 @@ const Cart = () => {
             updateInventory()
             // setTransaction(state.currentUser.id, { [id]: state.shoppingCart })
             setTransaction(state.currentUser.id, {
-                transactionID: id, items: state.shoppingCart
+                transactionID: id, items: state.shoppingCart, date: moment().format('MMMM Do YYYY, h:mm:ss a')
             })
         }).catch(error => console.log(error))
     }

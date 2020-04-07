@@ -45,10 +45,6 @@ export default function UserAccount() {
     }
   }
 
-  // const currentUserInfo = state.currentUser
-  const userTrans = state.currentUser.transactions.items
-  // console.log(userTrans);
-
   return (
     
     <div>
@@ -60,36 +56,17 @@ export default function UserAccount() {
             handlePageChange={handlePageChange}
           />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <Paper>
             {page === "Account"
               ? <AccountDetails />
               : <TransactionPage transactions={state.currentUser.transactions}/>}
           </Paper>
         </Grid>
+        <Grid item xs={1}></Grid>
       </Grid>
     </div>
   )
 }
-
-{/* <h1>{currentUserInfo.id}</h1><br />
-            <h1>{currentUserInfo.email}</h1>
-            {currentUserInfo.transactions.map(el => (
-                <>
-                    <p>Transaction: <Link>{el.transactionID.slice(4, el.transactionID.length)}</Link></p>
-                </>
-            )
-            )} */}
-
-{/* <Grid container direction="column">
-        <NestedList />
-      </Grid>
-      <Grid container direction="column"></Grid> */}
-{/* <Grid container direction="row">
-        <Grid item xs={2} />
-        <Grid item container direction="row" xs={8}>
-          <Grid item xs={2} />
-        </Grid>
-      </Grid> */}
 
 

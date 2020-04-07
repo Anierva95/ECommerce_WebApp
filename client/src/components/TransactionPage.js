@@ -9,10 +9,9 @@ export default function TransactionPage(props) {
         <Paper >
             {/* className={classes.paper} */}
             <h1>Transaction Page</h1>
-            {/* <h1>{currentUserInfo.id}</h1><br />
-            <h1>{currentUserInfo.email}</h1> */}
             {props.transactions.map(el => (
                 <>
+                    <p>Date: {el.date}</p>
                     <p>Transaction: <Link>{el.transactionID.slice(4, el.transactionID.length)}</Link></p>
                 </>
             )
