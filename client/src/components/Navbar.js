@@ -128,7 +128,7 @@ export default function Navbar() {
             <>
               {/* {checkUser(user.email)} */}
               <Typography color="textprimary">
-                <p>Hello, {user.name}!</p>
+                Hello, {user.name}!
               </Typography>
               <Button variant="contained" color="primary" onClick={logout}>
                 Logout

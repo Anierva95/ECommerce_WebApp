@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import Navbar from '../components/Navbar';
 import StoreManagerHeader from '../components/StoreManagerHeader';
 import AddProductForm from '../components/addProductForm';

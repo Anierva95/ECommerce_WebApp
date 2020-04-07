@@ -1,96 +1,72 @@
-import React, {useEffect} from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { Grid } from '@material-ui/core';
 import UserAccountHeader from '../components/UserAccountHeader';
 import { useStoreContext } from "../utils/GlobalState";
-import API from '../utils/API';
-import { useAuth0 } from '../utils/auth0context';
+import NestedList from '../components/List';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import AccountDetails from '../components/AccountDetails';
+import TransactionPage from '../components/TransactionPage';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+    flexGrow: 1,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
-export default function UserAccount(){
-
-  const {user} = useAuth0();
+export default function UserAccount() {
+  // const classes = useStyles();
   const [state, dispatch] = useStoreContext();
+  const [page, setPage] = useState("Account")
+  console.log("currentPage is: ",page);
+  const handlePageChange = page => {
+    setPage(page)
+  };
 
-      //   if (isUser.Transactions) {
-      //   for (let transaction of isUser.Transactions) {
-      //     console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
-      //   }
-      // }
+  const renderPage = page => {
+    if (page === "Account") {
+      return <AccountDetails />
+    } else if (page === "Transactions") {
+      return <TransactionPage transactions={state.currentUser.transactions}/>
+    }
+  }
 
-    let transactions = null;
-
-    useEffect(() => {
-
-      if (!user) {
-        console.log("no user")
-        return;
-      } else {
-        console.log("user present")
-        checkUser(user.email)
-      }
-      
-      function checkUser(email) {
-        API.getUsers().then(res => {
-          const isUser = res.data.find(({ Email }) => Email === email)
-        //   if (isUser.Transactions) {
-        //   for (let transaction of isUser.Transactions) {
-        //     console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
-        //   }
-        // }
-          if (!isUser) {
-            API.saveUsers({ Email: email })
-            .then(res =>           
-              dispatch({
-              type: "SET_USER",
-              user: {
-                id: res.data._id,
-                email: res.data.Email,
-                transactions: res.data.Transactions
-              }
-            }))
-          } else {
-            dispatch({
-              type: "SET_USER",
-              user: {
-                id: isUser._id,
-                email: isUser.Email,
-                transactions: isUser.Transactions
-              }
-            })
-
-          }
-        });
-      };
+  return (
+    
+    <div>
+      <Navbar />
+      <UserAccountHeader />
+      <Grid container direction="row" spacing={3}>
+        <Grid item xs={3}>
+          <NestedList
+            page={page}
+            handlePageChange={handlePageChange}
+          />
+        </Grid>
+        <Grid item xs={8}>
+          <Paper>
+            {renderPage(page)}
+            {/* {page === "Account"
+              ? <AccountDetails />
+              : <TransactionPage transactions={state.currentUser.transactions}/>} */}
+          </Paper>
+        </Grid>
+        <Grid item xs={1}></Grid>
+      </Grid>
+    </div>
+  )
+}
 
 
-      // transactions = state.currentUser.transactions.map(transaction => {
-      //   return(
-      //     <h2>{transaction.transactionID}</h2>
-      
-      // )})
-  
-   
-    }, [user])
-
-    return(
-       <div>
-          <Navbar/>
-          <UserAccountHeader/>
-
-
-
-          <h1>{state.currentUser.id}</h1><br/>
-          <h1>{state.currentUser.email}</h1>
-          {transactions}
-          {/* <Grid container direction="row">
-          <Grid item xs={2} />
-          <Grid item container direction="row" xs={8}>
-          <Grid item xs={2} />
-          </Grid>
-          </Grid> */}
-
-
-
-        </div>
-    )}

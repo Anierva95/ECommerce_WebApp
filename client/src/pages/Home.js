@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Navbar from '../components/Navbar';
 import SalesHeader from '../components/SalesHeader'
 import ProductRow from '../components/ProductRow'

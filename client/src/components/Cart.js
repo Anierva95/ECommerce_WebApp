@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStoreContext } from "../utils/GlobalState";
 import StripeCheckout from "react-stripe-checkout";
 import API from '../utils/API';
+const moment = require('moment');
 
 const Cart = () => {
 
@@ -56,7 +57,7 @@ const Cart = () => {
             body: JSON.stringify(body)
         }).then(response => {
             // console.log("Response", response)
-            const { status } = response;
+            // const { status } = response;
             console.log("state: ", state)
             // console.log("status", status)
             // console.log(token, token.id)
@@ -66,7 +67,7 @@ const Cart = () => {
             updateInventory()
             // setTransaction(state.currentUser.id, { [id]: state.shoppingCart })
             setTransaction(state.currentUser.id, {
-                transactionID: id, items: state.shoppingCart
+                transactionID: id, items: state.shoppingCart, date: moment().format('MMMM Do YYYY, h:mm:ss a')
             })
         }).catch(error => console.log(error))
     }
@@ -137,9 +138,7 @@ const Cart = () => {
                 </thead>
                 <tbody>
                     {state.shoppingCart.map(element => (
-                        // console.log(subTotal, "before"),
                         subTotal = subTotal + (element.Quantity * element.Price),
-                        // console.log(subTotal, "after"),
                         <tr key={element._id}>
                             <td>{element.Item}</td>
                             <td>${element.Price}</td>
