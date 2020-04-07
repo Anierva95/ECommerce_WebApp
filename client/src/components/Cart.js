@@ -69,6 +69,7 @@ const Cart = () => {
             setTransaction(state.currentUser.id, {
                 transactionID: id, items: state.shoppingCart, date: moment().format('MMMM Do YYYY, h:mm:ss a')
             })
+            API.saveCart(state.currentUser.id, [])
         }).catch(error => console.log(error))
     }
 
