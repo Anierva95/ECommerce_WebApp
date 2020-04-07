@@ -13,7 +13,8 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     Email: { type: String, required: true },
-    BlogPost: [],
+    Wishlist: [],
+    ShoppingCart: [],
     Transactions: ""
 });
 

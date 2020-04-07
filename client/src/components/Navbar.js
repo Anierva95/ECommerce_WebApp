@@ -61,17 +61,27 @@ export default function Navbar() {
             user: {
               id: res.data._id,
               email: res.data.Email,
-              transactions: res.data.Transactions
+              transactions: res.data.Transactions,
+              shoppingCart: res.data.ShoppingCart
             }
           }))
+          dispatch({
+            type: "GET_CART",
+            dbCart: res.data.ShoppingCart 
+          })
         } else {
           dispatch({
             type: "SET_USER",
             user: {
               id: isUser._id,
               email: isUser.Email,
-              transactions: isUser.Transactions
+              transactions: isUser.Transactions,
+              shoppingCart: isUser.ShoppingCart
             }
+          })
+          dispatch({
+            type: "GET_CART",
+            dbCart: isUser.ShoppingCart
           })
         }
       });

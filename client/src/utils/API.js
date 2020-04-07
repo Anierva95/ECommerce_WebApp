@@ -43,5 +43,8 @@ export default {
   },
   addTransaction: function(id, postData) {
     return axios.put("/api/users/" + id, postData)
+  },
+  saveCart: function(id, postData) {
+    return axios.post("/api/users/" + id, postData)
   }
 };

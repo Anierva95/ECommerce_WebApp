@@ -22,4 +22,9 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+    updateCart: function (req, res) {
+        db.UserList.update({ _id: req.params.id }, { ShoppingCart: req.body })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
 };
