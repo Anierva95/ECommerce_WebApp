@@ -107,10 +107,11 @@ export default function Navbar() {
           <ShoppingCartIcon style={{"textDecoration": "inherit"}} />
           </Link>
           </Badge>
-
+          <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>
           <Badge badgeContent={state.wishList.length} color="secondary">
           <FavoriteIcon style={{"marginLeft": "20px"}}/>
           </Badge>
+          </Link>
 
           <Link to="/storeManager" style={{"textDecoration": "inherit"}}>
           <Button style={{"textDecoration": "inherit"}}  >Store Manager</Button>
