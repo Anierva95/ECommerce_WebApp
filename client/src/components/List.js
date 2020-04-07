@@ -5,10 +5,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import SendIcon from '@material-ui/icons/Send';
 import BuildIcon from '@material-ui/icons/Build';
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,6 +58,12 @@ export default function NestedList(props) {
                     <ReceiptIcon />
                 </ListItemIcon>
                 <ListItemText primary="Transactions" />
+            </ListItem>
+            <ListItem button selected={props.page === "Wishlist"}onClick={() => props.handlePageChange("Wishlist")}>
+                <ListItemIcon>
+                    <FavoriteIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Wish List" />
             </ListItem>
         </List>
     )

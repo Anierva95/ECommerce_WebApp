@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import AccountDetails from '../components/AccountDetails';
 import TransactionPage from '../components/TransactionPage';
+import WishlistPage from '../components/WishlistPage'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +52,9 @@ export default function UserAccount() {
       case "Transactions": {
         return <TransactionPage transactions={state.currentUser.transactions}/>
       }
+      case "Wishlist": {
+        return <WishlistPage/>
+      }
     }
   }
 
@@ -69,9 +73,6 @@ export default function UserAccount() {
         <Grid item xs={8}>
           <Paper>
             {renderPage(page)}
-            {/* {page === "Account"
-              ? <AccountDetails />
-              : <TransactionPage transactions={state.currentUser.transactions}/>} */}
           </Paper>
         </Grid>
         <Grid item xs={1}></Grid>

@@ -1,6 +1,5 @@
 import React from 'react'
 import Paper from '@material-ui/core/Paper';
-import { Link } from '@material-ui/core';
 import TransactionModal from '../components/TransactionModal';
 
 
