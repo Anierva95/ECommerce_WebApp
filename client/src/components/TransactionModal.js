@@ -7,6 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Grid } from '@material-ui/core';
 import TransactionModalTable from '../components/TransactionModalTable';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -37,9 +38,9 @@ export default function TransactionModal(props) {
 
     return (
         <div>
-            <Grid type="button" onClick={handleOpen}>
+            <ListItemText type="button" onClick={handleOpen}>
                 <p>Transaction #: <Link>{props.elements.transactionID.slice(4, props.elements.transactionID.length)}</Link></p>
-            </Grid>
+            </ListItemText>
             <Modal
                 aria-labelledby="spring-modal-title"
                 aria-describedby="spring-modal-description"

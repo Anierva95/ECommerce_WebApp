@@ -30,16 +30,16 @@ export default function UserAccount() {
   // const classes = useStyles();
   const [state, dispatch] = useStoreContext();
   const [page, setPage] = useState("Account")
-  console.log("currentPage is: ",page);
+  // console.log("currentPage is: ",page);
   const handlePageChange = page => {
     setPage(page)
   };
 
   const renderPage = page => {
     if (page === "Account") {
-      return <AccountDetails />
+      return <AccountDetails user={state.currentUser}/>
     } else if (page === "Transactions") {
-      return <TransactionPage transactions={state.currentUser.transactions}/>
+      return <TransactionPage user={state.currentUser}/>
     }
   }
 
@@ -56,12 +56,12 @@ export default function UserAccount() {
           />
         </Grid>
         <Grid item xs={8}>
-          <Paper>
+          <>
             {renderPage(page)}
             {/* {page === "Account"
               ? <AccountDetails />
               : <TransactionPage transactions={state.currentUser.transactions}/>} */}
-          </Paper>
+          </>
         </Grid>
         <Grid item xs={1}></Grid>
       </Grid>
