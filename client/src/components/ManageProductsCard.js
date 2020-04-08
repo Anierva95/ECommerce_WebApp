@@ -32,9 +32,11 @@ export default function MediaCard(props) {
   // function setCurrentProduct (id) {
   //   API.getProduct(id).then(res => dispatch({type: "SET_CURRENT_PRODUCT", product: res.data}))
   // }
-  function addToWish(id) {
+
+
+  function deleteItem(id) {
     console.log(id)
-    API.getProduct(id).then(res => dispatch({ type: "ADD_TO_WISH", product: res.data }))
+    API.deleteProduct(id).then(res => console.log(res));
   }
 
 
@@ -44,6 +46,7 @@ export default function MediaCard(props) {
   // }
 
   return (
+    
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
@@ -63,7 +66,7 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => addToWish(props.id)}> 
+        <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => deleteItem(props.id)}> 
          Delete!
         </Button>
         <EditProductModal

@@ -62,6 +62,7 @@ export default function UserAccount() {
     
     <div>
       <Navbar />
+      <Paper>
       <UserAccountHeader />
       <Grid container direction="row" spacing={3}>
         <Grid item xs={3}>
@@ -73,10 +74,11 @@ export default function UserAccount() {
         <Grid item xs={8}>
           <>
             {renderPage(page)}
-          </>
+          </>    
         </Grid>
         <Grid item xs={1}></Grid>
       </Grid>
+      </Paper>
     </div>
   )
 }
