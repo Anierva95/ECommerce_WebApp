@@ -29,6 +29,16 @@ export default function MediaCard(props) {
 
   const [state, dispatch] = useStoreContext();
 
+  function loadProducts() {
+    API.getProducts().then(res => {
+      dispatch({
+        type: "GET_PRODUCTS",
+        products: res.data
+      })
+    })
+    .catch(err => console.log(err));
+  };
+
   // function setCurrentProduct (id) {
   //   API.getProduct(id).then(res => dispatch({type: "SET_CURRENT_PRODUCT", product: res.data}))
   // }
@@ -36,7 +46,7 @@ export default function MediaCard(props) {
 
   function deleteItem(id) {
     console.log(id)
-    API.deleteProduct(id).then(res => console.log(res));
+    API.deleteProduct(id).then(res => console.log(res)).then(loadProducts());
   }
 
 

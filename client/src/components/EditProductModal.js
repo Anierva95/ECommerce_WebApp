@@ -38,11 +38,11 @@ export default function TransitionsModal(props) {
 
 
   const [itemName, SetItemName] = useState(props.name);
-  const [priceAmount, SetPriceAmount] = useState(0);
-  const [typeItem, SetItemType] = useState("");
-  const [descriptionText, SetDescriptionText] = useState("");
-  const [quantityAmount, SetQuantityAmount] = useState("");
-  const [setGender, setGenderType] = useState("");
+  const [priceAmount, SetPriceAmount] = useState(props.price);
+  const [typeItem, SetItemType] = useState(props.Type);
+  const [descriptionText, SetDescriptionText] = useState(props.description);
+  const [quantityAmount, SetQuantityAmount] = useState(props.quantity);
+  const [genderType, setGenderType] = useState(props.gender);
 
 
   const [state, dispatch] = useStoreContext()
@@ -154,19 +154,20 @@ useEffect(() => {
                   variant="filled"
                   fullWidth={true}
                   value={itemName}
-                  onChange= {e => SetItemName(e.target.value)}
+                  onChange = {e => SetItemName(e.target.value)}
                 />
                 <FilledInput
                   id="filled-adornment-amount"
                   startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                  value={props.price}
+                  value={priceAmount}
+                  onChange = {e => SetPriceAmount(e.target.value)}
                 />
                 <TextField
-                  id="standard-select-currency"
                   select
                   label="Type"
                   variant="filled"
-                  value={props.Type}
+                  value={typeItem}
+                  onChange= {e => SetItemType(e.target.value)}
                 >
                   {Type.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -178,18 +179,21 @@ useEffect(() => {
                 <TextField
                   label="Item Description"
                   variant="filled"
-                  value={props.description}
+                  value={descriptionText}
+                  onChange = {e => SetDescriptionText(e.target.value)}
                 />
                 <TextField
                   label="Quantity"
                   variant="filled"
-                  value={props.quantity}
+                  value={quantityAmount}
+                  onChange= {e => SetQuantityAmount(e.target.value)}
                 />
                 <TextField
                   select
                   label="Gender"
                   variant="filled"
-                  value={props.gender}
+                  value={genderType}
+                  onChange={e => setGenderType(e.target.value)}
                 >
                   {genders.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
