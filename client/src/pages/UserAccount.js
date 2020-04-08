@@ -71,11 +71,9 @@ export default function UserAccount() {
           />
         </Grid>
         <Grid item xs={8}>
-          <Paper>
           <>
             {renderPage(page)}
           </>
-          </Paper>
         </Grid>
         <Grid item xs={1}></Grid>
       </Grid>
