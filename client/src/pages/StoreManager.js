@@ -45,6 +45,7 @@ export default function StoreManager() {
 
         <div>
         <Navbar />
+        <Paper>
         <StoreManagerHeader />
         <Grid container direction="row" spacing={3}>
         <Grid item xs={3}>
@@ -54,14 +55,15 @@ export default function StoreManager() {
             />
         </Grid>
         <Grid item xs={8}>
-            <Paper>
+
             <>
             {renderPage(page)}
             </>
-            </Paper>
+
         </Grid>
         <Grid item xs={1}></Grid>
         </Grid>
+        </Paper>
         </div>
     );
 }
