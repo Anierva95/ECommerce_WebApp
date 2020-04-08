@@ -37,12 +37,13 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
 
 
-  const itemRef = useRef();
-  const priceRef = useRef();
-  const typeRef = useRef();
-  const descriptionRef = useRef();
-  const quantityRef = useRef();
-  const genderRef = useRef();
+  const [itemName, SetItemName] = useState(props.name);
+  const [priceAmount, SetPriceAmount] = useState(0);
+  const [typeItem, SetItemType] = useState("");
+  const [descriptionText, SetDescriptionText] = useState("");
+  const [quantityAmount, SetQuantityAmount] = useState("");
+  const [setGender, setGenderType] = useState("");
+
 
   const [state, dispatch] = useStoreContext()
 
@@ -109,17 +110,6 @@ export default function TransitionsModal(props) {
   }
 
 
-
-  function addToCart(id) {
-    console.log(quantityRef.current.value)
-    if (quantityRef.current.value === undefined) {
-      alert("Error! Please select a quantity!")
-    } else {
-    API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
-    // .then(saveCart());
-  }
-}
-
 useEffect(() => {
   saveCart();
 }, [state.shoppingCart])
@@ -157,25 +147,26 @@ useEffect(() => {
         <div className={classes.paper}>
         <Grid item container direction="column" xs={12}>
             <form className={classes.root} noValidate autoComplete="off" bgcolor="primary.main">
-              <h2>Edit Product</h2>
+              <h2>Edit Product #{props.id}</h2>
               <FormControl fullWidth>
                 <TextField
                   label="Item Name"
                   variant="filled"
-                  inputRef={itemRef}
                   fullWidth={true}
+                  value={itemName}
+                  onChange= {e => SetItemName(e.target.value)}
                 />
                 <FilledInput
                   id="filled-adornment-amount"
                   startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                  inputRef={priceRef}
+                  value={props.price}
                 />
                 <TextField
                   id="standard-select-currency"
                   select
                   label="Type"
                   variant="filled"
-                  inputRef={typeRef}
+                  value={props.Type}
                 >
                   {Type.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -187,18 +178,18 @@ useEffect(() => {
                 <TextField
                   label="Item Description"
                   variant="filled"
-                  inputRef={descriptionRef}
+                  value={props.description}
                 />
                 <TextField
                   label="Quantity"
                   variant="filled"
-                  inputRef={quantityRef}
+                  value={props.quantity}
                 />
                 <TextField
                   select
                   label="Gender"
                   variant="filled"
-                  inputRef={genderRef}
+                  value={props.gender}
                 >
                   {genders.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -210,7 +201,7 @@ useEffect(() => {
                     {imageUploaded === false ? <p>Please upload an image</p> : <p>Image uploaded!</p>}
 
               </FormControl>
-              <Button variant="contained" color="primary" onClick={() => addToCart()}>
+              <Button variant="contained" color="primary" onClick={() => console.log(props.id)}>
                 Submit
             </Button>
             </form>

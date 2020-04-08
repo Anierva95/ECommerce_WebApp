@@ -75,6 +75,9 @@ export default function MediaCard(props) {
         price={props.price}
         id={props.id}
         Image={props.Image}
+        quantity = {props.quantity}
+        gender = {props.gender}
+        Type = {props.Type}
         />
       </CardActions>
     </Card>

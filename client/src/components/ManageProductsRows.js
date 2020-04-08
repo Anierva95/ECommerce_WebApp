@@ -33,6 +33,9 @@ export default function ManageProductRows() {
             description={product.Description}
             price={product.Price}
             Image = {product.Image}
+            quantity = {product.Quantity}
+            gender = {product.Gender}
+            Type = {product.Type}
           />
         </Grid>
       ))}
