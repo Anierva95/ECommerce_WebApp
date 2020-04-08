@@ -5,9 +5,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import BuildIcon from '@material-ui/icons/Build';
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import AddIcon from '@material-ui/icons/Add';
+import CreateIcon from '@material-ui/icons/Create';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import ChatIcon from '@material-ui/icons/Chat';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,21 +50,27 @@ export default function NestedList(props) {
         >
             <ListItem button selected={props.page === "AddItem"} onClick={() => props.handlePageChange("AddItem")}>
                 <ListItemIcon>
-                    <BuildIcon />
+                    <AddIcon />
                 </ListItemIcon>
                 <ListItemText primary="Add a product to sell" />
             </ListItem>
             <ListItem button selected={props.page === "AddBlog"} onClick={() => props.handlePageChange("AddBlog")}>
                 <ListItemIcon>
-                    <ReceiptIcon />
+                    <ChatIcon />
                 </ListItemIcon>
-                <ListItemText primary="Add a blog" />
+                <ListItemText primary="Write a blog" />
             </ListItem>
             <ListItem button selected={props.page === "ManageItems"}onClick={() => props.handlePageChange("ManageItems")}>
                 <ListItemIcon>
-                    <FavoriteIcon/>
+                    <AssignmentIcon/>
                 </ListItemIcon>
                 <ListItemText primary="Manage your inventory" />
+            </ListItem>
+            <ListItem button selected={props.page === "ManageItems"}onClick={() => props.handlePageChange("ManageItems")}>
+                <ListItemIcon>
+                    <CreateIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Manage your blogs" />
             </ListItem>
         </List>
     )
