@@ -157,14 +157,15 @@ const Cart = () => {
     ]
 
     return (
+
         <Grid container direction="row">
-            {/* <Grid item xs={2}></Grid> */}
             <Grid item xs={8}>
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableCell>
-                                {/* <List>
+                {state.shoppingCart.length !== 0 ?
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                                <TableCell>
+                                    {/* <List>
                                     <ListItem>
                                         <AccountCircleIcon />
                                         TEST ITEM (Item# 5e8d3fe0105415112c0bddaa)
@@ -173,97 +174,108 @@ const Cart = () => {
                                         Description: Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd
                                     </ListItemText>
                                 </List> */}
-                            </TableCell>
-                            <TableCell align='center'>Quantity</TableCell>
-                            <TableCell align='center'>Price</TableCell>
-                            <TableCell align='center'>Item Subtotal</TableCell>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell>
-                                    <List>
-                                        <ListItem>
-                                            <AccountCircleIcon />
+                                </TableCell>
+                                <TableCell align='center'>Quantity</TableCell>
+                                <TableCell align='center'>Price</TableCell>
+                                <TableCell align='center'>Item Subtotal</TableCell>
+                            </TableHead>
+                            <TableBody>
+                                {state.shoppingCart.map(element => (
+                                    subTotal = subTotal + (element.Quantity * element.Price),
+                                    <TableRow>
+                                        <TableCell>
+                                            <List>
+                                                <ListItem>
+                                                    <AccountCircleIcon />
+                                                    {element.Item}
+                                                    {/* TEST ITEM (Item# 5e8d3fe0105415112c0bddaa)  */}
+                                                    <Link><DeleteIcon /></Link>
+                                                </ListItem>
+                                                <ListItemText>
+                                                    Description: {element.Description}
+                                                    {/* Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd */}
+                                                </ListItemText>
+                                                <Link><DeleteForeverIcon /></Link>
+                                                <Link><DeleteIcon /></Link>
+                                            </List>
+                                        </TableCell>
+                                        <TableCell align='center'>
+                                            <TextField
+
+                                                label="Size"
+                                                id="outlined-size-small" // id={element._id}
+                                                value={element.Quantity}
+                                                // defaultValue="1" // value={element.Quantity}
+                                                variant="outlined"
+                                                size="small"
+                                                placeholder={element.Quantity}
+                                                // placeholder="" // placeholder={element.Quantity}
+                                                select
+                                                label={"Qty."}
+                                                onChange={event => editQuantity(event, element._id)}
+                                            >
+                                                {quantity.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                ))}
+                                            </TextField>
+                                        </TableCell>
+                                        <TableCell align='center'>$ {element.Price}</TableCell>
+                                        <TableCell align='center'>$ {element.Price * element.Quantity}</TableCell>
+                                    </TableRow>
+                                ))}
+                                {taxAmount()}
+                                {totalAmount()}
+                                {/* <TableRow>
+                                    <TableCell>
+                                        <AccountCircleIcon></AccountCircleIcon>
+                                    </TableCell>
+                                </TableRow> */}
+                                {/* <TableRow>
+                                    <TableCell>
+                                        <List>
+                                            <ListItem>
+                                                <AccountCircleIcon />
                                             TEST ITEM (Item# 5e8d3fe0105415112c0bddaa) <Link><DeleteIcon /></Link>
-                                        </ListItem>
-                                        <ListItemText>
-                                            Description: Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd
+                                            </ListItem>
+                                            <ListItemText>
+                                                Description: Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd
                                         </ListItemText>
-                                        <Link><DeleteForeverIcon /></Link>
-                                        <Link><DeleteIcon /></Link>
-                                    </List>
-                                </TableCell>
-                                <TableCell align='center'>
-                                    <TextField
+                                            <Link><DeleteForeverIcon /></Link>
+                                            <Link><DeleteIcon /></Link>
+                                        </List>
+                                    </TableCell>
+                                    <TableCell align='center'>
+                                        <TextField
 
-                                        label="Size"
-                                        id="outlined-size-small" // id={element._id}
-                                        defaultValue="1" // value={element.Quantity}
-                                        variant="outlined"
-                                        size="small"
-                                        placeholder="" // placeholder={element.Quantity}
-                                        select
-                                        label={"Qty."}
-                                    // onChange={event => editQuantity(event, element._id)}
-                                    >
-                                        {quantity.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </TextField>
-                                </TableCell>
-                                <TableCell align='center'>$ 10.00</TableCell>
-                                <TableCell align='center'>$ 100</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell>
-                                    <AccountCircleIcon></AccountCircleIcon>
-                                </TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell>
-                                    <List>
-                                        <ListItem>
-                                            <AccountCircleIcon />
-                                            TEST ITEM (Item# 5e8d3fe0105415112c0bddaa) <Link><DeleteIcon /></Link>
-                                        </ListItem>
-                                        <ListItemText>
-                                            Description: Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd
-                                        </ListItemText>
-                                        <Link><DeleteForeverIcon /></Link>
-                                        <Link><DeleteIcon /></Link>
-                                    </List>
-                                </TableCell>
-                                <TableCell align='center'>
-                                    <TextField
+                                            label="Size"
+                                            id="outlined-size-small" // id={element._id}
+                                            defaultValue="1" // value={element.Quantity}
+                                            variant="outlined"
+                                            size="small"
+                                            placeholder="" // placeholder={element.Quantity}
+                                            select
+                                            label={"Qty."}
+                                        // onChange={event => editQuantity(event, element._id)}
+                                        >
+                                            {quantity.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </TextField>
+                                    </TableCell>
+                                    <TableCell align='center'>$ 10.00</TableCell>
+                                    <TableCell align='center'>$ 100</TableCell>
+                                </TableRow> */}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
 
-                                        label="Size"
-                                        id="outlined-size-small" // id={element._id}
-                                        defaultValue="1" // value={element.Quantity}
-                                        variant="outlined"
-                                        size="small"
-                                        placeholder="" // placeholder={element.Quantity}
-                                        select
-                                        label={"Qty."}
-                                    // onChange={event => editQuantity(event, element._id)}
-                                    >
-                                        {quantity.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </TextField>
-                                </TableCell>
-                                <TableCell align='center'>$ 10.00</TableCell>
-                                <TableCell align='center'>$ 100</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-
-
+                    : <><h1>your cart is empty</h1> </>}
             </Grid>
+
             <Grid item xs={2}>
                 <Grid container direction="row">
                     <Grid item xs={10}></Grid>
@@ -271,15 +283,15 @@ const Cart = () => {
                 </Grid>
                 <Grid container direction="row">
                     <Grid item xs={2}></Grid>
-                    <Grid item xs={10}><h3>Subtotal: $ 100</h3></Grid>
+                    <Grid item xs={10}><h3>Subtotal: $ {subTotal.toFixed(2)}</h3></Grid>
                 </Grid>
                 <Grid container direction="row">
                     <Grid item xs={2}></Grid>
-                    <Grid item xs={10}><h3>Tax: $ 999</h3></Grid>
+                    <Grid item xs={10}><h3>Tax: $ {taxTotal.toFixed(2)}</h3></Grid>
                 </Grid>
                 <Grid container direction="row">
                     <Grid item xs={2}></Grid>
-                    <Grid item xs={10}><h3>Total: $ 1099</h3></Grid>
+                    <Grid item xs={10}><h3>Total: $ {total.toFixed(2)}</h3></Grid>
                 </Grid>
                 <Grid container direction="row" >
                     <Grid item xs={2}></Grid>
