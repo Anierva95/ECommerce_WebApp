@@ -121,6 +121,7 @@ useEffect(() => {
             <img src="https://picsum.photos/200/300"></img>
             <p id="transition-modal-description">{props.description}</p>
             <h2>${props.price}</h2>
+            <p>Inventory: {props.quantity}</p>
             <TextField
               id={props.id}
               select

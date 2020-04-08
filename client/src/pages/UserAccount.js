@@ -50,7 +50,7 @@ export default function UserAccount() {
       return <AccountDetails user={state.currentUser}/>
       }
       case "Transactions": {
-        return <TransactionPage transactions={state.currentUser.transactions}/>
+        return <TransactionPage user={state.currentUser}/>
       }
       case "Wishlist": {
         return <WishlistPage/>
@@ -71,9 +71,7 @@ export default function UserAccount() {
           />
         </Grid>
         <Grid item xs={8}>
-          <>
             {renderPage(page)}
-          </Paper>
         </Grid>
         <Grid item xs={1}></Grid>
       </Grid>

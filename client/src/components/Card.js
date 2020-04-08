@@ -72,6 +72,7 @@ export default function MediaCard(props) {
         description={props.description}
         price={props.price}
         id={props.id}
+        quantity={props.quantity}
         />
       </CardActions>
     </Card>
