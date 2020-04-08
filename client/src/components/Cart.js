@@ -182,17 +182,20 @@ const Cart = () => {
                 {state.shoppingCart !== undefined || state.shoppingCart.length !== 0 ?
                     <TableContainer>
                         <Table>
-                            <TableHead>
-                                <TableCell>
-                                </TableCell>
+                            <TableBody>
+                                <TableCell align='left'> Item</TableCell>
+                                <TableCell>Description</TableCell>
                                 <TableCell align='center'>Quantity</TableCell>
                                 <TableCell align='center'>Price</TableCell>
                                 <TableCell align='center'>Item Subtotal</TableCell>
-                            </TableHead>
+                            </TableBody>
                             <TableBody>
                                 {state.shoppingCart.map(element => (
                                     subTotal = subTotal + (element.Quantity * element.Price),
                                     <TableRow>
+                                        <TableCell>
+                                            <img alt={element.Item} src={element.Image} height='100px'></img>
+                                        </TableCell>
                                         <TableCell>
                                             <List>
                                                 <ListItem>

@@ -54,6 +54,11 @@ const reducer = (state, action) => {
                 ...state,
                 wishList: action.dbWish
             }
+        case "UPDATE_WISH":
+            return {
+                ...state,
+                wishList: action.updatedList
+            }
 
     }
 }

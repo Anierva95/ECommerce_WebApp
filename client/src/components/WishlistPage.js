@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import { useStoreContext } from "../utils/GlobalState";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,49 +17,83 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from "react-router-dom";
+import CardMedia from '@material-ui/core/CardMedia';
+import API from '../utils/API';
+
+const useStyles = makeStyles({
+    media: {
+        height: 140,
+    },
+});
 
 export default function WishlistPage(props) {
     const [state, dispatch] = useStoreContext();
+    const classes= useStyles();
+    // console.log("props in wishlist", props)
+    // console.log("state in wishlist", state);
 
-    console.log("state in wishlist", state);
+    function setWishDb() {
+        API.saveWish(state.currentUser.id, state.wishList).then(res => console.log("saved to wishList", res.data)).then(dispatch({
+            type: "SET_USER",
+            user: {
+                ...state.currentUser,
+                wishList: state.wishList
+            }
+        }))
+    }
+
+    function removeItem(id) {
+        const wishList = state.wishList;
+        const updatedList = wishList.filter(element => element._id !== id)
+        console.log("updatedList: ", updatedList);
+        dispatch({ type: "UPDATE_WISH", updatedList: updatedList });
+        setWishDb();
+    };
+
+    useEffect(() => {
+        setWishDb();
+    }, [state.wishList])
+
     return (
 
         <Grid container direction="row">
             <Grid item xs={12}>
-                {/* {state.shoppingCart !== undefined || state.shoppingCart.length !== 0 ? */}
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableCell align='center'>Wishlist</TableCell>
-                            <TableCell></TableCell>
-                        </TableHead>
-                        <TableBody>
-                            {/* {state.shoppingCart.map(element => (
-                                    subTotal = subTotal + (element.Quantity * element.Price), */}
-                            <TableRow>
-                                <TableCell>
-                                    <List>
-                                        <ListItem>
-                                            <AccountCircleIcon />
-                                            {/* {element.Item} */}
-                                            {/* <Link ><DeleteIcon /></Link> */}
-                                            {/* onClick={event => removeItem(element._id)} */}
-                                        </ListItem>
-                                        <ListItem>
-                                            
-                                        </ListItem>
-                                        <ListItemText>
-                                            Description:
-                                            adslkjfasdadslkjfasdadslkjfasdadslkjfasdadslkjfasdadslkjfasdadslkjfasdadslkjfasdadslkjfasd
-                                                    {/* {element.Description} */}
-                                        </ListItemText>
-                                    </List>
-                                </TableCell>
-                                <TableCell align='right'>
-                                    <Link ><DeleteIcon /></Link>
-                                </TableCell>
-                            </TableRow>
-                            {/* <TableCell align='center'>
+                {state.wishList !== undefined || state.wishList.length !== 0 ?
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                                <TableCell align='center'>Wishlist</TableCell>
+                                <TableCell></TableCell>
+                            </TableHead>
+                            <TableBody>
+                                {state.wishList.map(element => (
+                                    <TableRow>
+                                        <TableCell>
+                                            <List>
+                                                <ListItem>
+                                                <img src={element.Image} height='200px'></img>
+                                                    {/* <CardMedia
+                                                        className={classes.media}
+                                                        image={element.Image}
+                                                    /> */}
+                                                    <AccountCircleIcon />
+                                                    {element.Item} (Item#: {element._id})
+                                                    {/* <Link ><DeleteIcon /></Link> */}
+                                                </ListItem>
+                                                <ListItem>
+
+                                                </ListItem>
+                                                <ListItemText>
+                                                    Description: {element.Description}
+                                                </ListItemText>
+                                            </List>
+                                        </TableCell>
+                                        <TableCell align='right'>
+                                            <Link onClick={event => removeItem(element._id)}><DeleteIcon /></Link>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                                {/* <TableCell align='center'>
                                             <TextField
                                                 label="Size"
                                                 // id={element._id}
@@ -78,15 +112,15 @@ export default function WishlistPage(props) {
                                                 ))}
                                             </TextField>
                                         </TableCell> */}
-                            {/* <TableCell align='center'>$ {element.Price}</TableCell>
+                                {/* <TableCell align='center'>$ {element.Price}</TableCell>
                                         <TableCell align='center'>$ {element.Price * element.Quantity}</TableCell> */}
-                            {/* ))} */}
-                            {/* {taxAmount()}
+                                {/* ))} */}
+                                {/* {taxAmount()}
                                 {totalAmount()} */}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                {/* : <><h1>your cart is empty</h1> </>} */}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    : <><h1>your wishlist is empty</h1> </>}
             </Grid>
         </Grid>
         // <>

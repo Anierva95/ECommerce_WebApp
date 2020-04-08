@@ -33,15 +33,16 @@ export default function AddProductForm() {
   const genderRef = useRef();
 
   const [imageUploaded, changeStatus] = useState(false)
-
-  let image = "";
+  const [image, setImage] = useState("")
+  // let image = "";
 
   var myWidget = window.cloudinary.createUploadWidget({
     cloudName: 'diadpow6d', 
     uploadPreset: 'h6i1uchv'}, (error, result) => { 
       if (!error && result && result.event === "success") {
         changeStatus(true)
-        image = result.info.url;
+        setImage(result.info.url)
+        // image = result.info.url;
         console.log(image)
         console.log('Done! Here is the image info: ', result.info); 
       }
@@ -55,6 +56,7 @@ export default function AddProductForm() {
     console.log(descriptionRef.current.value);
     console.log(quantityRef.current.value);
     console.log(genderRef.current.value);
+    console.log("image before API: ", image)
     API.saveProduct({
       Item: itemRef.current.value,
       Type: typeRef.current.value,
@@ -63,7 +65,7 @@ export default function AddProductForm() {
       Quantity: parseInt(quantityRef.current.value),
       Gender: genderRef.current.value,
       Image: image
-    }).then(res => console.log("Product created!! burkeep!"))
+    }).then(res => console.log(res))
   }
 
   const Type = [
