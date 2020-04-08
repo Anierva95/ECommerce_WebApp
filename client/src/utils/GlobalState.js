@@ -39,7 +39,6 @@ const reducer = (state, action) => {
                 ...state,
                 blogPosts: action.blogs
             }
-
         case "SET_USER":
             return {
                 ...state,
@@ -50,7 +49,12 @@ const reducer = (state, action) => {
                 ...state,
                 shoppingCart: action.dbCart
             }
-        
+        case "GET_WISH":
+            return {
+                ...state,
+                wishList: action.dbWish
+            }
+
     }
 }
 

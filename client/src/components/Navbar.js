@@ -76,12 +76,17 @@ export default function Navbar() {
                   id: res.data._id,
                   email: res.data.Email,
                   transactions: res.data.Transactions,
-                  shoppingCart: res.data.ShoppingCart
+                  shoppingCart: res.data.ShoppingCart,
+                  wishList: res.data.Wishlist
                 }
               }))
           dispatch({
             type: "GET_CART",
             dbCart: res.data.ShoppingCart
+          })
+          dispatch({
+            type: "GET_WISH",
+            dbWish: res.data.Wishlist
           })
         } else {
           dispatch({
@@ -90,12 +95,17 @@ export default function Navbar() {
               id: isUser._id,
               email: isUser.Email,
               transactions: isUser.Transactions,
-              shoppingCart: isUser.ShoppingCart
+              shoppingCart: isUser.ShoppingCart,
+              wishList: isUser.Wishlist
             }
           })
           dispatch({
             type: "GET_CART",
             dbCart: isUser.ShoppingCart
+          })
+          dispatch({
+            type: "GET_WISH",
+            dbWish: isUser.Wishlist
           })
         }
       });

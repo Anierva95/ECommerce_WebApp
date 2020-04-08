@@ -46,5 +46,8 @@ export default {
   },
   saveCart: function(id, postData) {
     return axios.post("/api/users/" + id, postData)
+  },
+  saveWish: function(id, postData) {
+    return axios.post("/api/users/wish/" + id, postData)
   }
 };

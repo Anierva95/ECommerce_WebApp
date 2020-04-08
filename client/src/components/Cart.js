@@ -201,7 +201,7 @@ const Cart = () => {
                                                     <Link onClick={event => removeItem(element._id)}><DeleteIcon /></Link>
                                                 </ListItem>
                                                 <ListItemText>
-                                                    Description: {element.Description}
+                                                    Description: {element.Description} 
                                                 </ListItemText>
                                                 {/* <Link><DeleteForeverIcon /></Link>
                                                 <Link><DeleteIcon /></Link> */}
@@ -265,7 +265,6 @@ const Cart = () => {
                                 name="Buy product"
                                 amount={totalCharge.price * 100}
                             />
-
                         </div>
                     </Grid>
                 </Grid>
