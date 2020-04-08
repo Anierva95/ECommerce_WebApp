@@ -19,6 +19,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { Link } from "react-router-dom";
 const moment = require('moment');
 
 
@@ -180,11 +184,13 @@ const Cart = () => {
                                     <List>
                                         <ListItem>
                                             <AccountCircleIcon />
-                                            TEST ITEM (Item# 5e8d3fe0105415112c0bddaa)
+                                            TEST ITEM (Item# 5e8d3fe0105415112c0bddaa) <Link><DeleteIcon /></Link>
                                         </ListItem>
                                         <ListItemText>
                                             Description: Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd
                                         </ListItemText>
+                                        <Link><DeleteForeverIcon /></Link>
+                                        <Link><DeleteIcon /></Link>
                                     </List>
                                 </TableCell>
                                 <TableCell align='center'>
@@ -205,7 +211,6 @@ const Cart = () => {
                                                 {option.label}
                                             </MenuItem>
                                         ))}
-
                                     </TextField>
                                 </TableCell>
                                 <TableCell align='center'>$ 10.00</TableCell>
@@ -221,14 +226,16 @@ const Cart = () => {
                                     <List>
                                         <ListItem>
                                             <AccountCircleIcon />
-                                            TEST ITEM (Item# 5e8d3fe0105415112c0bddaa)
+                                            TEST ITEM (Item# 5e8d3fe0105415112c0bddaa) <Link><DeleteIcon /></Link>
                                         </ListItem>
                                         <ListItemText>
                                             Description: Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd
                                         </ListItemText>
+                                        <Link><DeleteForeverIcon /></Link>
+                                        <Link><DeleteIcon /></Link>
                                     </List>
                                 </TableCell>
-                                <TableCell>
+                                <TableCell align='center'>
                                     <TextField
 
                                         label="Size"
@@ -246,11 +253,10 @@ const Cart = () => {
                                                 {option.label}
                                             </MenuItem>
                                         ))}
-
                                     </TextField>
                                 </TableCell>
-                                <TableCell>$ 10.00</TableCell>
-                                <TableCell>$ 100</TableCell>
+                                <TableCell align='center'>$ 10.00</TableCell>
+                                <TableCell align='center'>$ 100</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -259,26 +265,36 @@ const Cart = () => {
 
             </Grid>
             <Grid item xs={2}>
-                <Table>
-                    <TableHead>
-                        <TableCell>
-                            Hello
-                        </TableCell>
-                    </TableHead>
-                    <TableBody>
-                        <TableCell>
-                            <div className="checkout">
-                                <StripeCheckout
-                                    stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"
-                                    token={makePayment}
-                                    name="Buy product"
-                                    amount={totalCharge.price * 100}
-                                />
+                <Grid container direction="row">
+                    <Grid item xs={10}></Grid>
+                    <Grid item xs={2} align='center'><h3>Checkout</h3></Grid>
+                </Grid>
+                <Grid container direction="row">
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={10}><h3>Subtotal: $ 100</h3></Grid>
+                </Grid>
+                <Grid container direction="row">
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={10}><h3>Tax: $ 999</h3></Grid>
+                </Grid>
+                <Grid container direction="row">
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={10}><h3>Total: $ 1099</h3></Grid>
+                </Grid>
+                <Grid container direction="row" >
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={10}>
+                        <div className="checkout">
+                            <StripeCheckout
+                                stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"
+                                token={makePayment}
+                                name="Buy product"
+                                amount={totalCharge.price * 100}
+                            />
 
-                            </div>
-                        </TableCell>
-                    </TableBody>
-                </Table>
+                        </div>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     )
@@ -286,7 +302,7 @@ const Cart = () => {
 
 {/* <TableContainer>
                     <Table className={classes.table} aria-label="spanning table">
-                        {state.shoppingCart.length !== 0 ?
+                        {state.shoppingCart.length !== 0 ? <h1> Render TableList here </h1>: <h1>your cart is empty</h1>}
                             <table>
                                 <TableHead>
                                     <TableRow>
