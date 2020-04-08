@@ -124,7 +124,7 @@ export default function Navbar() {
             <Button style={{ "textDecoration": "inherit" }} >Blog</Button>
           </Link>
           <Badge badgeContent={state.shoppingCart ? state.shoppingCart.length : 0} color="secondary">
-            <Link to="/cart" style={{ "textDecoration": "inherit" }}>
+            <Link to="/cart" disabled='true' style={{ "textDecoration": "inherit" }}>
               <ShoppingCartIcon style={{ "textDecoration": "inherit" }} onClick={handleClickOpen}/>
               <Dialog
                 open={open}

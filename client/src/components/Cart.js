@@ -118,7 +118,8 @@ const Cart = () => {
     }
 
     useEffect(() => {
-        setTotalCharge({ ...totalCharge, price: total })
+        setTotalCharge({ ...totalCharge, price: total });
+        saveCart();
     }, [state.shoppingCart])
 
 
@@ -131,7 +132,25 @@ const Cart = () => {
             return element;
         })
         dispatch({ type: "UPDATE_CART", updatedCart: updatedCart });
-    }
+    };
+
+    function saveCart() {
+        API.saveCart(state.currentUser.id, state.shoppingCart).then(res => console.log("saved to cart", res.data)).then(dispatch({
+            type: "SET_USER",
+            user: {
+                ...state.currentUser,
+                shoppingCart: state.shoppingCart
+            }
+        }))
+    };
+
+    function removeItem(id) {
+        const shoppingCart = state.shoppingCart;
+        const updatedCart = shoppingCart.filter(element => element._id !== id)
+        console.log("updatedCart: ", updatedCart);
+        dispatch({ type: "UPDATE_CART", updatedCart: updatedCart });
+        saveCart();
+    };
 
     const quantity = [
         {
@@ -160,20 +179,11 @@ const Cart = () => {
 
         <Grid container direction="row">
             <Grid item xs={8}>
-                {state.shoppingCart.length !== 0 ?
+                {state.shoppingCart !== undefined || state.shoppingCart.length !== 0 ?
                     <TableContainer>
                         <Table>
                             <TableHead>
                                 <TableCell>
-                                    {/* <List>
-                                    <ListItem>
-                                        <AccountCircleIcon />
-                                        TEST ITEM (Item# 5e8d3fe0105415112c0bddaa)
-                                    </ListItem>
-                                    <ListItemText>
-                                        Description: Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd
-                                    </ListItemText>
-                                </List> */}
                                 </TableCell>
                                 <TableCell align='center'>Quantity</TableCell>
                                 <TableCell align='center'>Price</TableCell>
@@ -188,28 +198,23 @@ const Cart = () => {
                                                 <ListItem>
                                                     <AccountCircleIcon />
                                                     {element.Item}
-                                                    {/* TEST ITEM (Item# 5e8d3fe0105415112c0bddaa)  */}
-                                                    <Link><DeleteIcon /></Link>
+                                                    <Link onClick={event => removeItem(element._id)}><DeleteIcon /></Link>
                                                 </ListItem>
                                                 <ListItemText>
                                                     Description: {element.Description}
-                                                    {/* Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd */}
                                                 </ListItemText>
-                                                <Link><DeleteForeverIcon /></Link>
-                                                <Link><DeleteIcon /></Link>
+                                                {/* <Link><DeleteForeverIcon /></Link>
+                                                <Link><DeleteIcon /></Link> */}
                                             </List>
                                         </TableCell>
                                         <TableCell align='center'>
                                             <TextField
-
                                                 label="Size"
-                                                id="outlined-size-small" // id={element._id}
+                                                id={element._id}
                                                 value={element.Quantity}
-                                                // defaultValue="1" // value={element.Quantity}
                                                 variant="outlined"
                                                 size="small"
                                                 placeholder={element.Quantity}
-                                                // placeholder="" // placeholder={element.Quantity}
                                                 select
                                                 label={"Qty."}
                                                 onChange={event => editQuantity(event, element._id)}
@@ -227,52 +232,9 @@ const Cart = () => {
                                 ))}
                                 {taxAmount()}
                                 {totalAmount()}
-                                {/* <TableRow>
-                                    <TableCell>
-                                        <AccountCircleIcon></AccountCircleIcon>
-                                    </TableCell>
-                                </TableRow> */}
-                                {/* <TableRow>
-                                    <TableCell>
-                                        <List>
-                                            <ListItem>
-                                                <AccountCircleIcon />
-                                            TEST ITEM (Item# 5e8d3fe0105415112c0bddaa) <Link><DeleteIcon /></Link>
-                                            </ListItem>
-                                            <ListItemText>
-                                                Description: Hello asdflkajdflaskdjfalsdkfjasdfasdfaskldfjaskdfasd
-                                        </ListItemText>
-                                            <Link><DeleteForeverIcon /></Link>
-                                            <Link><DeleteIcon /></Link>
-                                        </List>
-                                    </TableCell>
-                                    <TableCell align='center'>
-                                        <TextField
-
-                                            label="Size"
-                                            id="outlined-size-small" // id={element._id}
-                                            defaultValue="1" // value={element.Quantity}
-                                            variant="outlined"
-                                            size="small"
-                                            placeholder="" // placeholder={element.Quantity}
-                                            select
-                                            label={"Qty."}
-                                        // onChange={event => editQuantity(event, element._id)}
-                                        >
-                                            {quantity.map((option) => (
-                                                <MenuItem key={option.value} value={option.value}>
-                                                    {option.label}
-                                                </MenuItem>
-                                            ))}
-                                        </TextField>
-                                    </TableCell>
-                                    <TableCell align='center'>$ 10.00</TableCell>
-                                    <TableCell align='center'>$ 100</TableCell>
-                                </TableRow> */}
                             </TableBody>
                         </Table>
                     </TableContainer>
-
                     : <><h1>your cart is empty</h1> </>}
             </Grid>
 
@@ -311,113 +273,5 @@ const Cart = () => {
         </Grid>
     )
 }
-
-{/* <TableContainer>
-                    <Table className={classes.table} aria-label="spanning table">
-                        {state.shoppingCart.length !== 0 ? <h1> Render TableList here </h1>: <h1>your cart is empty</h1>}
-                            <table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell></TableCell>
-                                        <TableCell>Item</TableCell>
-                                        <TableCell>Price</TableCell>
-                                        <TableCell>Quantity</TableCell>
-                                        <TableCell>Item Total</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {state.shoppingCart.map(element => (
-                                        subTotal = subTotal + (element.Quantity * element.Price),
-                                        <TableRow key={element._id}>
-                                            <TableCell><AccountCircleIcon></AccountCircleIcon></TableCell>
-                                            <TableCell>{element.Item}</TableCell>
-                                            <TableCell>${element.Price}</TableCell>
-                                            <TableCell>
-                                                <TextField
-                                                    id={element._id}
-                                                    select
-                                                    label={"Quantity"}
-                                                    value={element.Quantity}
-                                                    variant="filled"
-                                                    placeholder={element.Quantity}
-                                                    onChange={event => editQuantity(event, element._id)}
-                                                    style={{ "width": "200px" }}
-                                                >
-                                                    {quantity.map((option) => (
-                                                        <MenuItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </MenuItem>
-                                                    ))}
-                                                </TextField>
-                                            </TableCell>
-                                            <TableCell>$ {(element.Quantity * element.Price).toFixed(2)}</TableCell>
-                                        </TableRow>
-                                    ))}
-
-                                    {taxAmount()}
-                                    {totalAmount()}
-
-                                    <TableRow>
-                                        <th></th>
-                                        <th></th>
-                                        <TableCell>Subtotal: </TableCell>
-                                        <TableCell>$ {subTotal.toFixed(2)}</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <th></th>
-                                        <th></th>
-                                        <TableCell>Tax: </TableCell>
-                                        <TableCell>$ {taxTotal.toFixed(2)}</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <th></th>
-                                        <th></th>
-                                        <TableCell>Total with Tax: </TableCell>
-                                        <TableCell>$ {total.toFixed(2)}</TableCell>
-                                    </TableRow>
-
-                                </TableBody>
-
-                            </table>
-                            : <h1>your cart is empty</h1>}
-
-                        {state.shoppingCart.length !== 0 ?
-                            <div className="checkout">
-                                <StripeCheckout
-                                    stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"
-                                    token={makePayment}
-                                    name="Buy product"
-                                    amount={totalCharge.price * 100}
-                                />
-
-                            </div>
-                            : ""}
-                    </Table>
-                </TableContainer> */}
-
-
-
-{/* 
-            </Grid>
-            <Grid item xs={2}>
-                <Table>
-                    <div className="checkout">
-                        <StripeCheckout
-                            stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"
-                            token={makePayment}
-                            name="Buy product"
-                            amount={totalCharge.price * 100}
-                        />
-
-                    </div>
-                </Table>
-            </Grid>
-        </Grid> */}
-
-
-
-
-//     )
-// }
 
 export default Cart
