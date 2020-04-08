@@ -14,6 +14,8 @@ import TransactionPage from '../components/TransactionPage';
 import WishlistPage from '../components/WishlistPage';
 import StoreManagerList from '../components/StoreManagerList';
 import AddItemPage from '../components/AddItemPage'
+import AddBlogPage from '../components/AddBlogPage'
+
 
 
 export default function StoreManager() {
@@ -33,7 +35,7 @@ export default function StoreManager() {
           return <AddItemPage user={state.currentUser}/>
           }
           case "AddBlog": {
-            return <TransactionPage user={state.currentUser}/>
+            return <AddBlogPage user={state.currentUser}/>
           }
           case "Wishlist": {
             return <WishlistPage/>
