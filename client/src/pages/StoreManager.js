@@ -55,7 +55,7 @@ export default function StoreManager() {
             />
         </Grid>
         <Grid item xs={8}>
-
+            
             <>
             {renderPage(page)}
             </>
