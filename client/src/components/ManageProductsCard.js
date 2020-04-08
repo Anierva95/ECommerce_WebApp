@@ -46,7 +46,10 @@ export default function MediaCard(props) {
 
   function deleteItem(id) {
     console.log(id)
-    API.deleteProduct(id).then(res => console.log(res)).then(loadProducts());
+    API.deleteProduct(id).then(res => console.log(res));
+    setTimeout(() => {
+      loadProducts()
+    }, 100);
   }
 
 

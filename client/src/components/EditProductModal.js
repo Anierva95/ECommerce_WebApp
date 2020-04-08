@@ -46,7 +46,6 @@ export default function TransitionsModal(props) {
 
 
   const [state, dispatch] = useStoreContext()
-
   const [imageUploaded, changeStatus] = useState(false)
 
   let image = "";
@@ -96,6 +95,31 @@ export default function TransitionsModal(props) {
       label: 'Unisex'
     }
   ]
+
+  function loadProducts() {
+    API.getProducts().then(res => {
+      dispatch({
+        type: "GET_PRODUCTS",
+        products: res.data
+      })
+    })
+    .catch(err => console.log(err));
+  };
+
+  function editItem(id) {
+    API.updateProduct(id, {
+      Item: itemName,
+      Type: typeItem,
+      Description: descriptionText,
+      Price: priceAmount,
+      Quantity: quantityAmount,
+      Gender: genderType,
+      Image: props.Image
+    })
+    setTimeout(() => {
+      loadProducts()
+    }, 100);
+  }
 
   function saveCart() {
     // console.log(state.currentUser.id);
@@ -205,7 +229,7 @@ useEffect(() => {
                     {imageUploaded === false ? <p>Please upload an image</p> : <p>Image uploaded!</p>}
 
               </FormControl>
-              <Button variant="contained" color="primary" onClick={() => console.log(props.id)}>
+              <Button variant="contained" color="primary" onClick={() => editItem(props.id)}>
                 Submit
             </Button>
             </form>
