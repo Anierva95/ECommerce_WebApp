@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useStoreContext } from "../utils/GlobalState";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 
 export default function WishlistPage(props) {
     const [state, dispatch] = useStoreContext();
-    const classes= useStyles();
+    const classes = useStyles();
     // console.log("props in wishlist", props)
     // console.log("state in wishlist", state);
 
@@ -62,16 +62,17 @@ export default function WishlistPage(props) {
                     <TableContainer>
                         <Table>
                             <TableHead>
-                                <TableCell align='center'>Wishlist</TableCell>
                                 <TableCell></TableCell>
+                                <TableCell>Wishlist</TableCell>
                             </TableHead>
                             <TableBody>
                                 {state.wishList.map(element => (
                                     <TableRow>
+                                        <TableCell> <img src={element.Image} height='100px'></img></TableCell>
                                         <TableCell>
+                                           
                                             <List>
                                                 <ListItem>
-                                                <img src={element.Image} height='200px'></img>
                                                     {/* <CardMedia
                                                         className={classes.media}
                                                         image={element.Image}
