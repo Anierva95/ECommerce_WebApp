@@ -33,6 +33,7 @@ export default function ProductRow() {
             description={product.Description}
             price={product.Price}
             Image = {product.Image}
+            quantity={product.Quantity}
           />
         </Grid>
       ))}
