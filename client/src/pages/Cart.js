@@ -1,13 +1,17 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-import Cart from '../components/Cart'
+import Cart from '../components/Cart';
+import CartHeader from '../components/CartHeader';
+import Paper from '@material-ui/core/Paper';
+// import { CardHeader } from '@material-ui/core';
 
 export default function shoppingCart() {
 
     return (
-        <div>
+        <Paper>
             <Navbar />
+            <CartHeader />
             <Cart />
-        </div>
+        </Paper>
     )
 }

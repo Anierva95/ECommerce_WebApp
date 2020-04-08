@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,6 +13,11 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import { useStoreContext } from "../utils/GlobalState";
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 
@@ -35,6 +40,15 @@ export default function Navbar() {
   const classes = useStyles();
   const location = useLocation();
   const [state, dispatch] = useStoreContext()
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
   useEffect(() => {
@@ -44,30 +58,30 @@ export default function Navbar() {
     } else {
       checkUser(user.email)
     }
-    
+
     function checkUser(email) {
       API.getUsers().then(res => {
         const isUser = res.data.find(({ Email }) => Email === email)
-      //   if (isUser.Transactions) {
-      //   for (let transaction of isUser.Transactions) {
-      //     console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
-      //   }
-      // }
+        //   if (isUser.Transactions) {
+        //   for (let transaction of isUser.Transactions) {
+        //     console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
+        //   }
+        // }
         if (!isUser) {
           API.saveUsers({ Email: email })
-          .then(res =>           
-            dispatch({
-            type: "SET_USER",
-            user: {
-              id: res.data._id,
-              email: res.data.Email,
-              transactions: res.data.Transactions,
-              shoppingCart: res.data.ShoppingCart
-            }
-          }))
+            .then(res =>
+              dispatch({
+                type: "SET_USER",
+                user: {
+                  id: res.data._id,
+                  email: res.data.Email,
+                  transactions: res.data.Transactions,
+                  shoppingCart: res.data.ShoppingCart
+                }
+              }))
           dispatch({
             type: "GET_CART",
-            dbCart: res.data.ShoppingCart 
+            dbCart: res.data.ShoppingCart
           })
         } else {
           dispatch({
@@ -104,27 +118,45 @@ export default function Navbar() {
             <Button style={{ "textDecoration": "inherit" }} >Home</Button>
           </Link>
           <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>
-          <Button style={{ "textDecoration": "inherit" }} >Account</Button>
+            <Button style={{ "textDecoration": "inherit" }} >Account</Button>
           </Link>
           <Link to="/blog" style={{ "textDecoration": "inherit" }}>
             <Button style={{ "textDecoration": "inherit" }} >Blog</Button>
           </Link>
-          {/* <Link to="/cart" style={{ "textDecoration": "inherit" }}>
-            Cart<span>{props.cart.length}</span>
-          </Link> */}
-          <Badge badgeContent={state.shoppingCart? state.shoppingCart.length : 0} color="secondary">
-          <Link to="/cart" style={{ "textDecoration": "inherit" }}>
-          <ShoppingCartIcon style={{"textDecoration": "inherit"}} />
-          </Link>
+          <Badge badgeContent={state.shoppingCart ? state.shoppingCart.length : 0} color="secondary">
+            <Link to="/cart" style={{ "textDecoration": "inherit" }}>
+              <ShoppingCartIcon style={{ "textDecoration": "inherit" }} onClick={handleClickOpen}/>
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    Let Google help apps determine location. This means sending anonymous location data to
+                    Google, even when no apps are running.
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    Disagree
+                  </Button>
+                  <Button onClick={handleClose} color="primary" autoFocus>
+                    Agree
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Link>
           </Badge>
           <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>
-          <Badge badgeContent={state.wishList.length} color="secondary">
-          <FavoriteIcon style={{"marginLeft": "20px"}}/>
-          </Badge>
+            <Badge badgeContent={state.wishList.length} color="secondary">
+              <FavoriteIcon style={{ "marginLeft": "20px" }} />
+            </Badge>
           </Link>
-
-          <Link to="/storeManager" style={{"textDecoration": "inherit"}}>
-          <Button style={{"textDecoration": "inherit"}}  >Store Manager</Button>
+          <Link to="/storeManager" style={{ "textDecoration": "inherit" }}>
+            <Button style={{ "textDecoration": "inherit" }}  >Store Manager</Button>
           </Link>
           {!isLoading && !user && (
             <>
