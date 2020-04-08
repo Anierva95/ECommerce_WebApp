@@ -45,7 +45,7 @@ export default function StoreManager() {
     return (
         // <>
         //     <Navbar />
-        //     <StoreManagerHeader />
+
 
         //     <Grid container direction="row">
         //     <Grid item xs={2}></Grid>
@@ -68,7 +68,7 @@ export default function StoreManager() {
 
         <div>
         <Navbar />
-        <UserAccountHeader />
+        <StoreManagerHeader />
         <Grid container direction="row" spacing={3}>
         <Grid item xs={3}>
             <NestedList
