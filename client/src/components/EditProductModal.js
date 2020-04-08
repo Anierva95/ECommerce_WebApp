@@ -122,8 +122,6 @@ export default function TransitionsModal(props) {
   }
 
   function saveCart() {
-    // console.log(state.currentUser.id);
-    // console.log(state.shoppingCart)
     API.saveCart(state.currentUser.id, state.shoppingCart).then(res => console.log("saved to cart", res.data)).then(dispatch({
       type: "SET_USER",
       user: {
