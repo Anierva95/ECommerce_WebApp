@@ -47,13 +47,13 @@ export default function NestedList(props) {
             }
             className={classes.root}
         >
-            <ListItem button selected={props.page === "Account"} onClick={() => props.handlePageChange("Account")}>
+            <ListItem button selected={props.page === "AddItem"} onClick={() => props.handlePageChange("AddItem")}>
                 <ListItemIcon>
                     <BuildIcon />
                 </ListItemIcon>
-                <ListItemText primary="Account Details" />
+                <ListItemText primary="Add an item" />
             </ListItem>
-            <ListItem button selected={props.page === "Transactions"} onClick={() => props.handlePageChange("Transactions")}>
+            <ListItem button selected={props.page === "Transactions"} onClick={() => props.handlePageChange("Add a Blog")}>
                 <ListItemIcon>
                     <ReceiptIcon />
                 </ListItemIcon>

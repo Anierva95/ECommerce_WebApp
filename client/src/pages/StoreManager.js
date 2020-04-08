@@ -12,7 +12,8 @@ import Paper from '@material-ui/core/Paper';
 import AccountDetails from '../components/AccountDetails';
 import TransactionPage from '../components/TransactionPage';
 import WishlistPage from '../components/WishlistPage';
-
+import StoreManagerList from '../components/StoreManagerList';
+import AddItemPage from '../components/AddItemPage'
 
 
 export default function StoreManager() {
@@ -26,11 +27,12 @@ export default function StoreManager() {
     };
 
     const renderPage = page => {
+        console.log(page);
         switch(page) {
-          case "Account": {
-          return <AccountDetails user={state.currentUser}/>
+          case "AddItem": {
+          return <AddItemPage user={state.currentUser}/>
           }
-          case "Transactions": {
+          case "AddBlog": {
             return <TransactionPage user={state.currentUser}/>
           }
           case "Wishlist": {
@@ -43,9 +45,6 @@ export default function StoreManager() {
 
 
     return (
-        // <>
-        //     <Navbar />
-
 
         //     <Grid container direction="row">
         //     <Grid item xs={2}></Grid>
@@ -61,17 +60,13 @@ export default function StoreManager() {
         //     </Grid>
         //     <Grid item xs={2} />
         //     </Grid>
-            
-
-
-        // </>
 
         <div>
         <Navbar />
         <StoreManagerHeader />
         <Grid container direction="row" spacing={3}>
         <Grid item xs={3}>
-            <NestedList
+            <StoreManagerList
             page={page}
             handlePageChange={handlePageChange}
             />
