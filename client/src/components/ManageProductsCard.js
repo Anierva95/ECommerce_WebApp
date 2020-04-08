@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Modal from './Modal';
+import EditProductModal from './EditProductModal';
 import { useStoreContext } from "../utils/GlobalState";
 import API from '../utils/API';
 
@@ -64,9 +64,9 @@ export default function MediaCard(props) {
       </CardActionArea>
       <CardActions>
         <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => addToWish(props.id)}> 
-          Wishlist!
+         Delete!
         </Button>
-        <Modal
+        <EditProductModal
         name={props.name}
         description={props.description}
         price={props.price}

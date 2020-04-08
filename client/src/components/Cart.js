@@ -35,7 +35,7 @@ const Cart = () => {
                     if(newQuantity < 0) {
                         return alert("We are all sold out!")
                     } else {
-                        API.updateProduct(item._id, {Quantity: newQuantity}).then(res => console.log("product quantity updated!"), window.location.replace("/"))
+                        API.updateProduct(item._id, {Quantity: newQuantity}).then(res => console.log("product quantity updated!"), window.location.replace("/shop"))
                     } 
                 }
             }
@@ -127,7 +127,9 @@ const Cart = () => {
     ]
 
     return (
+        
         <div className="shoppingCart">
+        {state.shoppingCart.length !== 0 ? 
             <table>
                 <thead>
                     <tr>
@@ -164,6 +166,8 @@ const Cart = () => {
                             <td>$ {(element.Quantity * element.Price).toFixed(2)}</td>
                         </tr>
                     ))}
+                    
+                    
                     {taxAmount()}
                     {totalAmount()}
 
@@ -186,9 +190,13 @@ const Cart = () => {
                         <th>Total with Tax: </th>
                         <th>$ {total.toFixed(2)}</th>
                     </tr>
+                   
                 </tbody>
-
+              
             </table>
+            : <h1>your cart is empty</h1>}
+
+            {state.shoppingCart.length !== 0 ? 
             <div className="checkout">
                 <StripeCheckout
                     stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"
@@ -196,7 +204,9 @@ const Cart = () => {
                     name="Buy product"
                     amount={totalCharge.price * 100}
                 />
+           
             </div>
+             : ""}
         </div>
     )
 }

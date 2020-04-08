@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
@@ -32,14 +32,15 @@ export default function AddProductForm() {
   const quantityRef = useRef();
   const genderRef = useRef();
 
-  let image = null;
+  const [imageUploaded, changeStatus] = useState(false)
+
+  let image = "";
 
   var myWidget = window.cloudinary.createUploadWidget({
-
-
     cloudName: 'diadpow6d', 
     uploadPreset: 'h6i1uchv'}, (error, result) => { 
       if (!error && result && result.event === "success") {
+        changeStatus(true)
         image = result.info.url;
         console.log(image)
         console.log('Done! Here is the image info: ', result.info); 
@@ -154,6 +155,8 @@ export default function AddProductForm() {
                   ))}
                 </TextField>
                 <Button id="upload_widget" class="cloudinary-button" onClick={()=> {myWidget.open()}}>Upload Image</Button>
+                    {imageUploaded === false ? <p>Please upload an image</p> : <p>Image uploaded!</p>}
+
               </FormControl>
               <Button variant="contained" color="primary" onClick={() => AddItem()}>
                 Submit
@@ -161,7 +164,7 @@ export default function AddProductForm() {
             </form>
           </Grid>
       </div>
-      <img src={image}></img>
+    
 
     </div>
   );
