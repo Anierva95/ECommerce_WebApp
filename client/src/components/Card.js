@@ -48,8 +48,7 @@ export default function MediaCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://picsum.photos/200/300"
-          title="Contemplative Reptile"
+          image={props.Image}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -72,6 +71,7 @@ export default function MediaCard(props) {
         description={props.description}
         price={props.price}
         id={props.id}
+        Image={props.Image}
         />
       </CardActions>
     </Card>

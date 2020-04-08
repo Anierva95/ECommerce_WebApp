@@ -118,7 +118,7 @@ useEffect(() => {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">{props.name}</h2>
-            <img src="https://picsum.photos/200/300"></img>
+            <img src={props.Image}></img>
             <p id="transition-modal-description">{props.description}</p>
             <h2>${props.price}</h2>
             <TextField

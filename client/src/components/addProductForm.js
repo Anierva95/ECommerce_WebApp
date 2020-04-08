@@ -40,7 +40,7 @@ export default function AddProductForm() {
     cloudName: 'diadpow6d', 
     uploadPreset: 'h6i1uchv'}, (error, result) => { 
       if (!error && result && result.event === "success") {
-        image = JSON.stringify(result.info.url);
+        image = result.info.url;
         console.log(image)
         console.log('Done! Here is the image info: ', result.info); 
       }
