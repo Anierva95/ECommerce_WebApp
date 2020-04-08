@@ -101,7 +101,7 @@ useEffect(() => {
   return (
     <div>
       <Button size="small" variant="contained" color="secondary" type="button" onClick={handleOpen}>
-        Learn More
+        Edit Product
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -121,7 +121,6 @@ useEffect(() => {
             <img src={props.Image}></img>
             <p id="transition-modal-description">{props.description}</p>
             <h2>${props.price}</h2>
-            <p>Inventory: {props.quantity}</p>
             <TextField
               id={props.id}
               select

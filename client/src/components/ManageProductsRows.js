@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import MediaCard from '../components/Card';
+import ManageProductsCard from '../components/ManageProductsCard';
 import { Grid } from '@material-ui/core';
 import API from "../utils/API";
 import { useStoreContext } from "../utils/GlobalState";
 
 
-export default function ProductRow() {
+export default function ManageProductRows() {
 
   const [state, dispatch] = useStoreContext();
 
@@ -27,13 +27,12 @@ export default function ProductRow() {
     <>
       {state.products.map(product => (
         <Grid item xs={3}>
-          <MediaCard
+          <ManageProductsCard
             id = {product._id}
             name={product.Item}
             description={product.Description}
             price={product.Price}
             Image = {product.Image}
-            quantity={product.Quantity}
           />
         </Grid>
       ))}

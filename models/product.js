@@ -3,11 +3,12 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
   Item: { type: String, required: true },
-  Type: { type: String, required: true }, //make this a dropdown? when adding a new item *for sorting purposes later on
+  Type: { type: String, required: true },
   Description: { type: String, required: true },
   Price: { type: Number, required: true },
   Quantity: { type: Number, required: true },
-  Gender: { type: String, required: true }, //dropdown? male/female/unisex
+  Gender: { type: String, required: true },
+  Image: { type: String, required: false }
 });
 
 const Product = mongoose.model("Product", productSchema);
