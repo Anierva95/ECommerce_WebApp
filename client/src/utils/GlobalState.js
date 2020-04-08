@@ -50,6 +50,7 @@ const reducer = (state, action) => {
                 ...state,
                 shoppingCart: action.dbCart
             }
+        
     }
 }
 

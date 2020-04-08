@@ -21,7 +21,7 @@ export default function ManageProductRows() {
 
   useEffect(() => {
     loadProducts()
-  }, []);
+  }, [state.products]);
 
   return (
     <>
