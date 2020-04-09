@@ -37,58 +37,54 @@ export default function MediaCard(props) {
     API.getProduct(id).then(res => dispatch({ type: "ADD_TO_WISH", product: res.data }))
   }
 
-  function setWishDb () {
-  API.saveWish(state.currentUser.id, state.wishList).then(res => console.log("saved to wishList", res.data)).then(dispatch({
-    type: "SET_USER",
-    user: {
-      ...state.currentUser,
-      wishList: state.wishList
-    }
-  }))
-}
+  function setWishDb() {
+    API.saveWish(state.currentUser.id, state.wishList).then(res => console.log("saved to wishList", res.data)).then(dispatch({
+      type: "SET_USER",
+      user: {
+        ...state.currentUser,
+        wishList: state.wishList
+      }
+    }))
+  }
 
-useEffect(() => {
-  setWishDb();
-}, [state.wishList])
+  useEffect(() => {
+    setWishDb();
+  }, [state.wishList])
 
-
-
-// function addToCart(id) {
-//   API.getProduct(id).then(res => dispatch({type: "ADD_TO_CART", product: {...res.data, Quantity: 2}}))
-// }
-
-return (
-  <Card className={classes.root}>
-    <CardActionArea>
-      <CardMedia
-        className={classes.media}
-        image={props.Image}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
-          {props.name}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.description}
-        </Typography>
-        <Typography gutterBottom variant="h5" component="h2">
-          ${props.price}
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-    <CardActions>
-      <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => addToWish(props.id)}>
-        Wishlist!
+  return (
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          alt={props.name}
+          className={classes.media}
+          image={props.Image}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {props.name}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {props.description}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="h2">
+            ${props.price}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button variant="contained" size="small" color="primary" key={props.id} onClick={() => addToWish(props.id)}>
+          Wishlist!
         </Button>
-      <Modal
-        name={props.name}
-        description={props.description}
-        price={props.price}
-        id={props.id}
-        Image={props.Image}
-        quantity={props.quantity}
-      />
-    </CardActions>
-  </Card>
-);
+        <Modal
+          name={props.name}
+          description={props.description}
+          price={props.price}
+          id={props.id}
+          Image={props.Image}
+          quantity={props.quantity}
+        />
+      </CardActions>
+    </Card>
+  );
 }

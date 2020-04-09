@@ -129,7 +129,7 @@ export default function Navbar() {
           </Link>
           <Badge badgeContent={state.shoppingCart ? state.shoppingCart.length : 0} color="secondary">
             <Link to="/cart" disabled='true' style={{ "textDecoration": "inherit" }}>
-              <ShoppingCartIcon style={{ "textDecoration": "inherit" }} onClick={handleClickOpen}/>
+              <ShoppingCartIcon style={{ "textDecoration": "inherit" }} onClick={handleClickOpen} />
               <Dialog
                 open={open}
                 onClose={handleClose}
@@ -168,19 +168,15 @@ export default function Navbar() {
                 Login
           </Button>
             </>
-
           )}
           {!isLoading && user && (
-
             <>
-              {/* {checkUser(user.email)} */}
               <Typography color="textprimary">
                 Hello, {user.name}!
               </Typography>
               <Button variant="contained" color="primary" onClick={logout}>
                 Logout
           </Button>
-              {/* {checkUser(user.email)} */}
             </>
           )}
         </Toolbar>

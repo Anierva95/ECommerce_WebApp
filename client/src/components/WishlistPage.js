@@ -69,7 +69,7 @@ export default function WishlistPage(props) {
                             <TableBody>
                                 {state.wishList.map(element => (
                                     <TableRow>
-                                        <TableCell> <img src={element.Image} height='100px'></img></TableCell>
+                                        <TableCell> <img alt={element.Item} src={element.Image} height='100px'></img></TableCell>
                                         <TableCell>                                           
                                             <List>
                                                 <ListItem>

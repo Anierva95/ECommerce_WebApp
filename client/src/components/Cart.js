@@ -179,7 +179,8 @@ const Cart = () => {
 
         <Grid container direction="row">
             <Grid item xs={8}>
-                {state.shoppingCart !== undefined || state.shoppingCart.length !== 0 ?
+            {/* || state.shoppingCart.length !== 0 */}
+                {state.shoppingCart !== undefined ?
                     <TableContainer>
                         <Table>
                             <TableBody>
