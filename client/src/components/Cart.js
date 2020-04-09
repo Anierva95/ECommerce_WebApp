@@ -262,7 +262,7 @@ const Cart = () => {
                         <Grid item xs={10}>
                             <div className="checkout">
                                 <StripeCheckout
-                                    stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"
+                                    stripeKey="pk_test_EyOvaQsKqUFV933zd4l0nmOK00ViQzudXV"
                                     token={makePayment}
                                     name="Buy product"
                                     amount={totalCharge.price * 100}

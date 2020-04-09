@@ -57,10 +57,11 @@ export default function TransitionsModal(props) {
     API.updateBlogPost(id, {
       Title: blogTitle,
       Body: blogBody,
-      Date: Date.now()
     }).then(res => console.log(res))
     setTimeout(() => {
       loadBlogs()
+      SetBlogTitle("")
+      SetBlogBody("")
     }, 100);
   }
 
@@ -68,6 +69,8 @@ export default function TransitionsModal(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
+    SetBlogTitle(props.Title)
+    SetBlogBody(props.Body)
     setOpen(true);
   };
 
