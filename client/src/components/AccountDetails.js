@@ -19,39 +19,25 @@ export default function AccountDetails(props) {
         <Grid>
             {props.user.id ?
                 <>
-                    <h2>Account Details Page</h2>
                     <TableContainer>
                         <Table>
                             <TableBody>
-                                <TableRow>
-                                    {/* <TableCell> */}
-                                    <ListItemText>First Name: <TextField>Henry</TextField></ListItemText>
-                                    {/* </TableCell> */}
-                                </TableRow>
-                                <TableRow>
-                                    <ListItemText>First Name: Henry</ListItemText>
-                                </TableRow>
+                                <TableCell><h2>Account Details Page</h2></TableCell>
+                            </TableBody>
+                            <TableBody>
                                 <TableRow>
                                     <TableCell>
                                         <ListItemText>First Name: Henry</ListItemText>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell>
-                                        <ListItemText>First Name: <TextField> Henry</TextField> </ListItemText>
+                                        <ListItemText>Last Name: Ni</ListItemText>
+                                        <ListItemText>Account Email: {props.user.email}</ListItemText>
+                                        <ListItemText>Shipping Address: 123 Main St</ListItemText>
+                                        <ListItemText>City: Edison</ListItemText>
+                                        <ListItemText>State: NJ</ListItemText>
+                                        <ListItemText>Zip Code: 08820</ListItemText>
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>
-                        <List>
-                            <ListItemText>First Name: Henry</ListItemText>
-                            <ListItemText>Last Name: Ni</ListItemText>
-                            <ListItemText>Account Email: {props.user.email}</ListItemText>
-                            <ListItemText>Shipping Address: 123 Main St</ListItemText>
-                            <ListItemText>City: Edison</ListItemText>
-                            <ListItemText>State: NJ</ListItemText>
-                            <ListItemText>Zip Code: 08820</ListItemText>
-                        </List>
                     </TableContainer>
                 </>
                 : <h1>Please login to see your account details.</h1>}

@@ -58,32 +58,24 @@ export default function WishlistPage(props) {
 
         <Grid container direction="row">
             <Grid item xs={12}>
-                {state.wishList !== undefined || state.wishList.length !== 0 ?
+                {/* state.wishList !== undefined ||  */}
+                {state.wishList.length !== 0 ?
                     <TableContainer>
                         <Table>
-                            <TableHead>
+                            <TableBody>
                                 <TableCell></TableCell>
                                 <TableCell>Wishlist</TableCell>
-                            </TableHead>
+                            </TableBody>
                             <TableBody>
                                 {state.wishList.map(element => (
                                     <TableRow>
                                         <TableCell> <img src={element.Image} height='100px'></img></TableCell>
-                                        <TableCell>
-                                           
+                                        <TableCell>                                           
                                             <List>
                                                 <ListItem>
-                                                    {/* <CardMedia
-                                                        className={classes.media}
-                                                        image={element.Image}
-                                                    /> */}
                                                     <AccountCircleIcon />
                                                     {element.Item} (Item#: {element._id})
-                                                    {/* <Link ><DeleteIcon /></Link> */}
-                                                </ListItem>
-                                                <ListItem>
-
-                                                </ListItem>
+                                                </ListItem>                                             
                                                 <ListItemText>
                                                     Description: {element.Description}
                                                 </ListItemText>
@@ -93,49 +85,12 @@ export default function WishlistPage(props) {
                                             <Link onClick={event => removeItem(element._id)}><DeleteIcon /></Link>
                                         </TableCell>
                                     </TableRow>
-                                ))}
-                                {/* <TableCell align='center'>
-                                            <TextField
-                                                label="Size"
-                                                // id={element._id}
-                                                // value={element.Quantity}
-                                                variant="outlined"
-                                                size="small"
-                                                placeholder={element.Quantity}
-                                                select
-                                                label={"Qty."}
-                                                onChange={event => editQuantity(event, element._id)}
-                                            >
-                                                {quantity.map((option) => (
-                                                    <MenuItem key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </MenuItem>
-                                                ))}
-                                            </TextField>
-                                        </TableCell> */}
-                                {/* <TableCell align='center'>$ {element.Price}</TableCell>
-                                        <TableCell align='center'>$ {element.Price * element.Quantity}</TableCell> */}
-                                {/* ))} */}
-                                {/* {taxAmount()}
-                                {totalAmount()} */}
+                                ))}                                
                             </TableBody>
                         </Table>
                     </TableContainer>
                     : <><h1>your wishlist is empty</h1> </>}
             </Grid>
         </Grid>
-        // <>
-        // <h1>My Wishlist Page</h1>
-        // {state.wishList.map(wishListItem => {
-        //     return(
-        //     <>
-        //     <p>{wishListItem.id}</p>
-        //     <p>{wishListItem.Item}</p>
-        //     <p>{wishListItem.Description}</p>
-        //     <p>{wishListItem.Price}</p>
-        //     </>
-        // )})}
-        // </>
-
     )
 }

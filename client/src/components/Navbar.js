@@ -62,11 +62,6 @@ export default function Navbar() {
     function checkUser(email) {
       API.getUsers().then(res => {
         const isUser = res.data.find(({ Email }) => Email === email)
-        //   if (isUser.Transactions) {
-        //   for (let transaction of isUser.Transactions) {
-        //     console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
-        //   }
-        // }
         if (!isUser) {
           API.saveUsers({ Email: email })
             .then(res =>
@@ -110,7 +105,6 @@ export default function Navbar() {
         }
       });
     };
-
     console.log("state: ", state);
   }, [user])
 
@@ -161,7 +155,7 @@ export default function Navbar() {
             </Link>
           </Badge>
           <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>
-            <Badge badgeContent={state.wishList.length} color="secondary">
+            <Badge badgeContent={state.wishList ? state.wishList.length : 0} color="secondary">
               <FavoriteIcon style={{ "marginLeft": "20px" }} />
             </Badge>
           </Link>
