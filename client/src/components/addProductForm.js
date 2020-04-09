@@ -58,7 +58,14 @@ export default function AddProductForm() {
       Quantity: parseInt(quantityRef.current.value),
       Gender: genderRef.current.value,
       Image: image
-    }).then(res => console.log(res))
+    }).then(res => {
+      itemRef.current.value = "";
+      typeRef.current.value = "";
+      descriptionRef.current.value = "";
+      priceRef.current.value = "";
+      quantityRef.current.value = "";
+      genderRef.current.value = "";
+    })
   }
 
   const Type = [

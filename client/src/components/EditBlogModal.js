@@ -62,6 +62,7 @@ export default function TransitionsModal(props) {
       loadBlogs()
       SetBlogTitle("")
       SetBlogBody("")
+      handleClose();
     }, 100);
   }
 
