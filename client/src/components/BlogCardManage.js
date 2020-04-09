@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import API from '../utils/API';
 import { useStoreContext } from "../utils/GlobalState";
+import EditBlogModal from './EditBlogModal'
 
 
 const useStyles = makeStyles({
@@ -71,7 +72,11 @@ function deleteBlog (id) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => deleteBlog(props.Key)}>Remove!</Button>
+        <Button variant="contained" color="primary" size="small" onClick={() => deleteBlog(props.Key)}>Remove!</Button>
+        <EditBlogModal
+        id={props.Key}
+        Body= {props.Body}
+        />
       </CardActions>
     </Card>
   );
