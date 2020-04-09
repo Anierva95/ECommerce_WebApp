@@ -33,28 +33,20 @@ export default function AddProductForm() {
   const genderRef = useRef();
 
   const [imageUploaded, changeStatus] = useState(false)
-
-  let image = "";
+  const [image, setImage] = useState("")
 
   var myWidget = window.cloudinary.createUploadWidget({
     cloudName: 'diadpow6d', 
     uploadPreset: 'h6i1uchv'}, (error, result) => { 
       if (!error && result && result.event === "success") {
         changeStatus(true)
-        image = result.info.url;
-        console.log(image)
-        console.log('Done! Here is the image info: ', result.info); 
+        console.log(result.info.url)
+        setImage(result.info.url)
       }
     }
   )
 
   function AddItem() {
-    console.log(itemRef.current.value);
-    console.log(priceRef.current.value);
-    console.log(typeRef.current.value);
-    console.log(descriptionRef.current.value);
-    console.log(quantityRef.current.value);
-    console.log(genderRef.current.value);
     API.saveProduct({
       Item: itemRef.current.value,
       Type: typeRef.current.value,
@@ -63,40 +55,68 @@ export default function AddProductForm() {
       Quantity: parseInt(quantityRef.current.value),
       Gender: genderRef.current.value,
       Image: image
-    }).then(res => console.log("Product created!! burkeep!"))
+    }).then(res => console.log(res))
   }
 
   const Type = [
     {
-      value: 'Clothing',
-      label: 'Clothing',
+      value: 'T-Shirts',
+      label: 'T-Shirts',
     },
     {
-      value: 'Stand Up',
-      label: 'Stand Up',
+      value: 'Sweaters',
+      label: 'Sweaters',
     },
     {
-      value: 'Relic',
-      label: 'Relic',
+      value: 'Hoodies',
+      label: 'Hoodies',
     },
     {
-      value: 'Used Kitchenware',
-      label: 'Used Kitchenware',
+      value: 'Pants',
+      label: 'Pants',
+    },
+    {
+      value: 'Socks',
+      label: 'Socks',
+    },
+    {
+      value: 'Dress Shirts',
+      label: 'Dress Shirts',
+    },
+    {
+      value: 'Accessory',
+      label: 'Accessory',
+    },
+    {
+      value: 'Dresses',
+      label: 'Dresses',
+    },
+    {
+      value: 'Skirts',
+      label: 'Skirts',
+    },
+    {
+      value: 'Polo Shirts',
+      label: 'Polo Shirts',
+    },
+    {
+      value: 'Suits',
+      label: 'Suits',
     },
   ];
 
   const genders = [
     {
-      value: 'Female',
-      label: 'Female'
+      value: 'Small',
+      label: 'Small'
     },
     {
-      value: 'Male',
-      label: 'Male'
+      value: 'Medium',
+      label: 'Medium'
     },
     {
-      value: 'Unisex',
-      label: 'Unisex'
+      value: 'Large',
+      label: 'Large'
     }
   ]
 

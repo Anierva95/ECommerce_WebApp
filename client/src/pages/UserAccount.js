@@ -53,7 +53,7 @@ export default function UserAccount() {
         return <TransactionPage user={state.currentUser}/>
       }
       case "Wishlist": {
-        return <WishlistPage/>
+        return <WishlistPage user={state.currentUser}/>
       }
     }
   }

@@ -4,11 +4,33 @@ import SalesHeader from '../components/SalesHeader'
 import ProductRow from '../components/ProductRow'
 import { Grid } from '@material-ui/core';
 import LiveChat from 'react-livechat'
+import { makeStyles } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
 
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: "#e0e0e0",
+    // border: '2px solid #000',
+    // boxShadow: theme.shadows[5],
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // textAlign: "center",
+    // padding: theme.spacing(2, 4, 3),
+    // width: "500px"
+  },
+}));
 
 export default function Home(){
+
+  const classes = useStyles();
+
     return(
-       <div>
+       <div className={classes.paper}>
           <Navbar/>
 
           <SalesHeader/>

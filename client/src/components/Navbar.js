@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import { Link, useLocation } from "react-router-dom";
+import StoreIcon from '@material-ui/icons/Store';
+import { Link } from "react-router-dom";
 import { useAuth0 } from '../utils/auth0context';
 import API from '../utils/API';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import { useStoreContext } from "../utils/GlobalState";
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 
@@ -38,7 +33,6 @@ export default function Navbar() {
 
   const { isLoading, user, loginWithRedirect, logout } = useAuth0();
   const classes = useStyles();
-  const location = useLocation();
   const [state, dispatch] = useStoreContext()
   const [open, setOpen] = React.useState(false);
 
@@ -62,11 +56,6 @@ export default function Navbar() {
     function checkUser(email) {
       API.getUsers().then(res => {
         const isUser = res.data.find(({ Email }) => Email === email)
-        //   if (isUser.Transactions) {
-        //   for (let transaction of isUser.Transactions) {
-        //     console.log(JSON.stringify(transaction).split(":")[0].slice(2, 28));
-        //   }
-        // }
         if (!isUser) {
           API.saveUsers({ Email: email })
             .then(res =>
@@ -76,12 +65,17 @@ export default function Navbar() {
                   id: res.data._id,
                   email: res.data.Email,
                   transactions: res.data.Transactions,
-                  shoppingCart: res.data.ShoppingCart
+                  shoppingCart: res.data.ShoppingCart,
+                  wishList: res.data.Wishlist
                 }
               }))
           dispatch({
             type: "GET_CART",
             dbCart: res.data.ShoppingCart
+          })
+          dispatch({
+            type: "GET_WISH",
+            dbWish: res.data.Wishlist
           })
         } else {
           dispatch({
@@ -90,17 +84,21 @@ export default function Navbar() {
               id: isUser._id,
               email: isUser.Email,
               transactions: isUser.Transactions,
-              shoppingCart: isUser.ShoppingCart
+              shoppingCart: isUser.ShoppingCart,
+              wishList: isUser.Wishlist
             }
           })
           dispatch({
             type: "GET_CART",
             dbCart: isUser.ShoppingCart
           })
+          dispatch({
+            type: "GET_WISH",
+            dbWish: isUser.Wishlist
+          })
         }
       });
     };
-
     console.log("state: ", state);
   }, [user])
 
@@ -109,10 +107,10 @@ export default function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            <StoreIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Welcome to my Store!
+            {/* Welcome to my Store! */}
           </Typography>
           <Link to="/shop" style={{ "textDecoration": "inherit" }}>
             <Button style={{ "textDecoration": "inherit" }} >Home</Button>
@@ -124,34 +122,12 @@ export default function Navbar() {
             <Button style={{ "textDecoration": "inherit" }} >Blog</Button>
           </Link>
           <Badge badgeContent={state.shoppingCart ? state.shoppingCart.length : 0} color="secondary">
-            <Link to="/cart" style={{ "textDecoration": "inherit" }}>
-              <ShoppingCartIcon style={{ "textDecoration": "inherit" }} onClick={handleClickOpen}/>
-              <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    Let Google help apps determine location. This means sending anonymous location data to
-                    Google, even when no apps are running.
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose} color="primary">
-                    Disagree
-                  </Button>
-                  <Button onClick={handleClose} color="primary" autoFocus>
-                    Agree
-                  </Button>
-                </DialogActions>
-              </Dialog>
+            <Link to="/cart" disabled='true' style={{ "textDecoration": "inherit" }}>
+              <ShoppingCartIcon style={{ "textDecoration": "inherit" }} onClick={handleClickOpen} />
             </Link>
           </Badge>
           <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>
-            <Badge badgeContent={state.wishList.length} color="secondary">
+            <Badge badgeContent={state.wishList ? state.wishList.length : 0} color="secondary">
               <FavoriteIcon style={{ "marginLeft": "20px" }} />
             </Badge>
           </Link>
@@ -164,19 +140,15 @@ export default function Navbar() {
                 Login
           </Button>
             </>
-
           )}
           {!isLoading && user && (
-
             <>
-              {/* {checkUser(user.email)} */}
               <Typography color="textprimary">
                 Hello, {user.name}!
               </Typography>
               <Button variant="contained" color="primary" onClick={logout}>
                 Logout
           </Button>
-              {/* {checkUser(user.email)} */}
             </>
           )}
         </Toolbar>
