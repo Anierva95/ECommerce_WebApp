@@ -145,7 +145,14 @@ export default function TransitionsModal(props) {
       Image: props.Image
     })
     setTimeout(() => {
-      loadProducts()
+      loadProducts("")
+      SetItemName("");
+      SetPriceAmount("");
+      SetItemType("");
+      SetDescriptionText("");
+      SetQuantityAmount("");
+      setGenderType("");
+      handleClose();
     }, 100);
   }
 
@@ -168,6 +175,12 @@ useEffect(() => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
+    SetItemName(props.name);
+    SetPriceAmount(props.price);
+    SetItemType(props.Type);
+    SetDescriptionText(props.description);
+    SetQuantityAmount(props.quantity);
+    setGenderType(props.gender);
     setOpen(true);
   };
 
