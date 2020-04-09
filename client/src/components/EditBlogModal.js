@@ -37,8 +37,32 @@ export default function TransitionsModal(props) {
   const [blogTitle, SetBlogTitle] = useState(props.Title);
   const [blogBody, SetBlogBody] = useState(props.Body);
 
+  function loadBlogs() {
+    API.getBlogPosts().then(res => {
+      dispatch({
+        type: "GET_BLOGS",
+        blogs: res.data
+      })
+    })
+    .catch(err => console.log(err));
+  };
 
-  const [state, dispatch] = useStoreContext()
+
+  const [state, dispatch] = useStoreContext();
+
+  function editBlog(id) {
+    console.log(blogTitle)
+    console.log(blogBody)
+    console.log(id)
+    API.updateBlogPost(id, {
+      Title: blogTitle,
+      Body: blogBody,
+      Date: Date.now()
+    }).then(res => console.log(res))
+    setTimeout(() => {
+      loadBlogs()
+    }, 100);
+  }
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -94,7 +118,7 @@ export default function TransitionsModal(props) {
                     onChange = {e => SetBlogBody(e.target.value)}
                   />
                 </FormControl>
-                <Button variant="contained" color="primary" onClick={() => console.log("pvp")}>
+                <Button variant="contained" color="primary" onClick={() => editBlog(props.id)}>
                   Submit
               </Button>
               </form>

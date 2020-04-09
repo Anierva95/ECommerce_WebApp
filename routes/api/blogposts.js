@@ -10,4 +10,5 @@ router
 router
   .route("/:id")
   .delete(blogPostController.remove)
+  .put(blogPostController.update)
 module.exports = router;
