@@ -66,7 +66,7 @@ const Cart = () => {
                     if (newQuantity < 0) {
                         return alert("We are all sold out!")
                     } else {
-                        API.updateProduct(item._id, { Quantity: newQuantity }).then(res => console.log("product quantity updated!"), window.location.replace("/shop"))
+                        API.updateProduct(item._id, { Quantity: newQuantity }).then(res => console.log("product quantity updated!"), window.location.replace("/UserAccount"))
                     }
                 }
             }
@@ -201,12 +201,12 @@ const Cart = () => {
                                             <List>
                                                 <ListItem>
                                                     {/* <AccountCircleIcon /> */}
-                                                    {element.Item}
+                                                    <strong>{element.Item}</strong>
                                                     <Link onClick={event => removeItem(element._id)}><DeleteIcon /></Link>
                                                 </ListItem>
-                                                <ListItemText>
+                                                <ListItem>
                                                     Description: {element.Description} 
-                                                </ListItemText>
+                                                </ListItem>
                                             </List>
                                         </TableCell>
                                         <TableCell align='center'>

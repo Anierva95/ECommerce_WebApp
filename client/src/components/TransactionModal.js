@@ -39,6 +39,7 @@ export default function TransactionModal(props) {
     return (
         <div>
             <ListItemText type="button" onClick={handleOpen}>
+                <p>{props.elements.date}</p>
                 <p>Transaction #: <Link>{props.elements.transactionID.slice(4, props.elements.transactionID.length)}</Link></p>
             </ListItemText>
             <Modal

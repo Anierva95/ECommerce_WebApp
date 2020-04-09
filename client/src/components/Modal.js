@@ -51,7 +51,9 @@ export default function TransitionsModal(props) {
       alert("Error! Please select a quantity!")
     } else {
       API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
-      // .then(saveCart());
+      setTimeout(() => {
+        handleClose();
+      }, 500)
     }
   }
 

@@ -64,7 +64,7 @@ export default function WishlistPage(props) {
                         <Table>
                             <TableBody>
                                 <TableCell></TableCell>
-                                <TableCell>Wishlist</TableCell>
+                                <TableCell><h2>Wishlist</h2></TableCell>
                             </TableBody>
                             <TableBody>
                                 {state.wishList.map(element => (
@@ -74,11 +74,11 @@ export default function WishlistPage(props) {
                                             <List>
                                                 <ListItem>
                                                     {/* <AccountCircleIcon /> */}
-                                                    {element.Item} (Item#: {element._id})
+                                                    <strong>{element.Item} (Item#: {element._id})</strong>
                                                 </ListItem>                                             
-                                                <ListItemText>
+                                                <ListItem>
                                                     Description: {element.Description}
-                                                </ListItemText>
+                                                </ListItem>
                                             </List>
                                         </TableCell>
                                         <TableCell align='right'>
