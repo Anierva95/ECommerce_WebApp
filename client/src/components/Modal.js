@@ -9,9 +9,6 @@ import API from '../utils/API';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
-
-
-
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -49,7 +46,7 @@ export default function TransitionsModal(props) {
 
 
   function addToCart(id) {
-    console.log(quantityRef.current.value)
+    // console.log(quantityRef.current.value)
     if (quantityRef.current.value === undefined) {
       alert("Error! Please select a quantity!")
     } else {

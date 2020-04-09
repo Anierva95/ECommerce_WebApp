@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import StoreIcon from '@material-ui/icons/Store';
 import { Link } from "react-router-dom";
 import { useAuth0 } from '../utils/auth0context';
 import API from '../utils/API';
@@ -107,10 +107,10 @@ export default function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            <StoreIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Welcome to my Store!
+            {/* Welcome to my Store! */}
           </Typography>
           <Link to="/shop" style={{ "textDecoration": "inherit" }}>
             <Button style={{ "textDecoration": "inherit" }} >Home</Button>

@@ -40,6 +40,7 @@ export default function AddProductForm() {
     uploadPreset: 'h6i1uchv'}, (error, result) => { 
       if (!error && result && result.event === "success") {
         changeStatus(true)
+        console.log(result.info.url)
         setImage(result.info.url)
       }
     }
@@ -65,6 +66,10 @@ export default function AddProductForm() {
     {
       value: 'Sweaters',
       label: 'Sweaters',
+    },
+    {
+      value: 'Hoodies',
+      label: 'Hoodies',
     },
     {
       value: 'Pants',

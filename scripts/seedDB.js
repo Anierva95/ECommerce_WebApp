@@ -7,76 +7,102 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/ecommerceShop")
 
 const productSeed = [
   {
-    Item: "Zhaoyang",
-    Type: "Person",
-    Description: "Please stand up",
-    Price: 1,
-    Quantity: 1,
-    Gender: "Male"
+    Item: "Ditch Slash Embroidered",
+    Type: "Hoodies",
+    Description: "The Ditch Hoodie is our take on a classic hooded sweatshirt and features original Saturdays NYC artwork. Made from a medium weight french terry cloth, it will soften with each wear. 100% cotton in our standard hoodie fit.",
+    Price: 125,
+    Quantity: 94,
+    Gender: "M",
+    Image: "http://res.cloudinary.com/diadpow6d/image/upload/v1586396291/qfwgouhe9r2cgvw8kpra.jpg"
   },
   {
-    Item: "Anthony",
-    Type: "Person",
-    Description: "Please stand up",
-    Price: .5,
-    Quantity: 100,
-    Gender: "Male"
+    Item: "Vintage Henley T-Shirt",
+    Type: "T-Shirts",
+    Description: "Our Vintage styles are constructed in a soft, lightweight slub-knit that offers great texture and a casual, relaxed look. Crew neck with three-button placket. Short sleeves.",
+    Price: 10,
+    Quantity: 58,
+    Gender: "S",
+    Image: "https://res.cloudinary.com/diadpow6d/image/upload/v1586396561/ewvzpgoa9nrvqf7x0wzb.jpg"
   },
   {
-    Item: "Sick Sweatshirt",
-    Type: "Sweatshirt",
-    Description: "Laced with c0ke",
-    Price: 1000,
-    Quantity: 100,
-    Gender: "Unisex"
+    Item: "Restful Intention Sweater",
+    Type: "Sweaters",
+    Description: "Designed for On the Move. Soft, Cashlu Fabric",
+    Price: 200,
+    Quantity: 92,
+    Gender: "L",
+    Image: "https://res.cloudinary.com/diadpow6d/image/upload/v1586397225/jjzlrxiqdsxteiwuwgs8.webp"
   },
   {
-    Item: "Used Napkin",
+    Item: "U Wide-Fit Pleated Tapered Pants",
+    Type: "Pants",
+    Description: "Chino pants in flexible cotton twill material.",
+    Price: 39.90,
+    Quantity: 4,
+    Gender: "M",
+    Image: "http://res.cloudinary.com/diadpow6d/image/upload/v1586397577/drohwvbadsgwcjz9fsxd.jpg"
+  },
+  {
+    Item: "Tiger King - Catchphrase",
+    Type: "Socks",
+    Description: "Be the real Tiger King in these exclusive socks from Rock 'Em! ",
+    Price: 14,
+    Quantity: 10000,
+    Gender: "M",
+    Image: "https://res.cloudinary.com/diadpow6d/image/upload/v1586397986/jxchrmc98j1pub4pkvoy.png"
+  },
+  {
+    Item: "Stripe Multi-Ball Icon Sport Coat",
+    Type: "Suits",
+    Description: "Medium Grey Sport Coat, Cotton Seersucker from Thom Browne",
+    Price: 5500,
+    Quantity: 9,
+    Gender: "S",
+    Image: "https://res.cloudinary.com/diadpow6d/image/upload/v1586398267/eeyhgndiz7qcygucmmi8.jpg"
+  },
+  {
+    Item: "Botanical Bangle, Rhodium Plated",
     Type: "Accessory",
-    Description: "Found under a table",
-    Price: 500,
-    Quantity: 200,
-    Gender: "Unisex"
+    Description: "The Botanical collection is Atelier Swarovski’s latest collaboration with award-winning actress Penélope Cruz. Inspired by some of the earth’s most endangered flora, this elegant hinged bangle features delicate green and white crystal petals and floral motifs in sparkling pavé. Shining like a flower in the sun, this refined and feminine rhodium-plated design will work by day or by night. Wear with a necklace from the same collection to dial up your look for an evening out.",
+    Price: 198,
+    Quantity: 46,
+    Gender: "S",
+    Image: "https://res.cloudinary.com/diadpow6d/image/upload/v1586398954/nkesyfogl9aiturafoqo.jpg"
   },
   {
-    Item: "JingleBell",
-    Type: "Accessory",
-    Description: "Grandmother used to love this jinglebell...",
-    Price: 1000,
-    Quantity: 100,
-    Gender: "Female"
+    Item: "Pocket Detail Wool Pencil Skirt",
+    Type: "Skirts",
+    Description: "A form-fitting pencil skirt in Italian-woven wool, patterned with our signature Vintage check. The style is detailed with patch pockets secured with equestrian-inspired leather tabs.",
+    Price: 1190,
+    Quantity: 5,
+    Gender: "S",
+    Image: "https://res.cloudinary.com/diadpow6d/image/upload/v1586399551/ufxpw8zygr7o2atel4sa.jpg"
   },
   {
-    Item: "A white flag",
-    Type: "Accessory",
-    Description: "Used to surrender in a bad circumstance",
-    Price: 100,
-    Quantity: 100,
-    Gender: "Unisex"
+    Item: "GG stretch cotton polo",
+    Type: "Polo Shirts",
+    Description: "The GG motif is reworked into an allover embroidery, contrasting this polo's dark blue stretch cotton base. An off-white and green striped collar completes the vintage inspired design.",
+    Price: 1100,
+    Quantity: 5,
+    Gender: "",
+    Image: "https://res.cloudinary.com/diadpow6d/image/upload/v1586399663/yjy7vopbl5jmbyk9t81e.jpg"
   },
   {
-    Item: "Thick pair of jeans",
-    Type: "Jean",
-    Description: "No one will ever question if you skipped leg day",
-    Price: 25,
-    Quantity: 100,
-    Gender: "Male"
-  },
-  {
-    Item: "Jacket with holes",
-    Type: "Jacket",
-    Description: "You will look like a hipster, for sure.",
-    Price: 85,
-    Quantity: 150,
-    Gender: "Female"
+    Item: "Cashmere RWB Tipped Polo",
+    Type: "Dress Shirts",
+    Description: "Light Grey Polo, Cashmere Fabric",
+    Price: 1100,
+    Quantity: 85,
+    Gender: "S",
+    Image: "https://res.cloudinary.com/diadpow6d/image/upload/v1586398467/blekxugaenco0ozt7qfp.jpg"
   },
 ];
 
 const blogPostSeed = [
   {
-    Title: "Blog about my store",
-    Body: "Welcome to my store, we will be selling many things to try and make certain individuals stand up.. er I mean we will be raising money for charities. Yeah, this is a nonprofit ecommerce site. All profits will be donated to charities found on DonotSpot!",
-    Date: "304923"
+    Title: "Welcome to our store!",
+    Body: "We are currently limited to only a few items, but please sign up for e-mail notifications to get notified when there are new releases. Thank you for visiting!",
+    Date: "April 8th 2020, 9:31:44 pm"
   }];
 
 const userSeed = [
@@ -88,7 +114,6 @@ const userSeed = [
 db.BlogPost.remove({})
   .then(() => db.BlogPost.collection.insertMany(blogPostSeed))
   .then(data => {
-    console.log(data.result.n + " blog posts inserted!");
     process.exit(0);
   })
   .catch(err => {
@@ -96,12 +121,9 @@ db.BlogPost.remove({})
     process.exit(1);
   });
 
-
-
 db.Product.remove({})
   .then(() => db.Product.collection.insertMany(productSeed))
   .then(data => {
-    console.log(data.result.n + " products inserted!");
     process.exit(0);
   })
   .catch(err => {
@@ -112,7 +134,6 @@ db.Product.remove({})
 db.UserList.remove({})
   .then(() => db.UserList.collection.insertMany(userSeed))
   .then(data => {
-    console.log(data.result.n + " users inserted!");
     process.exit(0);
   })
   .catch(err => {
