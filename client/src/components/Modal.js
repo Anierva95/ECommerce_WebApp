@@ -53,14 +53,14 @@ export default function TransitionsModal(props) {
     if (quantityRef.current.value === undefined) {
       alert("Error! Please select a quantity!")
     } else {
-    API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
-    // .then(saveCart());
+      API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
+      // .then(saveCart());
+    }
   }
-}
 
-useEffect(() => {
-  saveCart();
-}, [state.shoppingCart])
+  useEffect(() => {
+    saveCart();
+  }, [state.shoppingCart])
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -98,6 +98,21 @@ useEffect(() => {
     }
   ]
 
+  const sizes = [
+    {
+      value: 'Small',
+      label: 'Small'
+    },
+    {
+      value: 'Medium',
+      label: 'Medium'
+    },
+    {
+      value: 'Large',
+      label: 'Large'
+    }
+  ]
+
   return (
     <div>
       <Button size="small" variant="contained" color="secondary" type="button" onClick={handleOpen}>
@@ -121,14 +136,32 @@ useEffect(() => {
             <img alt={props.name} src={props.Image} height='200px'></img>
             <p id="transition-modal-description">{props.description}</p>
             <h2>${props.price}</h2>
-            <p>Inventory: {props.quantity}</p>
+            <p>Inventory: {props.quantity} </p>
             <TextField
-              id={props.id}
-              select
+              style={{"marginRight": '5px'}}
               label="Quantity"
-              variant="filled"
+              id={props.id}
+              variant="outlined"
+              size="small"
+              select
+              label={"Size"}
+            // inputRef={quantityRef}
+            >
+              {sizes.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            <TextField
+              label="Quantity"
+              id={props.id}
+              variant="outlined"
+              size="small"
+              select
+              label={"Qty."}
               inputRef={quantityRef}
-              style={{"width": "200px"}}
             >
               {quantity.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -136,7 +169,7 @@ useEffect(() => {
                 </MenuItem>
               ))}
             </TextField>
-            <Button variant="contained" color="primary" onClick={() => addToCart(props.id)} style={{"marginLeft": "50px"}}>
+            <Button variant="contained" color="primary" onClick={() => addToCart(props.id)} style={{ "marginLeft": "50px" }}>
               Add to Cart
             </Button>
           </div>

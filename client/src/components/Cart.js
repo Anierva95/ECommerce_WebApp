@@ -207,8 +207,6 @@ const Cart = () => {
                                                 <ListItemText>
                                                     Description: {element.Description} 
                                                 </ListItemText>
-                                                {/* <Link><DeleteForeverIcon /></Link>
-                                                <Link><DeleteIcon /></Link> */}
                                             </List>
                                         </TableCell>
                                         <TableCell align='center'>
@@ -241,7 +239,6 @@ const Cart = () => {
                     </TableContainer>
                     : <><h1>your cart is empty</h1> </>}
             </Grid>
-
             <Grid item xs={2}>
                 <Grid container direction="row">
                     <Grid item xs={10}></Grid>

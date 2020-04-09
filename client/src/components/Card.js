@@ -23,7 +23,6 @@ const useStyles = makeStyles({
   },
 });
 
-
 export default function MediaCard(props) {
   const classes = useStyles();
 
@@ -32,6 +31,7 @@ export default function MediaCard(props) {
   // function setCurrentProduct (id) {
   //   API.getProduct(id).then(res => dispatch({type: "SET_CURRENT_PRODUCT", product: res.data}))
   // }
+
   function addToWish(id) {
     console.log(id)
     API.getProduct(id).then(res => dispatch({ type: "ADD_TO_WISH", product: res.data }))
@@ -65,7 +65,7 @@ export default function MediaCard(props) {
             {props.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
+            Category: {props.type}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
             ${props.price}
@@ -82,6 +82,7 @@ export default function MediaCard(props) {
           price={props.price}
           id={props.id}
           Image={props.Image}
+          size={props.gender}
           quantity={props.quantity}
         />
       </CardActions>

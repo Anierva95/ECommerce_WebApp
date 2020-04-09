@@ -34,7 +34,6 @@ export default function AddProductForm() {
 
   const [imageUploaded, changeStatus] = useState(false)
   const [image, setImage] = useState("")
-  // let image = "";
 
   var myWidget = window.cloudinary.createUploadWidget({
     cloudName: 'diadpow6d', 
@@ -42,21 +41,11 @@ export default function AddProductForm() {
       if (!error && result && result.event === "success") {
         changeStatus(true)
         setImage(result.info.url)
-        // image = result.info.url;
-        console.log(image)
-        console.log('Done! Here is the image info: ', result.info); 
       }
     }
   )
 
   function AddItem() {
-    console.log(itemRef.current.value);
-    console.log(priceRef.current.value);
-    console.log(typeRef.current.value);
-    console.log(descriptionRef.current.value);
-    console.log(quantityRef.current.value);
-    console.log(genderRef.current.value);
-    console.log("image before API: ", image)
     API.saveProduct({
       Item: itemRef.current.value,
       Type: typeRef.current.value,
@@ -70,35 +59,59 @@ export default function AddProductForm() {
 
   const Type = [
     {
-      value: 'Clothing',
-      label: 'Clothing',
+      value: 'T-Shirts',
+      label: 'T-Shirts',
     },
     {
-      value: 'Stand Up',
-      label: 'Stand Up',
+      value: 'Sweaters',
+      label: 'Sweaters',
     },
     {
-      value: 'Relic',
-      label: 'Relic',
+      value: 'Pants',
+      label: 'Pants',
     },
     {
-      value: 'Used Kitchenware',
-      label: 'Used Kitchenware',
+      value: 'Socks',
+      label: 'Socks',
+    },
+    {
+      value: 'Dress Shirts',
+      label: 'Dress Shirts',
+    },
+    {
+      value: 'Accessory',
+      label: 'Accessory',
+    },
+    {
+      value: 'Dresses',
+      label: 'Dresses',
+    },
+    {
+      value: 'Skirts',
+      label: 'Skirts',
+    },
+    {
+      value: 'Polo Shirts',
+      label: 'Polo Shirts',
+    },
+    {
+      value: 'Suits',
+      label: 'Suits',
     },
   ];
 
   const genders = [
     {
-      value: 'Female',
-      label: 'Female'
+      value: 'Small',
+      label: 'Small'
     },
     {
-      value: 'Male',
-      label: 'Male'
+      value: 'Medium',
+      label: 'Medium'
     },
     {
-      value: 'Unisex',
-      label: 'Unisex'
+      value: 'Large',
+      label: 'Large'
     }
   ]
 
