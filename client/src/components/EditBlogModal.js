@@ -8,9 +8,6 @@ import Button from '@material-ui/core/Button';
 import { useStoreContext } from "../utils/GlobalState";
 import API from '../utils/API';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import FilledInput from '@material-ui/core/FilledInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import { FormControl } from '@material-ui/core';
 
 
@@ -37,104 +34,11 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
 
 
-  const [itemName, SetItemName] = useState(props.name);
-  const [priceAmount, SetPriceAmount] = useState(props.price);
-  const [typeItem, SetItemType] = useState(props.Type);
-  const [descriptionText, SetDescriptionText] = useState(props.description);
-  const [quantityAmount, SetQuantityAmount] = useState(props.quantity);
-  const [genderType, setGenderType] = useState(props.gender);
+  const [blogTitle, SetBlogTitle] = useState(props.Title);
+  const [blogBody, SetBlogBody] = useState(props.Body);
 
 
   const [state, dispatch] = useStoreContext()
-  const [imageUploaded, changeStatus] = useState(false)
-
-  let image = "";
-
-  var myWidget = window.cloudinary.createUploadWidget({
-    cloudName: 'diadpow6d', 
-    uploadPreset: 'h6i1uchv'}, (error, result) => { 
-      if (!error && result && result.event === "success") {
-        changeStatus(true)
-        image = result.info.url;
-        console.log(image)
-        console.log('Done! Here is the image info: ', result.info); 
-      }
-    }
-  )
-
-  const Type = [
-    {
-      value: 'Clothing',
-      label: 'Clothing',
-    },
-    {
-      value: 'Stand Up',
-      label: 'Stand Up',
-    },
-    {
-      value: 'Relic',
-      label: 'Relic',
-    },
-    {
-      value: 'Used Kitchenware',
-      label: 'Used Kitchenware',
-    },
-  ];
-
-  const genders = [
-    {
-      value: 'Female',
-      label: 'Female'
-    },
-    {
-      value: 'Male',
-      label: 'Male'
-    },
-    {
-      value: 'Unisex',
-      label: 'Unisex'
-    }
-  ]
-
-  function loadProducts() {
-    API.getProducts().then(res => {
-      dispatch({
-        type: "GET_PRODUCTS",
-        products: res.data
-      })
-    })
-    .catch(err => console.log(err));
-  };
-
-  function editItem(id) {
-    API.updateProduct(id, {
-      Item: itemName,
-      Type: typeItem,
-      Description: descriptionText,
-      Price: priceAmount,
-      Quantity: quantityAmount,
-      Gender: genderType,
-      Image: props.Image
-    })
-    setTimeout(() => {
-      loadProducts()
-    }, 100);
-  }
-
-  function saveCart() {
-    API.saveCart(state.currentUser.id, state.shoppingCart).then(res => console.log("saved to cart", res.data)).then(dispatch({
-      type: "SET_USER",
-      user: {
-        ...state.currentUser,
-        shoppingCart: state.shoppingCart
-      }
-    }))
-  }
-
-
-useEffect(() => {
-  saveCart();
-}, [state.shoppingCart])
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -169,12 +73,14 @@ useEffect(() => {
         <div className={classes.paper}>
         <Grid item container direction="column" xs={12}>
         <form className={classes.root} noValidate autoComplete="off" bgcolor="primary.main">
-                <h2>Write a blog</h2>
+                <h2>Edit Blog #{props.id}</h2>
                 <FormControl fullWidth>
                   <TextField
                     label="Blog Title"
                     variant="filled"
                     fullWidth={true}
+                    value={blogTitle}
+                    onChange = {e => SetBlogTitle(e.target.value)}
                   />
                   <TextField
                     label="Blog Body"
@@ -184,6 +90,8 @@ useEffect(() => {
                         className: classes.input2
                       }}
                     multiline
+                    value={blogBody}
+                    onChange = {e => SetBlogBody(e.target.value)}
                   />
                 </FormControl>
                 <Button variant="contained" color="primary" onClick={() => console.log("pvp")}>

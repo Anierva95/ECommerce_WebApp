@@ -75,6 +75,7 @@ function deleteBlog (id) {
         <Button variant="contained" color="primary" size="small" onClick={() => deleteBlog(props.Key)}>Remove!</Button>
         <EditBlogModal
         id={props.Key}
+        Title={props.Title}
         Body= {props.Body}
         />
       </CardActions>
