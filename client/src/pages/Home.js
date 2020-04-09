@@ -5,7 +5,7 @@ import ProductRow from '../components/ProductRow'
 import { Grid } from '@material-ui/core';
 import LiveChat from 'react-livechat'
 import { makeStyles } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
+import Footer from '../components/Footer'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -43,6 +43,7 @@ export default function Home(){
           </Grid>
           <Grid item xs={2} />
           <LiveChat license={11844840}/>
+          <Footer/>
           </Grid>
 
         </div>
