@@ -240,7 +240,7 @@ useEffect(() => {
                 />
                 <TextField
                   select
-                  label="Gender"
+                  label="Size"
                   variant="filled"
                   value={genderType}
                   onChange={e => setGenderType(e.target.value)}

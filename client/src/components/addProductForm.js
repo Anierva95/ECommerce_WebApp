@@ -167,7 +167,7 @@ export default function AddProductForm() {
               />
               <TextField
                 select
-                label="Gender"
+                label="Size"
                 variant="outlined"
                 inputRef={genderRef}
               >

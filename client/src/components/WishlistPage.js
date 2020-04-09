@@ -89,7 +89,7 @@ export default function WishlistPage(props) {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    : <><h1>your wishlist is empty</h1> </>}
+                    : <><h1>Your wishlist is empty!</h1> </>}
             </Grid>
         </Grid>
     )

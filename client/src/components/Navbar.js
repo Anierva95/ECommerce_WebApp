@@ -64,18 +64,18 @@ export default function Navbar() {
                 user: {
                   id: res.data._id,
                   email: res.data.Email,
-                  transactions: res.data.Transactions,
-                  shoppingCart: res.data.ShoppingCart,
-                  wishList: res.data.Wishlist
+                  transactions: [],
+                  shoppingCart: [],
+                  wishList: []
                 }
               }))
           dispatch({
             type: "GET_CART",
-            dbCart: res.data.ShoppingCart
+            dbCart: []
           })
           dispatch({
             type: "GET_WISH",
-            dbWish: res.data.Wishlist
+            dbWish: []
           })
         } else {
           dispatch({

@@ -179,8 +179,8 @@ const Cart = () => {
 
         <Grid container direction="row">
             <Grid item xs={8}>
-            {/* || state.shoppingCart.length !== 0 */}
-                {state.shoppingCart !== undefined ?
+                {/* || state.shoppingCart.length !== 0 */}
+                {state.shoppingCart.length !== 0 ?
                     <TableContainer>
                         <Table>
                             <TableBody>
@@ -205,7 +205,7 @@ const Cart = () => {
                                                     <Link onClick={event => removeItem(element._id)}><DeleteIcon /></Link>
                                                 </ListItem>
                                                 <ListItem>
-                                                    Description: {element.Description} 
+                                                    Description: {element.Description}
                                                 </ListItem>
                                             </List>
                                         </TableCell>
@@ -237,39 +237,41 @@ const Cart = () => {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    : <><h1>your cart is empty</h1> </>}
+                    : <><h1>Your cart is empty</h1></>}
             </Grid>
-            <Grid item xs={2}>
-                <Grid container direction="row">
-                    <Grid item xs={10}></Grid>
-                    <Grid item xs={2} align='center'><h3>Checkout</h3></Grid>
-                </Grid>
-                <Grid container direction="row">
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={10}><h3>Subtotal: $ {subTotal.toFixed(2)}</h3></Grid>
-                </Grid>
-                <Grid container direction="row">
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={10}><h3>Tax: $ {taxTotal.toFixed(2)}</h3></Grid>
-                </Grid>
-                <Grid container direction="row">
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={10}><h3>Total: $ {total.toFixed(2)}</h3></Grid>
-                </Grid>
-                <Grid container direction="row" >
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={10}>
-                        <div className="checkout">
-                            <StripeCheckout
-                                stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"
-                                token={makePayment}
-                                name="Buy product"
-                                amount={totalCharge.price * 100}
-                            />
-                        </div>
+            {state.shoppingCart.length !== 0 ?
+                <Grid item xs={2}>
+                    <Grid container direction="row">
+                        <Grid item xs={10}></Grid>
+                        <Grid item xs={2} align='center'><h3>Checkout</h3></Grid>
+                    </Grid>
+                    <Grid container direction="row">
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={10}><h3>Subtotal: $ {subTotal.toFixed(2)}</h3></Grid>
+                    </Grid>
+                    <Grid container direction="row">
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={10}><h3>Tax: $ {taxTotal.toFixed(2)}</h3></Grid>
+                    </Grid>
+                    <Grid container direction="row">
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={10}><h3>Total: $ {total.toFixed(2)}</h3></Grid>
+                    </Grid>
+                    <Grid container direction="row" >
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={10}>
+                            <div className="checkout">
+                                <StripeCheckout
+                                    stripeKey="pk_test_4acFvUccLP5A71yVS4W7sJp700euorF5ej"
+                                    token={makePayment}
+                                    name="Buy product"
+                                    amount={totalCharge.price * 100}
+                                />
+                            </div>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+                : <></>}
         </Grid>
     )
 }
