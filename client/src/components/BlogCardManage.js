@@ -27,16 +27,33 @@ const useStyles = makeStyles({
 });
 
 
+export default function OutlinedCard(props) {
+
+const [state, dispatch] = useStoreContext()
+
+
+function loadBlogs() {
+    API.getBlogPosts().then(res => {
+      dispatch({
+        type: "GET_BLOGS",
+        blogs: res.data
+      })
+    })
+    .catch(err => console.log(err));
+  };
+
+
 function deleteBlog (id) {
   console.log(id);
-  API.deleteBlogPost(id).then(res => window.location.reload()) // prob need to call a dispatch to re-render page here, but too lazy atm LOL
+  API.deleteBlogPost(id);
+  setTimeout(() => {
+    loadBlogs()
+  }, 100);
 }
 
-export default function OutlinedCard(props) {
 
   // const [state, dispatch] = useStoreContext();
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   // console.log("state", state.blogPosts)
 
