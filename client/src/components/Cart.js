@@ -82,7 +82,7 @@ const Cart = () => {
             "Content-Type": "application/json"
         }
 
-        return fetch('http://localhost:7000/payment', {
+        return fetch('https://ecommerce-bootcamp.herokuapp.com/payment', {
             method: "POST",
             headers,
             body: JSON.stringify(body)
