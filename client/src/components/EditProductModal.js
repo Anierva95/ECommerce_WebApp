@@ -1,5 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -8,6 +9,9 @@ import { useStoreContext } from "../utils/GlobalState";
 import API from '../utils/API';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import FilledInput from '@material-ui/core/FilledInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import { FormControl } from '@material-ui/core';
 
 
 
@@ -32,11 +36,92 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TransitionsModal(props) {
 
+
+  const [itemName, SetItemName] = useState(props.name);
+  const [priceAmount, SetPriceAmount] = useState(props.price);
+  const [typeItem, SetItemType] = useState(props.Type);
+  const [descriptionText, SetDescriptionText] = useState(props.description);
+  const [quantityAmount, SetQuantityAmount] = useState(props.quantity);
+  const [genderType, setGenderType] = useState(props.gender);
+
+
   const [state, dispatch] = useStoreContext()
+  const [imageUploaded, changeStatus] = useState(false)
+
+  let image = "";
+
+  var myWidget = window.cloudinary.createUploadWidget({
+    cloudName: 'diadpow6d', 
+    uploadPreset: 'h6i1uchv'}, (error, result) => { 
+      if (!error && result && result.event === "success") {
+        changeStatus(true)
+        image = result.info.url;
+        console.log(image)
+        console.log('Done! Here is the image info: ', result.info); 
+      }
+    }
+  )
+
+  const Type = [
+    {
+      value: 'Clothing',
+      label: 'Clothing',
+    },
+    {
+      value: 'Stand Up',
+      label: 'Stand Up',
+    },
+    {
+      value: 'Relic',
+      label: 'Relic',
+    },
+    {
+      value: 'Used Kitchenware',
+      label: 'Used Kitchenware',
+    },
+  ];
+
+  const genders = [
+    {
+      value: 'Female',
+      label: 'Female'
+    },
+    {
+      value: 'Male',
+      label: 'Male'
+    },
+    {
+      value: 'Unisex',
+      label: 'Unisex'
+    }
+  ]
+
+  function loadProducts() {
+    API.getProducts().then(res => {
+      dispatch({
+        type: "GET_PRODUCTS",
+        products: res.data
+      })
+    })
+    .catch(err => console.log(err));
+  };
+
+  function editItem(id) {
+    API.updateProduct(id, {
+      Item: itemName,
+      Type: typeItem,
+      Description: descriptionText,
+      Price: priceAmount,
+      Quantity: quantityAmount,
+      Gender: genderType,
+      Image: props.Image
+    })
+    setTimeout(() => {
+      loadProducts()
+    }, 100);
+  }
 
   function saveCart() {
-    // console.log(state.currentUser.id);
-    // console.log(state.shoppingCart)
     API.saveCart(state.currentUser.id, state.shoppingCart).then(res => console.log("saved to cart", res.data)).then(dispatch({
       type: "SET_USER",
       user: {
@@ -46,17 +131,6 @@ export default function TransitionsModal(props) {
     }))
   }
 
-
-
-  function addToCart(id) {
-    console.log(quantityRef.current.value)
-    if (quantityRef.current.value === undefined) {
-      alert("Error! Please select a quantity!")
-    } else {
-    API.getProduct(id).then(res => dispatch({ type: "ADD_TO_CART", product: { ...res.data, Quantity: parseInt(quantityRef.current.value) } }))
-    // .then(saveCart());
-  }
-}
 
 useEffect(() => {
   saveCart();
@@ -72,31 +146,7 @@ useEffect(() => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const quantityRef = useRef();
-
-  const quantity = [
-    {
-      value: 1,
-      label: 1
-    },
-    {
-      value: 2,
-      label: 2
-    },
-    {
-      value: 3,
-      label: 3
-    },
-    {
-      value: 4,
-      label: 4
-    },
-    {
-      value: 5,
-      label: 5
-    }
-  ]
+;
 
   return (
     <div>
@@ -116,28 +166,72 @@ useEffect(() => {
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id="transition-modal-title">{props.name}</h2>
-            <img src={props.Image}></img>
-            <p id="transition-modal-description">{props.description}</p>
-            <h2>${props.price}</h2>
-            <TextField
-              id={props.id}
-              select
-              label="Quantity"
-              variant="filled"
-              inputRef={quantityRef}
-              style={{"width": "200px"}}
-            >
-              {quantity.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Button variant="contained" color="primary" onClick={() => addToCart(props.id)} style={{"marginLeft": "50px"}}>
-              Add to Cart
+        <div className={classes.paper}>
+        <Grid item container direction="column" xs={12}>
+            <form className={classes.root} noValidate autoComplete="off" bgcolor="primary.main">
+              <h2>Edit Product #{props.id}</h2>
+              <FormControl fullWidth>
+                <TextField
+                  label="Item Name"
+                  variant="filled"
+                  fullWidth={true}
+                  value={itemName}
+                  onChange = {e => SetItemName(e.target.value)}
+                />
+                <FilledInput
+                  id="filled-adornment-amount"
+                  startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                  value={priceAmount}
+                  onChange = {e => SetPriceAmount(e.target.value)}
+                />
+                <TextField
+                  select
+                  label="Type"
+                  variant="filled"
+                  value={typeItem}
+                  onChange= {e => SetItemType(e.target.value)}
+                >
+                  {Type.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+
+                <TextField
+                  label="Item Description"
+                  variant="filled"
+                  value={descriptionText}
+                  onChange = {e => SetDescriptionText(e.target.value)}
+                />
+                <TextField
+                  label="Quantity"
+                  variant="filled"
+                  value={quantityAmount}
+                  onChange= {e => SetQuantityAmount(e.target.value)}
+                />
+                <TextField
+                  select
+                  label="Gender"
+                  variant="filled"
+                  value={genderType}
+                  onChange={e => setGenderType(e.target.value)}
+                >
+                  {genders.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <Button id="upload_widget" class="cloudinary-button" onClick={()=> {myWidget.open()}}>Upload Image</Button>
+                    {imageUploaded === false ? <p>Please upload an image</p> : <p>Image uploaded!</p>}
+
+              </FormControl>
+              <Button variant="contained" color="primary" onClick={() => editItem(props.id)}>
+                Submit
             </Button>
+            </form>
+          </Grid>
           </div>
         </Fade>
       </Modal>

@@ -9,6 +9,7 @@ import StoreManagerList from '../components/StoreManagerList';
 import AddItemPage from '../components/AddItemPage'
 import AddBlogPage from '../components/AddBlogPage'
 import ManageItemsPage from '../components/ManageItemsPage'
+import ManageBlogPostsPage from '../components/ManageBlogPostsPage'
 
 
 
@@ -34,6 +35,9 @@ export default function StoreManager() {
           case "ManageItems": {
             return <ManageItemsPage/>
           }
+          case "ManageBlogs": {
+            return <ManageBlogPostsPage/>
+          }
         }
       }
 
@@ -55,7 +59,7 @@ export default function StoreManager() {
             />
         </Grid>
         <Grid item xs={8}>
-
+            
             <>
             {renderPage(page)}
             </>

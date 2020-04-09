@@ -6,6 +6,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import API from '../utils/API';
+import { useStoreContext } from "../utils/GlobalState";
+import EditBlogModal from './EditBlogModal'
+
 
 const useStyles = makeStyles({
   root: {
@@ -25,14 +28,35 @@ const useStyles = makeStyles({
 });
 
 
-function deleteBlog (id) {
-  console.log(id);
-  API.deleteBlogPost(id).then(res => window.location.replace("/blog")) // prob need to call a dispatch to re-render page here, but too lazy atm LOL
-}
-
 export default function OutlinedCard(props) {
 
+const [state, dispatch] = useStoreContext()
+
+
+function loadBlogs() {
+    API.getBlogPosts().then(res => {
+      dispatch({
+        type: "GET_BLOGS",
+        blogs: res.data
+      })
+    })
+    .catch(err => console.log(err));
+  };
+
+
+function deleteBlog (id) {
+  console.log(id);
+  API.deleteBlogPost(id);
+  setTimeout(() => {
+    loadBlogs()
+  }, 100);
+}
+
+
+  // const [state, dispatch] = useStoreContext();
   const classes = useStyles();
+
+  // console.log("state", state.blogPosts)
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -48,7 +72,12 @@ export default function OutlinedCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => deleteBlog(props.Key)}>Remove!</Button>
+        <Button variant="contained" color="primary" size="small" onClick={() => deleteBlog(props.Key)}>Remove!</Button>
+        <EditBlogModal
+        id={props.Key}
+        Title={props.Title}
+        Body= {props.Body}
+        />
       </CardActions>
     </Card>
   );
