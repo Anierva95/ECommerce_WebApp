@@ -48,7 +48,7 @@ export default function OutlinedCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => deleteBlog(props.Key)}>Remove!</Button>
+        {/* <Button size="small" onClick={() => deleteBlog(props.Key)}>Remove!</Button> */}
       </CardActions>
     </Card>
   );

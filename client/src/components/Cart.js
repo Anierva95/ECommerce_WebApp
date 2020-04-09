@@ -200,7 +200,7 @@ const Cart = () => {
                                         <TableCell>
                                             <List>
                                                 <ListItem>
-                                                    <AccountCircleIcon />
+                                                    {/* <AccountCircleIcon /> */}
                                                     {element.Item}
                                                     <Link onClick={event => removeItem(element._id)}><DeleteIcon /></Link>
                                                 </ListItem>
@@ -228,8 +228,8 @@ const Cart = () => {
                                                 ))}
                                             </TextField>
                                         </TableCell>
-                                        <TableCell align='center'>$ {element.Price}</TableCell>
-                                        <TableCell align='center'>$ {element.Price * element.Quantity}</TableCell>
+                                        <TableCell align='center'>${element.Price}</TableCell>
+                                        <TableCell align='center'>${element.Price * element.Quantity}</TableCell>
                                     </TableRow>
                                 ))}
                                 {taxAmount()}

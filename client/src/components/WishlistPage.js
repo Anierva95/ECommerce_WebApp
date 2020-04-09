@@ -73,7 +73,7 @@ export default function WishlistPage(props) {
                                         <TableCell>                                           
                                             <List>
                                                 <ListItem>
-                                                    <AccountCircleIcon />
+                                                    {/* <AccountCircleIcon /> */}
                                                     {element.Item} (Item#: {element._id})
                                                 </ListItem>                                             
                                                 <ListItemText>

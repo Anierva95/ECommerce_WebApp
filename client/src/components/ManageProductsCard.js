@@ -71,7 +71,7 @@ export default function MediaCard(props) {
             {props.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {props.description}
+          {/* {props.description} */}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
             ${props.price}
