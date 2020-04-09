@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: "#eeeeee",
     // border: '2px solid #000',
     // boxShadow: theme.shadows[5],
     // justifyContent: 'center',

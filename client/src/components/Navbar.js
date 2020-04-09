@@ -64,18 +64,18 @@ export default function Navbar() {
                 user: {
                   id: res.data._id,
                   email: res.data.Email,
-                  transactions: res.data.Transactions,
-                  shoppingCart: res.data.ShoppingCart,
-                  wishList: res.data.Wishlist
+                  transactions: [],
+                  shoppingCart: [],
+                  wishList: []
                 }
               }))
           dispatch({
             type: "GET_CART",
-            dbCart: res.data.ShoppingCart
+            dbCart: []
           })
           dispatch({
             type: "GET_WISH",
-            dbWish: res.data.Wishlist
+            dbWish: []
           })
         } else {
           dispatch({
@@ -112,7 +112,7 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             {/* Welcome to my Store! */}
           </Typography>
-          <Link to="/shop" style={{ "textDecoration": "inherit" }}>
+          <Link to="/" style={{ "textDecoration": "inherit" }}>
             <Button style={{ "textDecoration": "inherit" }} >Home</Button>
           </Link>
           <Link to="/UserAccount" style={{ "textDecoration": "inherit" }}>

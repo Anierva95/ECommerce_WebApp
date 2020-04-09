@@ -72,7 +72,7 @@ function deleteBlog (id) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="contained" color="primary" size="small" onClick={() => deleteBlog(props.Key)}>Remove!</Button>
+        <Button variant="contained" color="primary" size="small" onClick={() => deleteBlog(props.Key)}>Delete!</Button>
         <EditBlogModal
         id={props.Key}
         Title={props.Title}

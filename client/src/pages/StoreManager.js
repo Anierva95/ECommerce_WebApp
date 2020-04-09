@@ -41,9 +41,6 @@ export default function StoreManager() {
         }
       }
 
- 
-
-
     return (
 
 

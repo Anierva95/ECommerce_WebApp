@@ -8,6 +8,7 @@ import API from '../utils/API';
 import { Grid } from '@material-ui/core';
 import { Button } from '@material-ui/core'
 import { FormControl } from '@material-ui/core';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       width: '88ch',
+      padding: '2px'
     },
     textAlign: "center",
     boxShadow: "0 0 5px"
@@ -36,14 +38,15 @@ export default function AddProductForm() {
   const [image, setImage] = useState("")
 
   var myWidget = window.cloudinary.createUploadWidget({
-    cloudName: 'diadpow6d', 
-    uploadPreset: 'h6i1uchv'}, (error, result) => { 
-      if (!error && result && result.event === "success") {
-        changeStatus(true)
-        console.log(result.info.url)
-        setImage(result.info.url)
-      }
+    cloudName: 'diadpow6d',
+    uploadPreset: 'h6i1uchv'
+  }, (error, result) => {
+    if (!error && result && result.event === "success") {
+      changeStatus(true)
+      console.log(result.info.url)
+      setImage(result.info.url)
     }
+  }
   )
 
   function AddItem() {
@@ -123,68 +126,68 @@ export default function AddProductForm() {
   return (
     <div>
       <div>
-          <Grid item container direction="column" xs={3}>
-            <form className={classes.root} noValidate autoComplete="off" bgcolor="primary.main">
-              <h2>Sell an item</h2>
-              <FormControl fullWidth>
-                <TextField
-                  label="Item Name"
-                  variant="filled"
-                  inputRef={itemRef}
-                  fullWidth={true}
-                />
-                <FilledInput
-                  id="filled-adornment-amount"
-                  startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                  inputRef={priceRef}
-                />
-                <TextField
-                  id="standard-select-currency"
-                  select
-                  label="Type"
-                  variant="filled"
-                  inputRef={typeRef}
-                >
-                  {Type.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
+        <Grid item container direction="column" xs={3}>
+          <form className={classes.root} noValidate autoComplete="off" bgcolor="primary.main">
+            <h2>Sell an item</h2>
+            <FormControl fullWidth>
+              <TextField
+                label="Item Name"
+                variant="outlined"
+                inputRef={itemRef}
+                fullWidth={true}
+              />
+              <OutlinedInput
+                id="outlined-adornment-amount"
+                startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                inputRef={priceRef}
+              />
+              <TextField
+                id="standard-select-currency"
+                select
+                label="Type"
+                variant="outlined"
+                inputRef={typeRef}
+              >
+                {Type.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
 
-                <TextField
-                  label="Item Description"
-                  variant="filled"
-                  inputRef={descriptionRef}
-                />
-                <TextField
-                  label="Quantity"
-                  variant="filled"
-                  inputRef={quantityRef}
-                />
-                <TextField
-                  select
-                  label="Gender"
-                  variant="filled"
-                  inputRef={genderRef}
-                >
-                  {genders.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <Button id="upload_widget" class="cloudinary-button" onClick={()=> {myWidget.open()}}>Upload Image</Button>
-                    {imageUploaded === false ? <p>Please upload an image</p> : <p>Image uploaded!</p>}
+              <TextField
+                label="Item Description"
+                variant="outlined"
+                inputRef={descriptionRef}
+              />
+              <TextField
+                label="Quantity"
+                variant="outlined"
+                inputRef={quantityRef}
+              />
+              <TextField
+                select
+                label="Size"
+                variant="outlined"
+                inputRef={genderRef}
+              >
+                {genders.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <Button id="upload_widget" class="cloudinary-button" onClick={() => { myWidget.open() }}>Upload Image</Button>
+              {imageUploaded === false ? <p>Please upload an image</p> : <p>Image uploaded!</p>}
 
-              </FormControl>
-              <Button variant="contained" color="primary" onClick={() => AddItem()}>
-                Submit
+            </FormControl>
+            <Button variant="contained" color="primary" onClick={() => AddItem()}>
+              Submit
             </Button>
-            </form>
-          </Grid>
+          </form>
+        </Grid>
       </div>
-    
+
 
     </div>
   );

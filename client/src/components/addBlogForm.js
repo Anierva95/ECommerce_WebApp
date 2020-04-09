@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
         Title: titleRef.current.value,
         Body: bodyRef.current.value,
         Date: moment().format('MMMM Do YYYY, h:mm:ss a')
-      }).then(res => console.log("Blog created!! burkeep!"))
+      }).then(res => titleRef.current.value = "", bodyRef.current.value = "")
+      
     }
   
       return (

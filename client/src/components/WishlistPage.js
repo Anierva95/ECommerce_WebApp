@@ -64,7 +64,7 @@ export default function WishlistPage(props) {
                         <Table>
                             <TableBody>
                                 <TableCell></TableCell>
-                                <TableCell>Wishlist</TableCell>
+                                <TableCell><h2>Wishlist</h2></TableCell>
                             </TableBody>
                             <TableBody>
                                 {state.wishList.map(element => (
@@ -73,12 +73,12 @@ export default function WishlistPage(props) {
                                         <TableCell>                                           
                                             <List>
                                                 <ListItem>
-                                                    <AccountCircleIcon />
-                                                    {element.Item} (Item#: {element._id})
+                                                    {/* <AccountCircleIcon /> */}
+                                                    <strong>{element.Item} (Item#: {element._id})</strong>
                                                 </ListItem>                                             
-                                                <ListItemText>
+                                                <ListItem>
                                                     Description: {element.Description}
-                                                </ListItemText>
+                                                </ListItem>
                                             </List>
                                         </TableCell>
                                         <TableCell align='right'>
@@ -89,7 +89,7 @@ export default function WishlistPage(props) {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    : <><h1>your wishlist is empty</h1> </>}
+                    : <><h1>Your wishlist is empty!</h1> </>}
             </Grid>
         </Grid>
     )

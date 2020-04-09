@@ -23,8 +23,8 @@ function App() {
         <Elements stripe={stripePromise}>
           <Auth0Provider>
             <StoreProvider>
-              <Route exact path="/" component={LandingPage} />
-              <Route exact path="/shop" component={Home} />
+              {/* <Route exact path="/" component={LandingPage} /> */}
+              <Route exact path="/" component={Home} />
               <Route exact path="/blog" component={Blog} />
               <Route exact path="/storeManager" component={StoreManager} />
               <Route exact path="/cart" component={Cart} />

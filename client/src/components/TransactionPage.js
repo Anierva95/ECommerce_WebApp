@@ -18,9 +18,7 @@ export default function TransactionPage(props) {
 
             {props.user.transactions ? props.user.transactions.map(el => (
                 <List>
-                    <ListItem><TransactionModal elements={el} />
-                        <ListItemText secondary={el.date}></ListItemText>
-                    </ListItem>
+                    <ListItem><TransactionModal elements={el} /></ListItem>
                 </List>
             )
             ) : <h2>You have not made any purchases.</h2>}

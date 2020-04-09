@@ -64,35 +64,63 @@ export default function TransitionsModal(props) {
 
   const Type = [
     {
-      value: 'Clothing',
-      label: 'Clothing',
+      value: 'T-Shirts',
+      label: 'T-Shirts',
     },
     {
-      value: 'Stand Up',
-      label: 'Stand Up',
+      value: 'Sweaters',
+      label: 'Sweaters',
     },
     {
-      value: 'Relic',
-      label: 'Relic',
+      value: 'Hoodies',
+      label: 'Hoodies',
     },
     {
-      value: 'Used Kitchenware',
-      label: 'Used Kitchenware',
+      value: 'Pants',
+      label: 'Pants',
+    },
+    {
+      value: 'Socks',
+      label: 'Socks',
+    },
+    {
+      value: 'Dress Shirts',
+      label: 'Dress Shirts',
+    },
+    {
+      value: 'Accessory',
+      label: 'Accessory',
+    },
+    {
+      value: 'Dresses',
+      label: 'Dresses',
+    },
+    {
+      value: 'Skirts',
+      label: 'Skirts',
+    },
+    {
+      value: 'Polo Shirts',
+      label: 'Polo Shirts',
+    },
+    {
+      value: 'Suits',
+      label: 'Suits',
     },
   ];
 
   const genders = [
     {
-      value: 'Female',
-      label: 'Female'
+      value: 'Small',
+      label: 'Small'
     },
     {
-      value: 'Male',
-      label: 'Male'
+      value: 'Medium',
+      label: 'Medium'
     },
     {
-      value: 'Unisex',
-      label: 'Unisex'
+      value: 'Large',
+      label: 'Large'
     }
   ]
 
@@ -212,7 +240,7 @@ useEffect(() => {
                 />
                 <TextField
                   select
-                  label="Gender"
+                  label="Size"
                   variant="filled"
                   value={genderType}
                   onChange={e => setGenderType(e.target.value)}
